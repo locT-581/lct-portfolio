@@ -1,0 +1,7 @@
+{
+  "HomePage": {
+    "title": "Hello World!",
+    "description": "This is a Next.js application configured with next-intl.",
+    "switchLanguage": "Switch language:"
+  }
+}

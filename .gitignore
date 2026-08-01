@@ -39,5 +39,6 @@ next-env.d.ts
 # bmad specific
 _bmad-output/
 _bmad/
-.agents/
+**/.agents/*
+!.agents/AGENTS.md
 .agent/

@@ -4,6 +4,7 @@ import { ContactSection } from "@/components/contact";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs/Breadcrumbs";
 import { Header } from "@/components/ui/Header";
 import { SectionTag } from "@/components/ui/SectionTag/SectionTag";
+import { constructMetadata } from "@/lib/seo";
 
 export async function generateMetadata({
   params,
@@ -13,10 +14,12 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "contact" });
 
-  return {
-    title: `${t("pageTitle")} | Loc Tran`,
+  return constructMetadata({
+    locale,
+    path: "contact",
+    title: t("pageTitle"),
     description: t("pageDescription"),
-  };
+  });
 }
 
 export default async function ContactPage({

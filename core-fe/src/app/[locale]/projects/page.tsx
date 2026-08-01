@@ -4,6 +4,7 @@ import { PortfolioGrid } from "@/components/portfolio/PortfolioGrid";
 import { Header } from "@/components/ui/Header";
 import { SectionTag } from "@/components/ui/SectionTag/SectionTag";
 import { getProjects } from "@/lib/api/projects";
+import { constructMetadata } from "@/lib/seo";
 
 export const revalidate = 3600; // REVALIDATE_INTERVAL_PROJECTS
 
@@ -15,10 +16,12 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "projects" });
 
-  return {
+  return constructMetadata({
+    locale,
+    path: "projects",
     title: t("pageTitle"),
     description: t("pageDescription"),
-  };
+  });
 }
 
 export default async function ProjectsPage({
@@ -30,7 +33,7 @@ export default async function ProjectsPage({
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "projects" });
-  const projects = await getProjects({ locale });
+  const projects = await getProjects({ locale }).catch(() => []);
 
   return (
     <div className="min-h-screen flex flex-col bg-bg-base-1 text-text-primary">

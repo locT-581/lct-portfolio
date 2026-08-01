@@ -6,6 +6,7 @@ import { CaseStudyMedia } from "@/components/portfolio/CaseStudyMedia";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Header } from "@/components/ui/Header";
 import { getProjectBySlug } from "@/lib/api/projects";
+import { constructMetadata } from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -18,12 +19,16 @@ export async function generateMetadata({
   const project = await getProjectBySlug({ slug, locale }).catch(() => null);
 
   if (!project) {
-    return {
+    return constructMetadata({
+      locale,
+      path: `projects/${slug}`,
       title: "Project Not Found",
-    };
+    });
   }
 
-  return {
+  return constructMetadata({
+    locale,
+    path: `projects/${slug}`,
     title: `${project.name} | Case Study`,
     description: project.shortDescription || project.description,
     openGraph: {
@@ -31,7 +36,7 @@ export async function generateMetadata({
       description: project.shortDescription || project.description,
       images: project.logoUrl ? [{ url: project.logoUrl }] : [],
     },
-  };
+  });
 }
 
 export default async function CaseStudyDetailPage({

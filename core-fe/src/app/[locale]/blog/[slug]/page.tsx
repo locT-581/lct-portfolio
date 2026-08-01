@@ -5,6 +5,7 @@ import { ArticleDetailHeader, ArticleMultiRenderer } from "@/components/blog";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { Header } from "@/components/ui/Header";
 import { getBlogPostBySlug } from "@/lib/api/blog";
+import { constructMetadata } from "@/lib/seo";
 
 export const revalidate = 3600;
 
@@ -17,19 +18,23 @@ export async function generateMetadata({
   const post = await getBlogPostBySlug({ slug, locale }).catch(() => null);
 
   if (!post) {
-    return {
+    return constructMetadata({
+      locale,
+      path: `blog/${slug}`,
       title: "Article Not Found",
-    };
+    });
   }
 
-  return {
+  return constructMetadata({
+    locale,
+    path: `blog/${slug}`,
     title: `${post.title} | Blog`,
     description: post.excerpt,
     openGraph: {
       title: post.title,
       description: post.excerpt,
     },
-  };
+  });
 }
 
 export default async function ArticleDetailPage({

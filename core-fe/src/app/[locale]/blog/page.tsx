@@ -4,6 +4,7 @@ import { ArticleList } from "@/components/blog";
 import { Header } from "@/components/ui/Header";
 import { SectionTag } from "@/components/ui/SectionTag/SectionTag";
 import { getBlogPosts } from "@/lib/api/blog";
+import { constructMetadata } from "@/lib/seo";
 
 export const revalidate = 3600; // REVALIDATE_INTERVAL_BLOG
 
@@ -15,10 +16,12 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "blog" });
 
-  return {
+  return constructMetadata({
+    locale,
+    path: "blog",
     title: t("pageTitle"),
     description: t("pageDescription"),
-  };
+  });
 }
 
 export default async function BlogPage({

@@ -1,13 +1,32 @@
+import type { Metadata } from "next";
 import { setRequestLocale } from "next-intl/server";
 import { ExperienceSection } from "@/components/home/ExperienceSection";
 import { HeroSection } from "@/components/home/HeroSection";
 import { HomeCtaSection } from "@/components/home/HomeCtaSection";
 import { SkillsSection } from "@/components/home/SkillsSection";
 import { ToolsSection } from "@/components/home/ToolsSection";
+import { PersonWebsiteJsonLd } from "@/components/seo/PersonWebsiteJsonLd";
 import { CTABlock } from "@/components/ui/CTABlock";
 import { Header } from "@/components/ui/Header";
 import { getExperienceEntries, getSkills, getTools } from "@/lib/api/about";
 import { getProfileIntro, getSocialLinks } from "@/lib/api/social";
+import { constructMetadata } from "@/lib/seo";
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const profile = await getProfileIntro({ locale }).catch(() => null);
+
+  return constructMetadata({
+    locale,
+    path: "",
+    title: profile ? `${profile.name} — ${profile.title}` : undefined,
+    description: profile?.bio,
+  });
+}
 
 export default async function HomePage({
   params,
@@ -28,6 +47,7 @@ export default async function HomePage({
 
   return (
     <div className="min-h-screen flex flex-col bg-bg-base-1 text-text-primary">
+      <PersonWebsiteJsonLd />
       <Header />
       <main className="flex-1 w-full max-w-300 mx-auto px-5 md:px-10 lg:px-20 py-8 md:py-12 flex flex-col gap-8 md:gap-10">
         <HeroSection profile={profile} socialLinks={socialLinks} />

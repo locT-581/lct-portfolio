@@ -14,8 +14,12 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Core FE App",
-  description: "Next.js App with next-intl localization",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://loct.dev"),
+  title: {
+    template: "%s | Loc Tran",
+    default: "Loc Tran - Full Stack Engineer & Software Architect",
+  },
+  description: "Personal portfolio and blog of Loc Tran",
 };
 
 export function generateStaticParams() {

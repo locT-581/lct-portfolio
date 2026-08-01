@@ -19,7 +19,10 @@ export async function getBlogPosts({
         status: err.response.status,
       };
     }
-    throw { error: err instanceof Error ? err.message : "Unknown error", status: 500 };
+    throw {
+      error: err instanceof Error ? err.message : "Unknown error",
+      status: 500,
+    };
   }
 }
 
@@ -42,6 +45,9 @@ export async function getBlogPostBySlug({
         status: err.response.status,
       };
     }
-    throw { error: err instanceof Error ? err.message : "Unknown error", status: 500 };
+    throw {
+      error: err instanceof Error ? err.message : "Unknown error",
+      status: 500,
+    };
   }
 }

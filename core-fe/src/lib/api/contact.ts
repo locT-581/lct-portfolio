@@ -17,7 +17,10 @@ export async function submitContactForm(
         status: err.response.status,
       };
     }
-    throw { error: err instanceof Error ? err.message : "Unknown error", status: 500 };
+    throw {
+      error: err instanceof Error ? err.message : "Unknown error",
+      status: 500,
+    };
   }
 }
 

@@ -19,7 +19,10 @@ export async function getExperienceEntries({
         status: err.response.status,
       };
     }
-    throw { error: err instanceof Error ? err.message : "Unknown error", status: 500 };
+    throw {
+      error: err instanceof Error ? err.message : "Unknown error",
+      status: 500,
+    };
   }
 }
 
@@ -40,7 +43,10 @@ export async function getSkills({
         status: err.response.status,
       };
     }
-    throw { error: err instanceof Error ? err.message : "Unknown error", status: 500 };
+    throw {
+      error: err instanceof Error ? err.message : "Unknown error",
+      status: 500,
+    };
   }
 }
 
@@ -61,7 +67,10 @@ export async function getTools({
         status: err.response.status,
       };
     }
-    throw { error: err instanceof Error ? err.message : "Unknown error", status: 500 };
+    throw {
+      error: err instanceof Error ? err.message : "Unknown error",
+      status: 500,
+    };
   }
 }
 
@@ -82,6 +91,9 @@ export async function getSocialLinks({
         status: err.response.status,
       };
     }
-    throw { error: err instanceof Error ? err.message : "Unknown error", status: 500 };
+    throw {
+      error: err instanceof Error ? err.message : "Unknown error",
+      status: 500,
+    };
   }
 }

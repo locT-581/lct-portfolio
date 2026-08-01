@@ -8,7 +8,9 @@ export function getSiteUrl(): string {
 export function constructUrl(locale: string, path: string = ""): string {
   const siteUrl = getSiteUrl();
   const cleanPath = path.replace(/^\/+|\/+$/g, "");
-  return cleanPath ? `${siteUrl}/${locale}/${cleanPath}` : `${siteUrl}/${locale}`;
+  return cleanPath
+    ? `${siteUrl}/${locale}/${cleanPath}`
+    : `${siteUrl}/${locale}`;
 }
 
 export interface ConstructMetadataOptions {
@@ -30,7 +32,20 @@ export function constructMetadata({
   const enUrl = constructUrl("en", path);
   const viUrl = constructUrl("vi", path);
 
-  const ogImages = openGraph?.images;
+  const defaultOgImage = {
+    url: `${getSiteUrl()}/og-default.png`,
+    width: 1200,
+    height: 630,
+    alt: title || "Loc Tran Portfolio",
+  };
+
+  const images =
+    openGraph?.images &&
+    (Array.isArray(openGraph.images)
+      ? openGraph.images.length > 0
+      : Boolean(openGraph.images))
+      ? openGraph.images
+      : [defaultOgImage];
 
   return {
     title,
@@ -47,8 +62,8 @@ export function constructMetadata({
       ...(title ? { title } : {}),
       ...(description ? { description } : {}),
       url: canonicalUrl,
-      ...(ogImages ? { images: ogImages } : {}),
       ...openGraph,
+      images,
     },
   };
 }

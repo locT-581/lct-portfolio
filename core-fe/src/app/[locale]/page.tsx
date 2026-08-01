@@ -1,5 +1,7 @@
-import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Link } from "@/i18n/routing";
+import { setRequestLocale } from "next-intl/server";
+import { HeroSection } from "@/components/home/HeroSection";
+import { Header } from "@/components/ui/Header";
+import { getProfileIntro, getSocialLinks } from "@/lib/api/social";
 
 export default async function HomePage({
   params,
@@ -9,38 +11,17 @@ export default async function HomePage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const t = await getTranslations("HomePage");
+  const [profile, socialLinks] = await Promise.all([
+    getProfileIntro({ locale }),
+    getSocialLinks({ locale }),
+  ]);
 
   return (
-    <main className="min-h-screen p-8 flex flex-col items-center justify-center text-center">
-      <h1 className="text-4xl font-bold mb-4">{t("title")}</h1>
-      <p className="text-lg text-gray-600 mb-8">{t("description")}</p>
-
-      <div className="flex items-center gap-4">
-        <span className="font-medium">{t("switchLanguage")}</span>
-        <Link
-          href="/"
-          locale="vi"
-          className={`px-4 py-2 rounded-md border ${
-            locale === "vi"
-              ? "bg-blue-600 text-white border-blue-600"
-              : "bg-white text-gray-800 border-gray-300 hover:bg-gray-50"
-          }`}
-        >
-          Tiếng Việt
-        </Link>
-        <Link
-          href="/"
-          locale="en"
-          className={`px-4 py-2 rounded-md border ${
-            locale === "en"
-              ? "bg-blue-600 text-white border-blue-600"
-              : "bg-white text-gray-800 border-gray-300 hover:bg-gray-50"
-          }`}
-        >
-          English
-        </Link>
-      </div>
-    </main>
+    <div className="min-h-screen flex flex-col bg-bg-base-1 text-text-primary">
+      <Header />
+      <main className="flex-1 w-full max-w-[1200px] mx-auto px-5 md:px-10 lg:px-20 py-8 md:py-12">
+        <HeroSection profile={profile} socialLinks={socialLinks} />
+      </main>
+    </div>
   );
 }

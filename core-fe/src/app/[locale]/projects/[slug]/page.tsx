@@ -1,5 +1,4 @@
 import { setRequestLocale } from "next-intl/server";
-import { REVALIDATE_INTERVAL_PROJECTS } from "@/lib/constants/revalidation";
 
 export const revalidate = 3600; // REVALIDATE_INTERVAL_PROJECTS
 

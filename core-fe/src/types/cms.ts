@@ -62,6 +62,20 @@ export interface SocialLink {
   iconName: string | null;
 }
 
+export interface SocialLinkItem {
+  platform: string;
+  url: string;
+  icon?: string | null;
+  label: string;
+}
+
+export interface ProfileIntro {
+  avatarUrl: string;
+  name: string;
+  title: string;
+  bio: string;
+}
+
 export interface NewsletterSubscribePayload {
   email: string;
   locale: string;

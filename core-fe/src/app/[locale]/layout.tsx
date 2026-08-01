@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { QueryProvider } from "@/components/providers/QueryProvider";
@@ -39,11 +40,9 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={geistSans.variable} suppressHydrationWarning>
-      <head>
-        <script
-          // biome-ignore lint/security/noDangerouslySetInnerHtml: inline theme script required to prevent FOUC (AD-17)
-          dangerouslySetInnerHTML={{
-            __html: `(function() {
+      <body className="antialiased">
+        <Script id="theme-script" strategy="beforeInteractive">
+          {`(function() {
   var theme = null;
   try {
     theme = localStorage.getItem('portfolio-theme');
@@ -52,11 +51,8 @@ export default async function LocaleLayout({
     theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
   document.documentElement.setAttribute('data-theme', theme);
-})();`,
-          }}
-        />
-      </head>
-      <body className="antialiased">
+})();`}
+        </Script>
         <NextIntlClientProvider messages={messages}>
           <QueryProvider>{children}</QueryProvider>
         </NextIntlClientProvider>

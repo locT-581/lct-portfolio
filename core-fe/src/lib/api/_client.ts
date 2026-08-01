@@ -1,12 +1,12 @@
 import "server-only";
 import ky from "ky";
 
-const baseUrl = process.env.EMDASH_API_URL;
+const baseUrl = process.env.EMDASH_API_URL || "http://localhost:3000/api";
 const apiKey = process.env.EMDASH_API_KEY;
 
-if (!baseUrl && process.env.NODE_ENV !== "test") {
+if (!process.env.EMDASH_API_URL && process.env.NODE_ENV !== "test") {
   console.warn(
-    "[Em-dash API Client] Warning: EMDASH_API_URL environment variable is not defined.",
+    "[Em-dash API Client] Warning: EMDASH_API_URL environment variable is not defined. Using fallback http://localhost:3000/api",
   );
 }
 

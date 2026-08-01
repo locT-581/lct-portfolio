@@ -1,6 +1,25 @@
-import { setRequestLocale } from "next-intl/server";
+import type { Metadata } from "next";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { ArticleList } from "@/components/blog";
+import { Header } from "@/components/ui/Header";
+import { SectionTag } from "@/components/ui/SectionTag/SectionTag";
+import { getBlogPosts } from "@/lib/api/blog";
 
 export const revalidate = 3600; // REVALIDATE_INTERVAL_BLOG
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "blog" });
+
+  return {
+    title: t("pageTitle"),
+    description: t("pageDescription"),
+  };
+}
 
 export default async function BlogPage({
   params,
@@ -10,10 +29,31 @@ export default async function BlogPage({
   const { locale } = await params;
   setRequestLocale(locale);
 
+  const t = await getTranslations({ locale, namespace: "blog" });
+  const posts = await getBlogPosts({ locale }).catch(() => []);
+
   return (
-    <main className="min-h-screen p-8">
-      <h1 className="text-3xl font-bold mb-4">Blog</h1>
-      <p className="text-gray-600">Blog articles list stub.</p>
-    </main>
+    <div className="min-h-screen flex flex-col bg-bg-base-1 text-text-primary">
+      <Header />
+      <main className="flex-1 w-full max-w-300 mx-auto px-5 md:px-10 lg:px-20 py-8 md:py-12 flex flex-col gap-8 md:gap-10">
+        {/* Section header */}
+        <div className="flex flex-col gap-3">
+          <SectionTag label={t("sectionLabel")} />
+          <h1 className="text-heading-m-bold md:text-heading-l-bold text-text-primary">
+            {t("pageTitle")}
+          </h1>
+          <p className="text-body-m-regular text-text-secondary max-w-2xl">
+            {t("pageDescription")}
+          </p>
+        </div>
+
+        {/* Article List */}
+        <ArticleList
+          posts={posts}
+          locale={locale}
+          sectionLabel={t("sectionLabel")}
+        />
+      </main>
+    </div>
   );
 }

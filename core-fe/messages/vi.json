@@ -58,5 +58,12 @@
     "pageDescription": "Khám phá danh mục các dự án tôi đã thực hiện — từ ứng dụng web đến trải nghiệm kỹ thuật số sáng tạo.",
     "sectionLabel": "Dự án",
     "emptyState": "Chưa có dự án nào. Hãy quay lại sau nhé!"
+  },
+  "blog": {
+    "pageTitle": "Bài viết & Chia sẻ",
+    "pageDescription": "Những góc nhìn, bài hướng dẫn và phân tích sâu về phát triển web hiện đại, kiến trúc phần mềm và công nghệ.",
+    "sectionLabel": "Góc viết",
+    "emptyState": "Chưa có bài viết nào. Hãy quay lại sau nhé!",
+    "readMore": "Đọc bài viết"
   }
 }

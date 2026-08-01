@@ -58,5 +58,12 @@
     "pageDescription": "Explore my portfolio of shipped projects — from web applications to creative digital experiences.",
     "sectionLabel": "Projects",
     "emptyState": "No projects to display yet. Check back soon!"
+  },
+  "blog": {
+    "pageTitle": "Articles & Insights",
+    "pageDescription": "Thoughts, tutorials, and deep-dives into modern web development, software architecture, and technology.",
+    "sectionLabel": "Writing",
+    "emptyState": "No articles published yet. Check back soon!",
+    "readMore": "Read article"
   }
 }

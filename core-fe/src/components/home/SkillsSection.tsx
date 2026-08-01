@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionTag } from "@/components/ui/SectionTag/SectionTag";
 import { cn } from "@/lib/utils";
 import type { Skill } from "@/types/cms";
@@ -36,11 +37,16 @@ export function SkillsSection({ skills, className = "" }: SkillsSectionProps) {
       <SectionTag label="Skills" />
 
       {/* Flex-wrap: 2 cols on sm+ (≥640px), single col on mobile */}
-      <div className="w-full flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-2">
+      <ScrollReveal
+        animation="fade-up"
+        selector=".skill-item"
+        stagger={0.05}
+        className="w-full flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-2"
+      >
         {skills.map((skill) => (
           <div
             key={skill.id}
-            className="flex items-center gap-0 min-w-40 max-w-72"
+            className="skill-item flex items-center gap-0 min-w-40 max-w-72"
             title={skill.label}
           >
             {/* 44×44 icon container with 6px padding around the image */}
@@ -68,7 +74,7 @@ export function SkillsSection({ skills, className = "" }: SkillsSectionProps) {
             </span>
           </div>
         ))}
-      </div>
+      </ScrollReveal>
     </section>
   );
 }

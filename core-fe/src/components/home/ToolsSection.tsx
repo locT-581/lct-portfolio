@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionTag } from "@/components/ui/SectionTag/SectionTag";
 import { cn } from "@/lib/utils";
 import type { Tool } from "@/types/cms";
@@ -36,11 +37,16 @@ export function ToolsSection({ tools, className = "" }: ToolsSectionProps) {
       <SectionTag label="Tools" />
 
       {/* Horizontal logo row — wraps responsively */}
-      <div className="flex flex-wrap items-center">
+      <ScrollReveal
+        animation="fade-up"
+        selector=".tool-item"
+        stagger={0.05}
+        className="flex flex-wrap items-center"
+      >
         {tools.map((tool) => (
           <div
             key={tool.id}
-            className="flex items-center justify-center w-15.5 px-3.75"
+            className="tool-item flex items-center justify-center w-15.5 px-3.75"
             title={tool.name}
           >
             {tool.iconName ? (
@@ -61,7 +67,7 @@ export function ToolsSection({ tools, className = "" }: ToolsSectionProps) {
             )}
           </div>
         ))}
-      </div>
+      </ScrollReveal>
     </section>
   );
 }

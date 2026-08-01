@@ -32,7 +32,28 @@
     "home": "Trang chủ",
     "about": "Về tôi",
     "blog": "Bài viết",
+    "contact": "Liên hệ",
     "brandName": "Copyseen"
+  },
+  "contact": {
+    "pageTitle": "Liên hệ",
+    "pageDescription": "Chúng tôi rất vui được hợp tác với bạn trong dự án tiếp theo. Hãy nhắn tin để bắt đầu trò chuyện ngay hôm nay.",
+    "sectionLabel": "Liên hệ",
+    "connectWithMe": "Kết nối với tôi",
+    "nameLabel": "Họ và tên",
+    "namePlaceholder": "Jean Pierre",
+    "emailLabel": "Email",
+    "emailPlaceholder": "example@email.com",
+    "messageLabel": "Tin nhắn",
+    "messagePlaceholder": "Hãy chia sẻ về dự án của bạn và những yêu cầu cần hỗ trợ",
+    "submitButton": "Gửi tin nhắn",
+    "submitting": "Đang gửi...",
+    "successMessage": "🎉 Cảm ơn bạn! Tin nhắn của bạn đã được gửi thành công.",
+    "invalidEmailError": "Vui lòng nhập địa chỉ email hợp lệ.",
+    "requiredFieldError": "Trường này là bắt buộc.",
+    "invalidFieldsError": "Vui lòng kiểm tra lại thông tin trong biểu mẫu và thử lại.",
+    "rateLimitError": "Bạn đã gửi quá nhiều lần. Vui lòng đợi vài phút trước khi thử lại.",
+    "genericError": "Có lỗi xảy ra. Vui lòng thử lại sau."
   },
   "social": {
     "email": "Email",

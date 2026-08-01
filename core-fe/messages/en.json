@@ -32,7 +32,28 @@
     "home": "Home",
     "about": "About me",
     "blog": "Blog",
+    "contact": "Contact",
     "brandName": "Copyseen"
+  },
+  "contact": {
+    "pageTitle": "Get in touch",
+    "pageDescription": "We'd love to collaborate with you on your next project. Reach out today to start the conversation.",
+    "sectionLabel": "Contact",
+    "connectWithMe": "Connect with me",
+    "nameLabel": "Name",
+    "namePlaceholder": "Jean Pierre",
+    "emailLabel": "Email",
+    "emailPlaceholder": "example@email.com",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Please tell us about your project and what you need",
+    "submitButton": "Send message",
+    "submitting": "Sending...",
+    "successMessage": "🎉 Thank you! Your message has been sent successfully.",
+    "invalidEmailError": "Please enter a valid email address.",
+    "requiredFieldError": "This field is required.",
+    "invalidFieldsError": "Please check the form for errors and try again.",
+    "rateLimitError": "Too many submissions. Please wait a few minutes before trying again.",
+    "genericError": "Something went wrong. Please try again later."
   },
   "social": {
     "email": "Email",

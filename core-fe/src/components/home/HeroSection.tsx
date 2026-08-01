@@ -35,14 +35,14 @@ export function HeroSection({
       className={cn("w-full flex flex-col gap-6 md:gap-8", className)}
     >
       <div className="flex flex-col sm:flex-row gap-5 sm:gap-6 items-start sm:items-center">
-        <div className="relative shrink-0 overflow-hidden rounded-full border border-stroke w-[78px] h-[78px]">
+        <div className="relative shrink-0 overflow-hidden rounded-full border border-stroke w-19.5 h-19.5">
           <Image
             src={avatarUrl}
             alt={name}
             width={78}
             height={78}
             priority
-            className="w-[78px] h-[78px] object-cover"
+            className="w-19.5 h-19.5 object-cover"
           />
         </div>
 

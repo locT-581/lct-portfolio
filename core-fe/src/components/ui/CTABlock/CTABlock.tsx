@@ -11,7 +11,7 @@ export interface CTABlockProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * Main call-to-action title / heading text.
    */
-  title: string;
+  title?: string;
   /**
    * Optional secondary body description text.
    */

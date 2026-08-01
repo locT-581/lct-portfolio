@@ -57,8 +57,6 @@ function ArrowRightIcon({ className = "w-3.5 h-3.5" }: { className?: string }) {
   );
 }
 
-
-
 /**
  * `<Breadcrumbs>` component rendering a navigational trail.
  *

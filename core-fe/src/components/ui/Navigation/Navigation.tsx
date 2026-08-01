@@ -134,8 +134,6 @@ function TestimonialIcon({ className = "w-6 h-6" }: { className?: string }) {
   );
 }
 
-
-
 /**
  * `<Navigation>` component for site orientation and section navigation.
  *

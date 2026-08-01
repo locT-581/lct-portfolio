@@ -83,7 +83,7 @@ export function NewsletterBlock({
       }
       setStatus("success");
       setEmail("");
-    } catch (error) {
+    } catch (_error) {
       setStatus("error");
       setErrorMessage(t("genericError"));
     }

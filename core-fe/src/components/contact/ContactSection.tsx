@@ -1,14 +1,17 @@
 import { useTranslations } from "next-intl";
 import { SocialLink } from "@/components/ui/SocialLink";
+import { CalendlyEmbed } from "./CalendlyEmbed";
 import { ContactForm } from "./ContactForm";
 
 export interface ContactSectionProps {
   locale: string;
+  calendlyUrl?: string;
   className?: string;
 }
 
 export function ContactSection({
   locale,
+  calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL,
   className = "",
 }: ContactSectionProps) {
   const t = useTranslations("contact");
@@ -21,8 +24,14 @@ export function ContactSection({
     { platform: "github", href: "https://github.com" },
   ] as const;
 
+  const hasCalendly = Boolean(calendlyUrl && calendlyUrl.trim() !== "");
+
   return (
-    <section className={`w-full py-10 md:py-16 ${className}`}>
+    <section
+      className={`w-full py-10 md:py-16 ${
+        hasCalendly ? "flex flex-col gap-12 md:gap-16" : ""
+      } ${className}`}
+    >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
         {/* Left Column: Intro & Social Links */}
         <div className="flex flex-col gap-6">
@@ -59,6 +68,8 @@ export function ContactSection({
           <ContactForm locale={locale} />
         </div>
       </div>
+
+      {hasCalendly && <CalendlyEmbed url={calendlyUrl} />}
     </section>
   );
 }

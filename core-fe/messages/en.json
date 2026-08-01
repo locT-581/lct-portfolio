@@ -53,7 +53,9 @@
     "requiredFieldError": "This field is required.",
     "invalidFieldsError": "Please check the form for errors and try again.",
     "rateLimitError": "Too many submissions. Please wait a few minutes before trying again.",
-    "genericError": "Something went wrong. Please try again later."
+    "genericError": "Something went wrong. Please try again later.",
+    "calendlyTitle": "Schedule a Meeting",
+    "calendlyDescription": "Pick a time on my calendar that works best for you."
   },
   "social": {
     "email": "Email",

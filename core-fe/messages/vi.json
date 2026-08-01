@@ -53,7 +53,9 @@
     "requiredFieldError": "Trường này là bắt buộc.",
     "invalidFieldsError": "Vui lòng kiểm tra lại thông tin trong biểu mẫu và thử lại.",
     "rateLimitError": "Bạn đã gửi quá nhiều lần. Vui lòng đợi vài phút trước khi thử lại.",
-    "genericError": "Có lỗi xảy ra. Vui lòng thử lại sau."
+    "genericError": "Có lỗi xảy ra. Vui lòng thử lại sau.",
+    "calendlyTitle": "Đặt lịch hẹn",
+    "calendlyDescription": "Chọn thời gian phù hợp trên lịch của tôi để trao đổi trực tiếp."
   },
   "social": {
     "email": "Email",

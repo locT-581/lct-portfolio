@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { type FormEvent, type HTMLAttributes, useState } from "react";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
@@ -11,7 +12,6 @@ export interface NewsletterBlockProps
   extends Omit<HTMLAttributes<HTMLDivElement>, "onSubmit"> {
   /**
    * Section heading title.
-   * @default "Newsletter"
    */
   title?: string;
   /**
@@ -20,12 +20,10 @@ export interface NewsletterBlockProps
   description?: string;
   /**
    * Placeholder text for the email input.
-   * @default "your@email.com"
    */
   placeholder?: string;
   /**
    * Button submit label.
-   * @default "Subscribe"
    */
   buttonText?: string;
   /**
@@ -45,25 +43,31 @@ export interface NewsletterBlockProps
  * reuses `<Button>`, and handles async submit state (loading, success, error).
  */
 export function NewsletterBlock({
-  title = "Newsletter",
-  description = "I send bite-sized insights on copywriting, content strategy, and creative work—only the good stuff that actually helps you grow.",
-  placeholder = "your@email.com",
-  buttonText = "Subscribe",
+  title,
+  description,
+  placeholder,
+  buttonText,
   onSubmit,
   className = "",
   ...props
 }: NewsletterBlockProps) {
+  const t = useTranslations("newsletter");
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
+  const displayTitle = title ?? t("title");
+  const displayDescription = description ?? t("description");
+  const displayPlaceholder = placeholder ?? t("placeholder");
+  const displayButtonText = buttonText ?? t("buttonText");
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       setStatus("error");
-      setErrorMessage("Please enter a valid email address.");
+      setErrorMessage(t("invalidEmailError"));
       return;
     }
 
@@ -81,11 +85,7 @@ export function NewsletterBlock({
       setEmail("");
     } catch (error) {
       setStatus("error");
-      setErrorMessage(
-        error instanceof Error
-          ? error.message
-          : "Something went wrong. Please try again.",
-      );
+      setErrorMessage(t("genericError"));
     }
   };
 
@@ -99,18 +99,18 @@ export function NewsletterBlock({
     >
       <div className="flex flex-col gap-1.5">
         <h3 className="text-body-m-medium text-text-primary font-semibold">
-          {title}
+          {displayTitle}
         </h3>
-        {description && (
+        {displayDescription && (
           <p className="text-body-m-regular text-text-secondary">
-            {description}
+            {displayDescription}
           </p>
         )}
       </div>
 
       {status === "success" ? (
         <output className="block p-3 rounded-lg bg-bg-base-2 text-text-primary text-body-s-medium border border-stroke text-center">
-          🎉 Thanks for subscribing!
+          {t("successMessage")}
         </output>
       ) : (
         <form
@@ -121,7 +121,7 @@ export function NewsletterBlock({
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder={placeholder}
+            placeholder={displayPlaceholder}
             disabled={status === "loading"}
             required
             aria-label="Email address"
@@ -133,7 +133,7 @@ export function NewsletterBlock({
             disabled={status === "loading"}
             className="shrink-0 h-10 px-5"
           >
-            {status === "loading" ? "Subscribing..." : buttonText}
+            {status === "loading" ? t("subscribing") : displayButtonText}
           </Button>
         </form>
       )}

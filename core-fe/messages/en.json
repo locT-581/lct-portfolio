@@ -1,4 +1,50 @@
 {
+  "nav": {
+    "about": "About me",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "howIWork": "How I work",
+    "testimonials": "Testimonials",
+    "brandName": "Loc Tran"
+  },
+  "footer": {
+    "copyright": "© 2026 Loc Tran. All rights reserved.",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "twitter": "Twitter"
+  },
+  "newsletter": {
+    "title": "Newsletter",
+    "description": "I send bite-sized insights on copywriting, content strategy, and creative work—only the good stuff that actually helps you grow.",
+    "placeholder": "your@email.com",
+    "buttonText": "Subscribe",
+    "subscribing": "Subscribing...",
+    "successMessage": "🎉 Thanks for subscribing!",
+    "invalidEmailError": "Please enter a valid email address.",
+    "genericError": "Something went wrong. Please try again."
+  },
+  "cta": {
+    "title": "Ready to elevate your brand?",
+    "description": "Let's discuss how we can work together on your next project.",
+    "buttonText": "Get in touch"
+  },
+  "breadcrumbs": {
+    "home": "Home",
+    "about": "About me",
+    "brandName": "Copyseen"
+  },
+  "social": {
+    "email": "Email",
+    "twitter": "Twitter",
+    "instagram": "Instagram",
+    "linkedin": "LinkedIn",
+    "github": "GitHub"
+  },
+  "theme": {
+    "toggleTheme": "Toggle theme",
+    "switchToLight": "Switch to light mode",
+    "switchToDark": "Switch to dark mode"
+  },
   "HomePage": {
     "title": "Hello World!",
     "description": "This is a Next.js application configured with next-intl.",

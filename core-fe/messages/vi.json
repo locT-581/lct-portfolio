@@ -1,4 +1,50 @@
 {
+  "nav": {
+    "about": "Về tôi",
+    "services": "Dịch vụ",
+    "portfolio": "Dự án",
+    "howIWork": "Quy trình làm việc",
+    "testimonials": "Đánh giá",
+    "brandName": "Lộc Trần"
+  },
+  "footer": {
+    "copyright": "© 2026 Loc Tran. Tất cả các quyền được bảo lưu.",
+    "github": "GitHub",
+    "linkedin": "LinkedIn",
+    "twitter": "Twitter"
+  },
+  "newsletter": {
+    "title": "Bản tin",
+    "description": "Tôi gửi những chia sẻ ngắn gọn về viết lách, chiến lược nội dung và công việc sáng tạo — chỉ những nội dung thực sự hữu ích cho bạn.",
+    "placeholder": "email-cua-ban@gmail.com",
+    "buttonText": "Đăng ký",
+    "subscribing": "Đang đăng ký...",
+    "successMessage": "🎉 Cảm ơn bạn đã đăng ký!",
+    "invalidEmailError": "Vui lòng nhập địa chỉ email hợp lệ.",
+    "genericError": "Có lỗi xảy ra. Vui lòng thử lại."
+  },
+  "cta": {
+    "title": "Bạn đã sẵn sàng nâng tầm thương hiệu?",
+    "description": "Hãy cùng thảo luận về dự án tiếp theo của bạn.",
+    "buttonText": "Liên hệ ngay"
+  },
+  "breadcrumbs": {
+    "home": "Trang chủ",
+    "about": "Về tôi",
+    "brandName": "Copyseen"
+  },
+  "social": {
+    "email": "Email",
+    "twitter": "Twitter",
+    "instagram": "Instagram",
+    "linkedin": "LinkedIn",
+    "github": "GitHub"
+  },
+  "theme": {
+    "toggleTheme": "Chuyển đổi giao diện",
+    "switchToLight": "Chuyển sang chế độ sáng",
+    "switchToDark": "Chuyển sang chế độ tối"
+  },
   "HomePage": {
     "title": "Xin chào thế giới!",
     "description": "Đây là ứng dụng Next.js đã được tích hợp next-intl.",

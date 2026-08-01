@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import type { AnchorHTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
@@ -144,14 +145,6 @@ function GithubIcon({ className = "w-4 h-4" }: { className?: string }) {
   );
 }
 
-const platformDefaults: Record<string, { label: string; icon: ReactNode }> = {
-  email: { label: "Email", icon: <MailIcon /> },
-  twitter: { label: "Twitter", icon: <TwitterIcon /> },
-  instagram: { label: "Instagram", icon: <InstagramIcon /> },
-  linkedin: { label: "LinkedIn", icon: <LinkedinIcon /> },
-  github: { label: "GitHub", icon: <GithubIcon /> },
-};
-
 /**
  * `<SocialLink>` component rendering an accessible social media icon link.
  *
@@ -166,6 +159,16 @@ export function SocialLink({
   className = "",
   ...props
 }: SocialLinkProps) {
+  const t = useTranslations("social");
+
+  const platformDefaults: Record<string, { label: string; icon: ReactNode }> = {
+    email: { label: t("email"), icon: <MailIcon /> },
+    twitter: { label: t("twitter"), icon: <TwitterIcon /> },
+    instagram: { label: t("instagram"), icon: <InstagramIcon /> },
+    linkedin: { label: t("linkedin"), icon: <LinkedinIcon /> },
+    github: { label: t("github"), icon: <GithubIcon /> },
+  };
+
   const platformInfo = platformDefaults[platform] ?? {
     label: platform,
     icon: <MailIcon />,

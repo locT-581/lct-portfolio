@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import type { HTMLAttributes, ReactNode } from "react";
 import { Button, type ButtonVariant } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
@@ -17,7 +18,6 @@ export interface CTABlockProps extends HTMLAttributes<HTMLDivElement> {
   description?: string;
   /**
    * Action button text.
-   * @default "Get in touch"
    */
   buttonText?: string;
   /**
@@ -52,7 +52,7 @@ export interface CTABlockProps extends HTMLAttributes<HTMLDivElement> {
 export function CTABlock({
   title,
   description,
-  buttonText = "Get in touch",
+  buttonText,
   buttonVariant = "primary",
   onButtonClick,
   href,
@@ -60,6 +60,11 @@ export function CTABlock({
   className = "",
   ...props
 }: CTABlockProps) {
+  const t = useTranslations("cta");
+  const displayTitle = title ?? t("title");
+  const displayDescription = description ?? t("description");
+  const displayButtonText = buttonText ?? t("buttonText");
+
   const renderAction = () => {
     if (children) {
       return children;
@@ -69,7 +74,7 @@ export function CTABlock({
       return (
         <Link href={href} className="inline-block shrink-0">
           <Button variant={buttonVariant} className="h-10 px-5">
-            {buttonText}
+            {displayButtonText}
           </Button>
         </Link>
       );
@@ -81,7 +86,7 @@ export function CTABlock({
         onClick={onButtonClick}
         className="shrink-0 h-10 px-5"
       >
-        {buttonText}
+        {displayButtonText}
       </Button>
     );
   };
@@ -95,12 +100,14 @@ export function CTABlock({
       {...props}
     >
       <div className="flex flex-col gap-1.5 flex-1">
-        <h3 className="text-h5 text-text-primary font-semibold tracking-tight">
-          {title}
-        </h3>
-        {description && (
+        {displayTitle && (
+          <h3 className="text-h5 text-text-primary font-semibold tracking-tight">
+            {displayTitle}
+          </h3>
+        )}
+        {displayDescription && (
           <p className="text-body-m-regular text-text-secondary">
-            {description}
+            {displayDescription}
           </p>
         )}
       </div>

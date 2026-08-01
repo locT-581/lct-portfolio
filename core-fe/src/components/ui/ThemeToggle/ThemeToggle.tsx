@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import {
   type ButtonHTMLAttributes,
   useCallback,
@@ -31,6 +32,7 @@ const THEME_STORAGE_KEY = "portfolio-theme";
  * and persists user preference in localStorage under 'portfolio-theme'.
  */
 export function ThemeToggle({ className = "", ...props }: ThemeToggleProps) {
+  const t = useTranslations("theme");
   const [theme, setTheme] = useState<Theme | null>(null);
   const [mounted, setMounted] = useState(false);
 
@@ -61,7 +63,7 @@ export function ThemeToggle({ className = "", ...props }: ThemeToggleProps) {
   }, [theme]);
 
   const isDark = theme === "dark";
-  const ariaLabel = isDark ? "Switch to light mode" : "Switch to dark mode";
+  const ariaLabel = isDark ? t("switchToLight") : t("switchToDark");
 
   return (
     <button

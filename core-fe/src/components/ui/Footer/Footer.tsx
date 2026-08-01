@@ -1,3 +1,4 @@
+import { useTranslations } from "next-intl";
 import type { HTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
@@ -29,7 +30,6 @@ export interface FooterLinkItem {
 export interface FooterProps extends HTMLAttributes<HTMLElement> {
   /**
    * Custom copyright notice text.
-   * @default "© 2026 Loc Tran. All rights reserved."
    */
   copyrightText?: string;
   /**
@@ -46,27 +46,6 @@ export interface FooterProps extends HTMLAttributes<HTMLElement> {
   className?: string;
 }
 
-const defaultLinks: FooterLinkItem[] = [
-  {
-    label: "GitHub",
-    href: "https://github.com",
-    target: "_blank",
-    rel: "noopener noreferrer",
-  },
-  {
-    label: "LinkedIn",
-    href: "https://linkedin.com",
-    target: "_blank",
-    rel: "noopener noreferrer",
-  },
-  {
-    label: "Twitter",
-    href: "https://twitter.com",
-    target: "_blank",
-    rel: "noopener noreferrer",
-  },
-];
-
 /**
  * `<Footer>` responsive navigation footer component.
  *
@@ -74,12 +53,38 @@ const defaultLinks: FooterLinkItem[] = [
  * copyright notice, links, and keyboard focus indicators.
  */
 export function Footer({
-  copyrightText = "© 2026 Loc Tran. All rights reserved.",
-  links = defaultLinks,
+  copyrightText,
+  links,
   children,
   className = "",
   ...props
 }: FooterProps) {
+  const t = useTranslations("footer");
+
+  const defaultLinks: FooterLinkItem[] = [
+    {
+      label: t("github"),
+      href: "https://github.com",
+      target: "_blank",
+      rel: "noopener noreferrer",
+    },
+    {
+      label: t("linkedin"),
+      href: "https://linkedin.com",
+      target: "_blank",
+      rel: "noopener noreferrer",
+    },
+    {
+      label: t("twitter"),
+      href: "https://twitter.com",
+      target: "_blank",
+      rel: "noopener noreferrer",
+    },
+  ];
+
+  const displayCopyright = copyrightText ?? t("copyright");
+  const displayLinks = links ?? defaultLinks;
+
   const baseStyles =
     "min-h-[80px] md:min-h-[54px] w-full bg-bg-base-1 border-t border-divider flex items-center justify-center text-footer text-text-secondary";
 
@@ -90,9 +95,11 @@ export function Footer({
           children
         ) : (
           <>
-            <p className="text-footer text-text-secondary">{copyrightText}</p>
+            <p className="text-footer text-text-secondary">
+              {displayCopyright}
+            </p>
             <div className="flex flex-wrap items-center gap-4 md:gap-6">
-              {links.map((link) => (
+              {displayLinks.map((link) => (
                 <a
                   key={link.href + link.label}
                   href={link.href}

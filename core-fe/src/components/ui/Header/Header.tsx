@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import type { HTMLAttributes, ReactNode } from "react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { cn } from "@/lib/utils";
@@ -43,6 +44,7 @@ export function Header({
   className = "",
   ...props
 }: HeaderProps) {
+  const t = useTranslations("nav");
   const baseStyles =
     "sticky top-0 z-50 min-h-[76px] w-full bg-bg-base-1/80 backdrop-blur-md border-b border-divider flex items-center justify-center text-text-primary";
 
@@ -59,7 +61,7 @@ export function Header({
                   href="/"
                   className="font-bold text-h6 text-text-primary hover:text-brand-orange transition-colors rounded focus-visible:outline-2 focus-visible:outline-brand-orange"
                 >
-                  Loc Tran
+                  {t("brandName")}
                 </Link>
               )}
             </div>

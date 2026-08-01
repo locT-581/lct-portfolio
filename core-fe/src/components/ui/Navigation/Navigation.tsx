@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import type { HTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
@@ -133,13 +134,7 @@ function TestimonialIcon({ className = "w-6 h-6" }: { className?: string }) {
   );
 }
 
-export const DEFAULT_NAV_ITEMS: NavItem[] = [
-  { label: "About me", href: "/", icon: <UserIcon /> },
-  { label: "Service", href: "/services", icon: <ServiceIcon /> },
-  { label: "Portfolio", href: "/portfolio", icon: <PortfolioIcon /> },
-  { label: "How i work", href: "/how-i-work", icon: <WorkIcon /> },
-  { label: "Testimonial", href: "/testimonials", icon: <TestimonialIcon /> },
-];
+
 
 /**
  * `<Navigation>` component for site orientation and section navigation.
@@ -148,11 +143,26 @@ export const DEFAULT_NAV_ITEMS: NavItem[] = [
  * and as a top horizontal navigation bar on Mobile (viewport <810px).
  */
 export function Navigation({
-  items = DEFAULT_NAV_ITEMS,
+  items,
   activePath = "/",
   className = "",
   ...props
 }: NavigationProps) {
+  const t = useTranslations("nav");
+
+  const defaultItems: NavItem[] = [
+    { label: t("about"), href: "/", icon: <UserIcon /> },
+    { label: t("services"), href: "/services", icon: <ServiceIcon /> },
+    { label: t("portfolio"), href: "/portfolio", icon: <PortfolioIcon /> },
+    { label: t("howIWork"), href: "/how-i-work", icon: <WorkIcon /> },
+    {
+      label: t("testimonials"),
+      href: "/testimonials",
+      icon: <TestimonialIcon />,
+    },
+  ];
+
+  const navItems = items ?? defaultItems;
   return (
     <nav
       aria-label="Main Navigation"
@@ -163,7 +173,7 @@ export function Navigation({
       )}
       {...props}
     >
-      {items.map((item) => {
+      {navItems.map((item) => {
         const isActive =
           activePath === item.href ||
           (item.href !== "/" && activePath.startsWith(`${item.href}/`));

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import type { HTMLAttributes, ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
@@ -56,10 +57,7 @@ function ArrowRightIcon({ className = "w-3.5 h-3.5" }: { className?: string }) {
   );
 }
 
-export const DEFAULT_BREADCRUMB_ITEMS: BreadcrumbItem[] = [
-  { label: "Copyseen", href: "/" },
-  { label: "About me" },
-];
+
 
 /**
  * `<Breadcrumbs>` component rendering a navigational trail.
@@ -68,11 +66,20 @@ export const DEFAULT_BREADCRUMB_ITEMS: BreadcrumbItem[] = [
  * and `<ol>` ordered list hierarchy, styled with the `text-breadcrumb` design token utility.
  */
 export function Breadcrumbs({
-  items = DEFAULT_BREADCRUMB_ITEMS,
+  items,
   separator = <ArrowRightIcon className="w-3.5 h-3.5 text-text-secondary" />,
   className = "",
   ...props
 }: BreadcrumbsProps) {
+  const t = useTranslations("breadcrumbs");
+
+  const defaultItems: BreadcrumbItem[] = [
+    { label: t("brandName"), href: "/" },
+    { label: t("about") },
+  ];
+
+  const displayItems = items ?? defaultItems;
+
   return (
     <nav
       aria-label="Breadcrumb"
@@ -83,8 +90,8 @@ export function Breadcrumbs({
       {...props}
     >
       <ol className="flex gap-1 items-center flex-wrap">
-        {items.map((item, index) => {
-          const isLast = index === items.length - 1;
+        {displayItems.map((item, index) => {
+          const isLast = index === displayItems.length - 1;
 
           return (
             <li

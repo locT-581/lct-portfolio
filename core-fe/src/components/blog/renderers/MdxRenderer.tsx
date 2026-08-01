@@ -1,6 +1,6 @@
 import { MDXRemote } from "next-mdx-remote/rsc";
-import rehypeHighlight from "rehype-highlight";
 import type { ComponentPropsWithoutRef, HTMLAttributes } from "react";
+import rehypeHighlight from "rehype-highlight";
 
 interface MdxRendererProps {
   content: string;
@@ -119,7 +119,6 @@ export function MdxRenderer({ content }: MdxRendererProps) {
         components={components}
         options={{
           mdxOptions: {
-            // @ts-ignore - types from rehype-highlight might not strictly match
             rehypePlugins: [rehypeHighlight],
           },
         }}

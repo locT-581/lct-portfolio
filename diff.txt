@@ -1,0 +1,202 @@
+diff --git a/core-fe/src/app/[locale]/layout.tsx b/core-fe/src/app/[locale]/layout.tsx
+index 7562c03..5fb0e4a 100644
+--- a/core-fe/src/app/[locale]/layout.tsx
++++ b/core-fe/src/app/[locale]/layout.tsx
+@@ -38,6 +38,22 @@ export default async function LocaleLayout({
+ 
+   return (
+     <html lang={locale} className={geistSans.variable} suppressHydrationWarning>
++      <head>
++        <script
++          // biome-ignore lint/security/noDangerouslySetInnerHtml: inline theme script required to prevent FOUC (AD-17)
++          dangerouslySetInnerHTML={{
++            __html: `(function() {
++  try {
++    var theme = localStorage.getItem('portfolio-theme');
++    if (!theme) {
++      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
++    }
++    document.documentElement.setAttribute('data-theme', theme);
++  } catch (e) {}
++})();`,
++          }}
++        />
++      </head>
+       <body className="antialiased">
+         <NextIntlClientProvider messages={messages}>
+           {children}
+diff --git a/core-fe/src/components/ui/Header/Header.tsx b/core-fe/src/components/ui/Header/Header.tsx
+index b243807..186ea03 100644
+--- a/core-fe/src/components/ui/Header/Header.tsx
++++ b/core-fe/src/components/ui/Header/Header.tsx
+@@ -1,5 +1,6 @@
+ import Link from "next/link";
+ import type { HTMLAttributes, ReactNode } from "react";
++import { ThemeToggle } from "@/components/ui/ThemeToggle";
+ import { cn } from "@/lib/utils";
+ 
+ /**
+@@ -64,37 +65,7 @@ export function Header({
+             </div>
+             {nav && <nav className="flex items-center gap-6">{nav}</nav>}
+             <div className="flex items-center gap-4">
+-              {themeToggle ?? (
+-                <button
+-                  type="button"
+-                  aria-label="Toggle theme"
+-                  className="p-2 rounded text-text-secondary hover:text-text-primary transition-colors focus-visible:outline-2 focus-visible:outline-brand-orange"
+-                >
+-                  <span className="sr-only">Toggle theme</span>
+-                  <svg
+-                    xmlns="http://www.w3.org/2000/svg"
+-                    width="20"
+-                    height="20"
+-                    viewBox="0 0 24 24"
+-                    fill="none"
+-                    stroke="currentColor"
+-                    strokeWidth="2"
+-                    strokeLinecap="round"
+-                    strokeLinejoin="round"
+-                    aria-hidden="true"
+-                  >
+-                    <circle cx="12" cy="12" r="4" />
+-                    <path d="M12 2v2" />
+-                    <path d="M12 20v2" />
+-                    <path d="m4.93 4.93 1.41 1.41" />
+-                    <path d="m17.66 17.66 1.41 1.41" />
+-                    <path d="M2 12h2" />
+-                    <path d="M20 12h2" />
+-                    <path d="m4.93 19.07 1.41-1.41" />
+-                    <path d="m17.66 6.34 1.41-1.41" />
+-                  </svg>
+-                </button>
+-              )}
++              {themeToggle ?? <ThemeToggle />}
+             </div>
+           </>
+         )}
+diff --git a/core-fe/src/components/ui/ThemeToggle/ThemeToggle.tsx b/core-fe/src/components/ui/ThemeToggle/ThemeToggle.tsx
+new file mode 100644
+index 0000000..d0bb87b
+--- /dev/null
++++ b/core-fe/src/components/ui/ThemeToggle/ThemeToggle.tsx
+@@ -0,0 +1,119 @@
++"use client";
++
++import {
++  type ButtonHTMLAttributes,
++  useCallback,
++  useEffect,
++  useState,
++} from "react";
++import { cn } from "@/lib/utils";
++
++/**
++ * Props for the ThemeToggle component.
++ */
++export interface ThemeToggleProps
++  extends ButtonHTMLAttributes<HTMLButtonElement> {
++  /**
++   * Additional CSS class names to extend or override default styles.
++   */
++  className?: string;
++}
++
++type Theme = "light" | "dark";
++
++const THEME_STORAGE_KEY = "portfolio-theme";
++
++/**
++ * `<ThemeToggle>` component.
++ *
++ * Client component that allows users to toggle between dark and light themes.
++ * Reads and writes theme state from document.documentElement ('data-theme')
++ * and persists user preference in localStorage under 'portfolio-theme'.
++ */
++export function ThemeToggle({ className = "", ...props }: ThemeToggleProps) {
++  const [theme, setTheme] = useState<Theme | null>(null);
++
++  useEffect(() => {
++    const currentTheme = document.documentElement.getAttribute(
++      "data-theme",
++    ) as Theme | null;
++    if (currentTheme === "dark" || currentTheme === "light") {
++      setTheme(currentTheme);
++    } else {
++      const prefersDark = window.matchMedia(
++        "(prefers-color-scheme: dark)",
++      ).matches;
++      setTheme(prefersDark ? "dark" : "light");
++    }
++  }, []);
++
++  const toggleTheme = useCallback(() => {
++    const nextTheme: Theme = theme === "dark" ? "light" : "dark";
++    document.documentElement.setAttribute("data-theme", nextTheme);
++    try {
++      localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
++    } catch {
++      // Ignore storage errors in restricted contexts
++    }
++    setTheme(nextTheme);
++  }, [theme]);
++
++  const isDark = theme === "dark";
++  const ariaLabel = isDark ? "Switch to light mode" : "Switch to dark mode";
++
++  return (
++    <button
++      type="button"
++      onClick={toggleTheme}
++      aria-label={ariaLabel}
++      className={cn(
++        "p-2 rounded text-text-secondary hover:text-text-primary transition-colors focus-visible:outline-2 focus-visible:outline-brand-orange cursor-pointer",
++        className,
++      )}
++      {...props}
++    >
++      <span className="sr-only">{ariaLabel}</span>
++      {isDark ? (
++        /* Sun Icon for switching to light mode */
++        <svg
++          xmlns="http://www.w3.org/2000/svg"
++          width="20"
++          height="20"
++          viewBox="0 0 24 24"
++          fill="none"
++          stroke="currentColor"
++          strokeWidth="2"
++          strokeLinecap="round"
++          strokeLinejoin="round"
++          aria-hidden="true"
++        >
++          <circle cx="12" cy="12" r="4" />
++          <path d="M12 2v2" />
++          <path d="M12 20v2" />
++          <path d="m4.93 4.93 1.41 1.41" />
++          <path d="m17.66 17.66 1.41 1.41" />
++          <path d="M2 12h2" />
++          <path d="M20 12h2" />
++          <path d="m4.93 19.07 1.41-1.41" />
++          <path d="m17.66 6.34 1.41-1.41" />
++        </svg>
++      ) : (
++        /* Moon Icon for switching to dark mode */
++        <svg
++          xmlns="http://www.w3.org/2000/svg"
++          width="20"
++          height="20"
++          viewBox="0 0 24 24"
++          fill="none"
++          stroke="currentColor"
++          strokeWidth="2"
++          strokeLinecap="round"
++          strokeLinejoin="round"
++          aria-hidden="true"
++        >
++          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
++        </svg>
++      )}
++    </button>
++  );
++}

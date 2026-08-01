@@ -51,7 +51,7 @@ export function ArticleCard({
     <Link
       href={`/blog/${slug}`}
       className={cn(
-        "group flex flex-col justify-between w-full h-full p-6 bg-bg-base-2 border border-stroke rounded-xl transition-all duration-200 hover:border-text-secondary hover:bg-bg-base-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange",
+        "group flex flex-col justify-between w-full h-full p-6 bg-bg-base-2 border border-stroke rounded-xl transition-all duration-300 ease-out hover:border-brand-orange/40 hover:bg-bg-base-1 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange",
         className,
       )}
       aria-label={title}
@@ -64,7 +64,7 @@ export function ArticleCard({
               <span
                 // biome-ignore lint/suspicious/noArrayIndexKey: category tags may contain duplicate string values
                 key={`${tag}-${index}`}
-                className="px-2.5 py-1 text-xs font-medium rounded-full bg-bg-base-1 border border-stroke text-brand-orange"
+                className="px-2.5 py-1 text-xs font-medium rounded-full bg-bg-base-1 border border-stroke text-brand-orange transition-colors duration-200 group-hover:border-brand-orange/40"
               >
                 {tag}
               </span>
@@ -93,7 +93,7 @@ export function ArticleCard({
       {/* Footer / Publication Date */}
       <div className="mt-6 pt-4 border-t border-stroke flex items-center justify-between text-body-s-regular text-text-secondary">
         <time dateTime={publishedAt}>{formattedDate}</time>
-        <span className="group-hover:translate-x-1 transition-transform duration-200 text-brand-orange font-medium">
+        <span className="group-hover:translate-x-1.5 transition-transform duration-200 text-brand-orange font-medium">
           →
         </span>
       </div>

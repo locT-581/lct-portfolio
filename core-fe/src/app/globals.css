@@ -138,3 +138,55 @@ body {
   color: var(--text-primary);
   font-family: var(--font-geist);
 }
+
+/* Cross-document View Transitions API (AC: #1, #2, #3, #4, #5, #7, #8) */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    /* biome-ignore lint/correctness/noUnknownProperty: View Transitions API standard CSS property */
+    navigation: auto;
+  }
+
+  /* biome-ignore lint/correctness/noUnknownTypeSelector: View Transitions API root selector */
+  ::view-transition-old(root) {
+    animation: 200ms cubic-bezier(0.4, 0, 0.2, 1) both fade-out;
+  }
+
+  /* biome-ignore lint/correctness/noUnknownTypeSelector: View Transitions API root selector */
+  ::view-transition-new(root) {
+    animation: 250ms cubic-bezier(0.4, 0, 0.2, 1) both fade-in;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Reduced motion preference fallback */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    /* biome-ignore lint/complexity/noImportantStyles: required for accessibility reduced motion override */
+    animation-duration: 0.01ms !important;
+    /* biome-ignore lint/complexity/noImportantStyles: required for accessibility reduced motion override */
+    animation-iteration-count: 1 !important;
+    /* biome-ignore lint/complexity/noImportantStyles: required for accessibility reduced motion override */
+    transition-duration: 0.01ms !important;
+    /* biome-ignore lint/complexity/noImportantStyles: required for accessibility reduced motion override */
+    scroll-behavior: auto !important;
+  }
+}

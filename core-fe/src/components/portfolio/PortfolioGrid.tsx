@@ -1,3 +1,5 @@
+import { useTranslations } from "next-intl";
+import { ScrollReveal } from "@/components/ui/ScrollReveal/ScrollReveal";
 import { cn } from "@/lib/utils";
 import type { Project } from "@/types/cms";
 import { ProjectCard } from "./ProjectCard";
@@ -21,8 +23,6 @@ export interface PortfolioGridProps {
  * Handles the empty state gracefully when no projects are returned.
  * Strictly follows RSC paradigm (AD-1), design tokens (AD-8).
  */
-import { useTranslations } from "next-intl";
-
 export function PortfolioGrid({
   projects,
   sectionLabel = "Portfolio",
@@ -49,14 +49,16 @@ export function PortfolioGrid({
 
   return (
     <section aria-label={sectionLabel} className={cn("w-full", className)}>
-      {/* Responsive grid: 2-col mobile/tablet, 3-col desktop */}
-      <ul className="grid grid-cols-2 lg:grid-cols-3 gap-2">
-        {projects.map((project) => (
-          <li key={project.id}>
-            <ProjectCard project={project} />
-          </li>
-        ))}
-      </ul>
+      {/* Responsive grid with ScrollReveal staggered entry animations */}
+      <ScrollReveal animation="fade-up" stagger={0.08} selector="li">
+        <ul className="grid grid-cols-2 lg:grid-cols-3 gap-2">
+          {projects.map((project) => (
+            <li key={project.id}>
+              <ProjectCard project={project} />
+            </li>
+          ))}
+        </ul>
+      </ScrollReveal>
     </section>
   );
 }

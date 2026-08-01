@@ -2,12 +2,12 @@
 export const prerender = false;
 
 import {
-	getEmDashCollection,
-	getTaxonomyTerms,
-	getTermsForEntries,
+  getEmDashCollection,
+  getTaxonomyTerms,
+  getTermsForEntries,
 } from "emdash";
-import Base from "../../layouts/Base.astro";
 import ProjectCard from "../../components/ProjectCard.astro";
+import Base from "../../layouts/Base.astro";
 
 // Get filter from query param. When set, push the filter down to the
 // database via `where` instead of loading every project and filtering
@@ -16,11 +16,11 @@ import ProjectCard from "../../components/ProjectCard.astro";
 const activeTag = Astro.url.searchParams.get("tag");
 
 const [{ entries: sortedProjects, cacheHint }, tags] = await Promise.all([
-	getEmDashCollection("projects", {
-		orderBy: { published_at: "desc" },
-		...(activeTag ? { where: { tag: activeTag } } : {}),
-	}),
-	getTaxonomyTerms("tag"),
+  getEmDashCollection("projects", {
+    orderBy: { published_at: "desc" },
+    ...(activeTag ? { where: { tag: activeTag } } : {}),
+  }),
+  getTaxonomyTerms("tag"),
 ]);
 
 if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
@@ -28,13 +28,13 @@ if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
 // Single batched JOIN for the tag pills shown on each card, instead of
 // one getEntryTerms() round-trip per card.
 const tagsByEntry = await getTermsForEntries(
-	"projects",
-	sortedProjects.map((p) => p.data.id),
-	"tag",
+  "projects",
+  sortedProjects.map((p) => p.data.id),
+  "tag",
 );
 const projectsWithTags = sortedProjects.map((project) => ({
-	project,
-	projectTags: tagsByEntry.get(project.data.id) ?? [],
+  project,
+  projectTags: tagsByEntry.get(project.data.id) ?? [],
 }));
 ---
 

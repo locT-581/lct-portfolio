@@ -1,6 +1,5 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.2.0/schema.json",
-  "root": false,
   "vcs": {
     "enabled": true,
     "clientKind": "git",
@@ -8,7 +7,15 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!node_modules", "!.next", "!dist", "!build"]
+    "includes": [
+      "**",
+      "!node_modules",
+      "!.next",
+      "!dist",
+      "!build",
+      "!_bmad",
+      "!_bmad-output"
+    ]
   },
   "formatter": {
     "enabled": true,

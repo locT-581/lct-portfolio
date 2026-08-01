@@ -42,3 +42,6 @@ _bmad/
 **/.agents/*
 !.agents/AGENTS.md
 .agent/
+
+# editor
+.vscode/

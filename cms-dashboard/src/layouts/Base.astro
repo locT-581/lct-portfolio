@@ -1,16 +1,16 @@
 ---
-import { getMenu, getSiteSettings } from "emdash";
-import { EmDashHead } from "emdash/ui";
-import { createPublicPageContext } from "emdash/page";
 import { Font } from "astro:assets";
+import { getMenu, getSiteSettings } from "emdash";
+import { createPublicPageContext } from "emdash/page";
+import { EmDashHead } from "emdash/ui";
 import "../styles/tokens.css";
 import "../styles/theme.css";
 
 interface Props {
-	title?: string;
-	description?: string;
-	image?: string;
-	type?: "website" | "article";
+  title?: string;
+  description?: string;
+  image?: string;
+  type?: "website" | "article";
 }
 
 const { title, description, image, type = "website" } = Astro.props;
@@ -18,22 +18,23 @@ const settings = await getSiteSettings();
 const siteTitle = settings?.title || "Studio";
 const fullTitle = title ? `${title} — ${siteTitle}` : siteTitle;
 const siteDescription = settings?.tagline || "Design & Development";
-const siteLogo = (settings?.logo as any)?.url ? settings.logo as
-	{ mediaId: string; alt?: string; url: string } : null;
+const siteLogo = (settings?.logo as any)?.url
+  ? (settings.logo as { mediaId: string; alt?: string; url: string })
+  : null;
 
 const menu = await getMenu("primary");
 
 const pageCtx = createPublicPageContext({
-	Astro,
-	kind: "custom",
-	pageType: type,
-	title: fullTitle,
-	pageTitle: title ?? siteTitle,
-	description: description || siteDescription,
-	canonical: Astro.url.href,
-	image,
-	seo: { ogImage: image },
-	siteName: siteTitle,
+  Astro,
+  kind: "custom",
+  pageType: type,
+  title: fullTitle,
+  pageTitle: title ?? siteTitle,
+  description: description || siteDescription,
+  canonical: Astro.url.href,
+  image,
+  seo: { ogImage: image },
+  siteName: siteTitle,
 });
 ---
 

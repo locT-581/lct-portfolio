@@ -4,6 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "pnpm -r run dev",
-    "build": "pnpm -r run build"
+    "build": "pnpm -r run build",
+    "lint": "biome check .",
+    "format": "biome format --write ."
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.2.0"
   }
 }

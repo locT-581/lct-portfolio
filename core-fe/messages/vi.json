@@ -49,5 +49,8 @@
     "title": "Xin chào thế giới!",
     "description": "Đây là ứng dụng Next.js đã được tích hợp next-intl.",
     "switchLanguage": "Đổi ngôn ngữ:"
+  },
+  "home": {
+    "ctaButtonLabel": "Xem dự án"
   }
 }

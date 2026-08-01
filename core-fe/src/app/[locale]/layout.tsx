@@ -3,6 +3,7 @@ import { Geist } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
+import { QueryProvider } from "@/components/providers/QueryProvider";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
 
@@ -57,7 +58,7 @@ export default async function LocaleLayout({
       </head>
       <body className="antialiased">
         <NextIntlClientProvider messages={messages}>
-          {children}
+          <QueryProvider>{children}</QueryProvider>
         </NextIntlClientProvider>
       </body>
     </html>

@@ -49,5 +49,8 @@
     "title": "Hello World!",
     "description": "This is a Next.js application configured with next-intl.",
     "switchLanguage": "Switch language:"
+  },
+  "home": {
+    "ctaButtonLabel": "View Projects"
   }
 }

@@ -29,7 +29,18 @@ export interface NewsletterBlockProps
   /**
    * Optional async submit callback for CMS or API integration.
    */
+  /**
+   * Optional async submit callback for CMS or API integration.
+   */
   onSubmit?: (email: string) => Promise<void>;
+  /**
+   * Optional controlled status. If provided, overrides internal status.
+   */
+  status?: "idle" | "loading" | "success" | "error";
+  /**
+   * Optional controlled error message.
+   */
+  errorMessage?: string;
   /**
    * Additional CSS class names to extend default styles.
    */
@@ -48,15 +59,20 @@ export function NewsletterBlock({
   placeholder,
   buttonText,
   onSubmit,
+  status: controlledStatus,
+  errorMessage: controlledErrorMessage,
   className = "",
   ...props
 }: NewsletterBlockProps) {
   const t = useTranslations("newsletter");
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<
+  const [internalStatus, setInternalStatus] = useState<
     "idle" | "loading" | "success" | "error"
   >("idle");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [internalErrorMessage, setInternalErrorMessage] = useState("");
+
+  const status = controlledStatus ?? internalStatus;
+  const errorMessage = controlledErrorMessage ?? internalErrorMessage;
 
   const displayTitle = title ?? t("title");
   const displayDescription = description ?? t("description");
@@ -66,13 +82,17 @@ export function NewsletterBlock({
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      setStatus("error");
-      setErrorMessage(t("invalidEmailError"));
+      if (!controlledStatus) {
+        setInternalStatus("error");
+        setInternalErrorMessage(t("invalidEmailError"));
+      }
       return;
     }
 
-    setStatus("loading");
-    setErrorMessage("");
+    if (!controlledStatus) {
+      setInternalStatus("loading");
+      setInternalErrorMessage("");
+    }
 
     try {
       if (onSubmit) {
@@ -81,11 +101,15 @@ export function NewsletterBlock({
         // Fallback simulation if no onSubmit provided
         await new Promise((resolve) => setTimeout(resolve, 600));
       }
-      setStatus("success");
-      setEmail("");
+      if (!controlledStatus) {
+        setInternalStatus("success");
+        setEmail("");
+      }
     } catch (_error) {
-      setStatus("error");
-      setErrorMessage(t("genericError"));
+      if (!controlledStatus) {
+        setInternalStatus("error");
+        setInternalErrorMessage(t("genericError"));
+      }
     }
   };
 

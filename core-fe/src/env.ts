@@ -8,7 +8,7 @@ export const env = createEnv({
     EMDASH_API_KEY: z.string().min(1),
   },
   client: {
-    NEXT_PUBLIC_SITE_URL: z.url(),
+    NEXT_PUBLIC_SITE_URL: z.url().default("http://localhost:3000"),
     NEXT_PUBLIC_CALENDLY_URL: z.url().optional(),
   },
   experimental__runtimeEnv: {

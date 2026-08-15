@@ -33,7 +33,7 @@ export function PeriodLabel({
   return (
     <div
       className={cn(
-        "inline-flex items-center px-3 py-2.5 rounded-lg text-text-secondary text-body-s-regular",
+        "inline-flex items-center px-3 py-2.5 rounded-lg bg-bg-base-2 text-text-secondary text-body-s-regular",
         className,
       )}
       {...props}

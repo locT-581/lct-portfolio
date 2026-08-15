@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import type { AnchorHTMLAttributes, ReactNode } from "react";
+import { LinkPreview } from "@/components/ui/LinkPreview";
 import { cn } from "@/lib/utils";
 
 /**
@@ -210,7 +211,7 @@ export function SocialLink({
   const icon = customIcon ?? platformInfo.icon;
 
   return (
-    <a
+    <LinkPreview
       href={href}
       target={href.startsWith("http") ? "_blank" : undefined}
       rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
@@ -223,6 +224,6 @@ export function SocialLink({
     >
       <span className="shrink-0">{icon}</span>
       {!iconOnly && <span className="text-body-s-medium">{displayLabel}</span>}
-    </a>
+    </LinkPreview>
   );
 }

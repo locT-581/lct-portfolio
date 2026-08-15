@@ -6,7 +6,7 @@
   --brand-orange: #e85a0c;
   --bg-base-1: #ffffff;
   --bg-base-2: #f6f7f9;
-  --bg-base-3: #d7d7d7;
+  --bg-base-3: #d6d6d6;
   --text-primary: #1e1e1f;
   --text-secondary: #5f636f;
   --text-btn-primary: #ffffff;
@@ -17,14 +17,14 @@
 
 [data-theme="dark"] {
   --brand-orange: #e85a0c;
-  --bg-base-1: #121214;
-  --bg-base-2: #1c1c1f;
+  --bg-base-1: #151517;
+  --bg-base-2: #1a1a1b;
   --bg-base-3: #2a2a2e;
-  --text-primary: #f3f4f6;
-  --text-secondary: #9ca3af;
+  --text-primary: #ffffff;
+  --text-secondary: #bababa;
   --text-btn-primary: #ffffff;
-  --stroke: #2e2e32;
-  --divider: #27272a;
+  --stroke: #242424;
+  --divider: #2b2b2b;
   --stroke-orange: #e85a0c;
 }
 

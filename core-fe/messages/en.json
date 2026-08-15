@@ -77,7 +77,8 @@
     "switchLanguage": "Switch language:"
   },
   "home": {
-    "ctaButtonLabel": "View Projects"
+    "ctaButtonLabel": "View Projects",
+    "downloadResume": "Download resume"
   },
   "projects": {
     "pageTitle": "Projects",

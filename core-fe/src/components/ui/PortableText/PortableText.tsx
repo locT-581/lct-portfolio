@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { CodeBlockViewer } from "@/components/ui/CodeBlockViewer";
+import { LinkPreview } from "@/components/ui/LinkPreview";
 import { cn } from "@/lib/utils";
 
 export interface PortableTextSpan {
@@ -79,18 +80,12 @@ function renderSpan(
         const linkDef = markDefs?.find((def) => def._key === mark);
         if (linkDef?.href) {
           content = (
-            <a
+            <LinkPreview
               href={linkDef.href}
-              target={linkDef.href.startsWith("http") ? "_blank" : undefined}
-              rel={
-                linkDef.href.startsWith("http")
-                  ? "noopener noreferrer"
-                  : undefined
-              }
               className="text-brand-orange hover:underline font-medium"
             >
               {content}
-            </a>
+            </LinkPreview>
           );
         }
         break;
@@ -100,6 +95,18 @@ function renderSpan(
 
   return content;
 }
+
+type GroupedBlock =
+  | {
+      type: "list";
+      listItem: string;
+      key: string;
+      items: PortableTextBlock[];
+    }
+  | {
+      type: "block";
+      block: PortableTextBlock;
+    };
 
 /**
  * Component to render Emdash / Sanity Portable Text blocks into styled semantic HTML elements.
@@ -128,9 +135,95 @@ export function PortableText({ value, className = "" }: PortableTextProps) {
 
   const blocks = value as PortableTextBlock[];
 
+  // Group consecutive list items together
+  const groupedBlocks: GroupedBlock[] = [];
+  let currentList: {
+    listItem: string;
+    key: string;
+    items: PortableTextBlock[];
+  } | null = null;
+
+  for (let i = 0; i < blocks.length; i++) {
+    const block = blocks[i];
+
+    // Skip empty trailing text block
+    const spans = block.children || [];
+    const hasText = spans.some((s) => s.text && s.text.trim().length > 0);
+    if (
+      !hasText &&
+      !block.listItem &&
+      block.style === "normal" &&
+      block._type === "block"
+    ) {
+      continue;
+    }
+
+    if (block.listItem) {
+      if (currentList && currentList.listItem === block.listItem) {
+        currentList.items.push(block);
+      } else {
+        if (currentList) {
+          groupedBlocks.push({ type: "list", ...currentList });
+        }
+        currentList = {
+          listItem: block.listItem,
+          key: `list-${block._key || i}`,
+          items: [block],
+        };
+      }
+    } else {
+      if (currentList) {
+        groupedBlocks.push({ type: "list", ...currentList });
+        currentList = null;
+      }
+      groupedBlocks.push({ type: "block", block });
+    }
+  }
+
+  if (currentList) {
+    groupedBlocks.push({ type: "list", ...currentList });
+  }
+
   return (
-    <div className={cn("portable-text-content space-y-3.5", className)}>
-      {blocks.map((block, idx) => {
+    <div className={cn("portable-text-content space-y-3", className)}>
+      {groupedBlocks.map((grouped, idx) => {
+        if (grouped.type === "list") {
+          const listChildren = grouped.items.map((liBlock, liIdx) => {
+            const liKey = liBlock._key || `li-${liIdx}`;
+            const spans = liBlock.children || [];
+            return (
+              <li key={liKey} className="leading-relaxed">
+                {spans.map((span, sIdx) => (
+                  <span key={span._key || `span-${sIdx}`}>
+                    {renderSpan(span, liBlock.markDefs)}
+                  </span>
+                ))}
+              </li>
+            );
+          });
+
+          if (grouped.listItem === "number") {
+            return (
+              <ol
+                key={grouped.key}
+                className="list-decimal pl-5 space-y-1.5 text-body-m-regular text-text-secondary"
+              >
+                {listChildren}
+              </ol>
+            );
+          }
+
+          return (
+            <ul
+              key={grouped.key}
+              className="list-disc pl-5 space-y-1 text-body-m-regular text-text-secondary"
+            >
+              {listChildren}
+            </ul>
+          );
+        }
+
+        const block = grouped.block;
         const key = block._key || `block-${idx}`;
 
         // 1. Code Block (_type: "code")
@@ -175,40 +268,11 @@ export function PortableText({ value, className = "" }: PortableTextProps) {
 
         // 4. Standard Text Block (_type: "block")
         const spans = block.children || [];
-        const hasText = spans.some((s) => s.text && s.text.trim().length > 0);
-
-        // Skip completely empty blocks (e.g. empty trailing span)
-        if (!hasText && block.style === "normal") {
-          return null;
-        }
-
         const renderedChildren = spans.map((span, sIdx) => (
           <span key={span._key || `span-${sIdx}`}>
             {renderSpan(span, block.markDefs)}
           </span>
         ));
-
-        // List Item
-        if (block.listItem) {
-          if (block.listItem === "number") {
-            return (
-              <ol
-                key={key}
-                className="list-decimal list-inside pl-4 text-body-m-regular text-text-secondary"
-              >
-                <li>{renderedChildren}</li>
-              </ol>
-            );
-          }
-          return (
-            <ul
-              key={key}
-              className="list-disc list-inside pl-4 text-body-m-regular text-text-secondary"
-            >
-              <li>{renderedChildren}</li>
-            </ul>
-          );
-        }
 
         switch (block.style) {
           case "h1":

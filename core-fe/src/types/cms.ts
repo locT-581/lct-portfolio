@@ -38,9 +38,12 @@ export interface BlogPostDetail extends BlogPost {
 export interface ExperienceEntry {
   id: string;
   company: string;
+  companyUrl?: string | null;
   role: string;
   period: string;
+  location?: string;
   description: string;
+  descriptionRaw?: unknown;
 }
 
 export interface Skill {
@@ -73,8 +76,10 @@ export interface ProfileIntro {
   avatarUrl: string;
   name: string;
   title: string;
+  headline?: string;
   bio: string;
   bioRaw?: unknown;
+  resumeUrl?: string | null;
 }
 
 export interface NewsletterSubscribePayload {

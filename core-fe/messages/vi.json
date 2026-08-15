@@ -77,7 +77,8 @@
     "switchLanguage": "Đổi ngôn ngữ:"
   },
   "home": {
-    "ctaButtonLabel": "Xem dự án"
+    "ctaButtonLabel": "Xem dự án",
+    "downloadResume": "Tải hồ sơ"
   },
   "projects": {
     "pageTitle": "Dự án",

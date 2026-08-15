@@ -7,6 +7,12 @@
       "skillPath": "skills/figma-generate-design/SKILL.md",
       "computedHash": "0e3e617068174482c54cfa2e33207f5753c809bbb32f3b2b250370c9e6701e63"
     },
+    "impeccable": {
+      "source": "pbakaus/impeccable",
+      "sourceType": "github",
+      "skillPath": ".agents/skills/impeccable/SKILL.md",
+      "computedHash": "ceb127db3ff5732ac4f0fd97eeb26bedf212acfa0a80a1143618dde0eb3f096f"
+    },
     "vercel-react-best-practices": {
       "source": "vercel-labs/agent-skills",
       "sourceType": "github",

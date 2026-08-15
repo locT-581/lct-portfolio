@@ -317,6 +317,11 @@
           "searchable": true
         },
         {
+          "slug": "company_url",
+          "label": "Company URL (optional)",
+          "type": "string"
+        },
+        {
           "slug": "location",
           "label": "Location",
           "type": "string"
@@ -751,12 +756,13 @@
         "id": "senior-frontend-dev",
         "slug": "senior-frontend-dev",
         "status": "published",
+        "locale": "en",
         "data": {
           "type": "experience",
-          "title": "Senior Frontend Engineer",
-          "organization": "Teknix Enterprise",
-          "location": "Ho Chi Minh City",
-          "start_date": "2023-01",
+          "title": "Frontend Engineer",
+          "organization": "TekNix Solutions",
+          "location": "Ho Chi Minh City, Vietnam",
+          "start_date": "2024-03",
           "end_date": "Present",
           "is_current": true,
           "order_index": 1,
@@ -767,11 +773,42 @@
               "children": [
                 {
                   "_type": "span",
-                  "text": "Architecting enterprise Web applications, voting systems, and high-performance UI design systems.",
+                  "text": "• Building user interfaces with React and embedding into Flutter via WebView while maintaining stable performance.\n• Converting designs from Figma, Framer, etc. into fully responsive websites, ensuring pixel-perfect display across all devices.\n• Developing responsive interfaces using CSS, Tailwind CSS, React/Next.js, and TypeScript.\n• Optimizing performance and user experience across diverse devices.\n• Designing and developing an internal SDK system accompanied by comprehensive technical documentation, enabling rapid and seamless integration for team developers.\n• Participating in project planning, feature development, and code reviews to ensure high product quality.",
                   "_key": "t1"
                 }
               ],
               "_key": "t0"
+            }
+          ]
+        }
+      },
+      {
+        "id": "senior-frontend-dev-vi",
+        "slug": "senior-frontend-dev",
+        "status": "published",
+        "locale": "vi",
+        "translationOf": "senior-frontend-dev",
+        "data": {
+          "type": "experience",
+          "title": "Frontend Engineer",
+          "organization": "TekNix Solutions",
+          "location": "TP. Hồ Chí Minh, Việt Nam",
+          "start_date": "2024-03",
+          "end_date": "Hiện tại",
+          "is_current": true,
+          "order_index": 1,
+          "description": [
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "• Xây dựng giao diện người dùng với React và nhúng vào Flutter qua WebView đảm bảo duy trì hiệu năng ổn định.\n• Chuyển đổi thiết kế từ Figma, Framer,.. thành website responsive hoàn chỉnh, đảm bảo pixel‑perfect trên mọi thiết bị.\n• Phát triển giao diện responsive sử dụng CSS, Tailwind CSS, React/NextJs và TypeScript.\n• Tối ưu hóa hiệu suất và trải nghiệm người dùng trên các thiết bị.\n• Thiết kế và phát triển hệ thống SDK nội bộ đi kèm với tài liệu kỹ thuật rõ ràng, hỗ trợ các lập trình viên khác tích hợp nhanh chóng và liền mạch.\n• Tham gia lập kế hoạch dự án, phát triển và code review để đảm bảo chất lượng sản phẩm cao.",
+                  "_key": "t3"
+                }
+              ],
+              "_key": "t2"
             }
           ]
         }

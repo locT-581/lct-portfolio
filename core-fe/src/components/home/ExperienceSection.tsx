@@ -1,4 +1,6 @@
+import { LinkPreview } from "@/components/ui/LinkPreview";
 import { PeriodLabel } from "@/components/ui/PeriodLabel/PeriodLabel";
+import { PortableText } from "@/components/ui/PortableText";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionTag } from "@/components/ui/SectionTag/SectionTag";
 import { cn } from "@/lib/utils";
@@ -26,7 +28,7 @@ export interface ExperienceSectionProps {
  */
 export function ExperienceSection({
   entries,
-  sectionLabel = "Experience",
+  sectionLabel = "Experiences",
   className = "",
 }: ExperienceSectionProps) {
   if (!entries || entries.length === 0) {
@@ -53,23 +55,39 @@ export function ExperienceSection({
               className="experience-entry w-full flex flex-col gap-6"
             >
               <div className="w-full flex flex-col gap-2 max-w-2xl">
-                <div className="flex items-start justify-between gap-2 w-full">
-                  <div className="flex flex-col gap-1.5 text-body-m-medium">
-                    <h3 className="text-text-primary font-medium">
+                <div className="flex items-start justify-between gap-4 w-full">
+                  <div className="flex flex-col gap-1.5">
+                    <h3 className="text-text-primary text-body-m-medium font-medium">
                       {entry.role}
                     </h3>
-                    <p className="text-text-secondary font-medium">
-                      {entry.company}
+                    <p className="text-text-secondary text-body-m-medium font-medium">
+                      {entry.companyUrl ? (
+                        <LinkPreview href={entry.companyUrl}>
+                          {entry.company}
+                        </LinkPreview>
+                      ) : (
+                        entry.company
+                      )}
+                      {entry.location && (
+                        <span className="text-text-muted font-normal italic">
+                          {" "}
+                          · {entry.location}
+                        </span>
+                      )}
                     </p>
                   </div>
                   <PeriodLabel period={entry.period} className="shrink-0" />
                 </div>
-                <p className="text-text-secondary text-body-m-regular leading-relaxed w-full whitespace-pre-line">
-                  {entry.description}
-                </p>
+                <div className="text-text-secondary text-body-m-regular leading-normal sm:leading-relaxed w-full">
+                  {entry.descriptionRaw ? (
+                    <PortableText value={entry.descriptionRaw} />
+                  ) : (
+                    <p className="whitespace-pre-line">{entry.description}</p>
+                  )}
+                </div>
               </div>
               {index < entries.length - 1 && (
-                <div className="h-px bg-stroke w-full rounded-xs" />
+                <div className="h-px bg-stroke w-full" />
               )}
             </div>
           ))}

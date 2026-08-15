@@ -1,8 +1,44 @@
 import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { extendTailwindMerge } from "tailwind-merge";
+
+const customTwMerge = extendTailwindMerge({
+  extend: {
+    theme: {
+      color: [
+        "brand-orange",
+        "bg-base-1",
+        "bg-base-2",
+        "bg-base-3",
+        "text-primary",
+        "text-secondary",
+        "text-btn-primary",
+        "stroke",
+        "divider",
+        "stroke-orange",
+      ],
+    },
+    classGroups: {
+      "font-size": [
+        "text-h1",
+        "text-h2",
+        "text-h3",
+        "text-h4",
+        "text-h5",
+        "text-h6",
+        "text-body-m-medium",
+        "text-body-m-regular",
+        "text-body-s-medium",
+        "text-body-s-regular",
+        "text-btn",
+        "text-breadcrumb",
+        "text-footer",
+      ],
+    },
+  },
+});
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+  return customTwMerge(clsx(inputs));
 }
 
 /**
@@ -19,9 +55,14 @@ export function extractPortableText(value: unknown): string {
         typeof block === "object" &&
         Array.isArray((block as { children?: unknown[] }).children)
       ) {
-        return (block as { children: Array<{ text?: string }> }).children
+        const text = (block as { children: Array<{ text?: string }> }).children
           .map((child) => child?.text || "")
           .join("");
+        if (!text || text.trim().length === 0) return "";
+        if ((block as { listItem?: string }).listItem === "bullet") {
+          return `• ${text}`;
+        }
+        return text;
       }
       return "";
     })

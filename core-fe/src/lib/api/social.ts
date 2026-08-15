@@ -105,9 +105,12 @@ export async function getProfileIntro({
       return {
         avatarUrl,
         name: profile.data.full_name || "",
-        title: profile.data.headline || "",
+        title: profile.data.persona_title || profile.data.headline || "",
+        headline: profile.data.headline || profile.data.persona_title || "",
         bio: bioText,
         bioRaw: profile.data.bio,
+        resumeUrl:
+          profile.data.resume_url || profile.data.resume_file?.url || null,
       };
     }
 
@@ -115,7 +118,9 @@ export async function getProfileIntro({
       avatarUrl: "/assets/avatar.png",
       name: "",
       title: "",
+      headline: "",
       bio: "",
+      resumeUrl: null,
     };
   } catch (err) {
     if (err instanceof HTTPError) {
@@ -129,7 +134,9 @@ export async function getProfileIntro({
       avatarUrl: "/assets/avatar.png",
       name: "",
       title: "",
+      headline: "",
       bio: "",
+      resumeUrl: null,
     };
   }
 }

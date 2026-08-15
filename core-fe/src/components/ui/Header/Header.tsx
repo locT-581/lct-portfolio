@@ -46,7 +46,7 @@ export function Header({
 }: HeaderProps) {
   const t = useTranslations("nav");
   const baseStyles =
-    "sticky top-0 z-50 min-h-[76px] w-full bg-bg-base-1/80 backdrop-blur-md border-b border-divider flex items-center justify-center text-text-primary";
+    "sticky top-0 z-50 min-h-[76px] w-full bg-bg-base-1/80 backdrop-blur-md flex items-center justify-center text-text-primary";
 
   return (
     <header className={cn(baseStyles, className)} {...props}>

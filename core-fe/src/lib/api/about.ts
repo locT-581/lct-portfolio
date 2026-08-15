@@ -15,6 +15,10 @@ interface EmdashTimelineItem {
     is_current?: boolean | number;
     description?: unknown;
     credential_url?: string;
+    company_url?: string;
+    organization_url?: string;
+    website_url?: string;
+    url?: string;
     order_index?: number;
   };
 }
@@ -58,19 +62,32 @@ export async function getExperienceEntries({
       );
 
       return sorted.map((item) => {
+        const isCurrentLabel = locale === "vi" ? "Hiện tại" : "Present";
         const periodStr = [
           item.data.start_date,
-          item.data.end_date || (item.data.is_current ? "Present" : undefined),
+          item.data.end_date ||
+            (item.data.is_current ? isCurrentLabel : undefined),
         ]
           .filter(Boolean)
-          .join(" — ");
+          .join(" - ");
+
+        const companyUrl =
+          item.data.company_url ||
+          item.data.organization_url ||
+          item.data.website_url ||
+          item.data.credential_url ||
+          item.data.url ||
+          null;
 
         return {
           id: item.id,
           company: item.data.organization || "",
+          companyUrl,
           role: item.data.title || "",
           period: periodStr || "Present",
+          location: item.data.location || "",
           description: extractPortableText(item.data.description),
+          descriptionRaw: item.data.description,
         };
       });
     }

@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ExperienceSection } from "@/components/home/ExperienceSection";
 import { HeroSection } from "@/components/home/HeroSection";
-import { HomeCtaSection } from "@/components/home/HomeCtaSection";
 import { SkillsSection } from "@/components/home/SkillsSection";
 import { ToolsSection } from "@/components/home/ToolsSection";
 import { PersonWebsiteJsonLd } from "@/components/seo/PersonWebsiteJsonLd";
@@ -35,20 +34,24 @@ export default async function HomePage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const [profile, socialLinks, experienceEntries, skills, tools] =
+  const [profile, socialLinks, experienceEntries, skills, tools, tHome] =
     await Promise.all([
       getProfileIntro({ locale }),
       getSocialLinks({ locale }),
       getExperienceEntries({ locale }),
       getSkills({ locale }),
       getTools({ locale }),
+      getTranslations({ locale, namespace: "home" }),
     ]);
 
   return (
-    <main className="flex flex-col gap-8 md:gap-10">
+    <main className="flex flex-col gap-12 md:gap-16">
       <PersonWebsiteJsonLd />
-      <HeroSection profile={profile} socialLinks={socialLinks} />
-      <HomeCtaSection locale={locale} />
+      <HeroSection
+        profile={profile}
+        socialLinks={socialLinks}
+        resumeLabel={tHome("downloadResume")}
+      />
       <ExperienceSection entries={experienceEntries} />
       <SkillsSection skills={skills} />
       <ToolsSection tools={tools} />

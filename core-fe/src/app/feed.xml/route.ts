@@ -1,8 +1,9 @@
+import { env } from "@/env";
 import { getBlogPosts } from "@/lib/api/blog";
 import { generateRssFeed } from "@/lib/rss";
 
 export async function GET() {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://loct.dev";
+  const siteUrl = env.NEXT_PUBLIC_SITE_URL;
 
   try {
     const posts = await getBlogPosts({ locale: "vi" });

@@ -49,7 +49,9 @@ export function ToolsSection({ tools, className = "" }: ToolsSectionProps) {
             className="tool-item flex items-center justify-center w-15.5 px-3.75"
             title={tool.name}
           >
-            {tool.iconName ? (
+            {tool.iconName &&
+            (tool.iconName.startsWith("/") ||
+              tool.iconName.startsWith("http")) ? (
               <Image
                 src={tool.iconName}
                 alt={tool.name}
@@ -58,12 +60,14 @@ export function ToolsSection({ tools, className = "" }: ToolsSectionProps) {
                 className="object-contain"
               />
             ) : (
-              /* Fallback placeholder when no icon provided */
+              /* Fallback badge when icon is a slug or empty */
               <div
                 role="img"
                 aria-label={tool.name}
-                className="w-8 h-8 rounded bg-stroke"
-              />
+                className="w-8 h-8 rounded bg-bg-base-2 border border-stroke flex items-center justify-center text-caption text-text-secondary uppercase font-medium"
+              >
+                {tool.name.slice(0, 2)}
+              </div>
             )}
           </div>
         ))}

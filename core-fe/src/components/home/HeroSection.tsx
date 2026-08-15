@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { PortableText } from "@/components/ui/PortableText";
 import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SocialLink } from "@/components/ui/SocialLink";
 import { cn } from "@/lib/utils";
@@ -6,7 +7,7 @@ import type { ProfileIntro, SocialLinkItem } from "@/types/cms";
 
 export interface HeroSectionProps {
   /**
-   * Profile intro data (avatarUrl, name, title, bio).
+   * Profile intro data (avatarUrl, name, title, bio, bioRaw).
    */
   profile: ProfileIntro;
   /**
@@ -28,7 +29,7 @@ export function HeroSection({
   socialLinks,
   className = "",
 }: HeroSectionProps) {
-  const { avatarUrl, name, title, bio } = profile;
+  const { avatarUrl, name, title, bio, bioRaw } = profile;
 
   return (
     <ScrollReveal
@@ -40,7 +41,7 @@ export function HeroSection({
         className="w-full flex flex-col gap-6 md:gap-8"
       >
         <div className="flex flex-col sm:flex-row gap-5 sm:gap-6 items-start sm:items-center">
-          <div className="relative shrink-0 overflow-hidden rounded-full border border-stroke w-19.5 h-19.5">
+          <div className="relative shrink-0 overflow-hidden rounded-full border border-stroke w-19.5 h-19.5 bg-bg-base-2">
             <Image
               src={avatarUrl}
               alt={name}
@@ -75,8 +76,8 @@ export function HeroSection({
           </div>
         </div>
 
-        <div className="text-body-m-regular text-text-secondary max-w-2xl leading-relaxed">
-          {bio}
+        <div className="max-w-2xl">
+          <PortableText value={bioRaw || bio} />
         </div>
       </section>
     </ScrollReveal>

@@ -1,4 +1,5 @@
 import type { JSX } from "react";
+import { CodeBlockViewer } from "@/components/ui/CodeBlockViewer";
 
 export interface RichTextBlock {
   type: string;
@@ -120,12 +121,7 @@ export function RichTextRenderer({ content }: RichTextRendererProps) {
           case "code":
           case "code_block":
             return (
-              <pre
-                key={key}
-                className="bg-bg-base-2 text-text-primary p-4 rounded-lg overflow-x-auto border border-stroke my-6 font-mono text-sm"
-              >
-                <code>{block.text}</code>
-              </pre>
+              <CodeBlockViewer key={key} code={block.text || ""} allowCopy />
             );
           case "unordered-list":
           case "ul":

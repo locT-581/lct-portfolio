@@ -1,3 +1,4 @@
+import { env } from "@/env";
 import { HtmlRenderer } from "./HtmlRenderer";
 import { MdxRenderer } from "./MdxRenderer";
 import { RichTextRenderer } from "./RichTextRenderer";
@@ -22,7 +23,7 @@ export function ArticleMultiRenderer({
     case "richtext":
       return <RichTextRenderer content={content} />;
     default:
-      if (process.env.NODE_ENV !== "production") {
+      if (env.NODE_ENV !== "production") {
         console.warn(
           `[ArticleMultiRenderer] Unknown content_type: "${contentType}". Falling back to plain text.`,
         );

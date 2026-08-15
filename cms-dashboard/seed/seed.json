@@ -600,7 +600,7 @@
         "status": "published",
         "data": {
           "platform_name": "GitHub",
-          "url": "https://github.com/locT-581",
+          "url": "https://github.com/locT-581/",
           "icon_name": "github",
           "order_index": 1
         }
@@ -611,9 +611,42 @@
         "status": "published",
         "data": {
           "platform_name": "LinkedIn",
-          "url": "https://linkedin.com/in/loct",
+          "url": "https://www.linkedin.com/in/loct581/",
           "icon_name": "linkedin",
           "order_index": 2
+        }
+      },
+      {
+        "id": "pinterest",
+        "slug": "pinterest",
+        "status": "published",
+        "data": {
+          "platform_name": "Pinterest",
+          "url": "https://www.pinterest.com/rainydays581/",
+          "icon_name": "pinterest",
+          "order_index": 3
+        }
+      },
+      {
+        "id": "upwork",
+        "slug": "upwork",
+        "status": "published",
+        "data": {
+          "platform_name": "Upwork",
+          "url": "https://www.upwork.com/freelancers/~014f887f8f402e5149",
+          "icon_name": "upwork",
+          "order_index": 4
+        }
+      },
+      {
+        "id": "email",
+        "slug": "email",
+        "status": "published",
+        "data": {
+          "platform_name": "Email",
+          "url": "mailto:loct.se581@gmail.com",
+          "icon_name": "email",
+          "order_index": 5
         }
       }
     ],

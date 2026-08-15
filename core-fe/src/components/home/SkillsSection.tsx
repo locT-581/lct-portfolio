@@ -51,7 +51,9 @@ export function SkillsSection({ skills, className = "" }: SkillsSectionProps) {
           >
             {/* 44×44 icon container with 6px padding around the image */}
             <div className="shrink-0 flex items-center justify-center w-14 h-14 rounded-lg bg-bg-base-2 border border-stroke p-1.5">
-              {skill.iconName ? (
+              {skill.iconName &&
+              (skill.iconName.startsWith("/") ||
+                skill.iconName.startsWith("http")) ? (
                 <Image
                   src={skill.iconName}
                   alt={skill.label}
@@ -60,11 +62,13 @@ export function SkillsSection({ skills, className = "" }: SkillsSectionProps) {
                   className="rounded object-contain"
                 />
               ) : (
-                /* Fallback placeholder when no icon provided */
+                /* Fallback badge when icon is a slug or empty */
                 <div
-                  className="w-11 h-11 rounded bg-stroke"
+                  className="w-11 h-11 rounded bg-bg-base-1 border border-stroke flex items-center justify-center text-body-s-medium text-brand-orange uppercase font-semibold"
                   aria-hidden="true"
-                />
+                >
+                  {skill.label.slice(0, 2)}
+                </div>
               )}
             </div>
 

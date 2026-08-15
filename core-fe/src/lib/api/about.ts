@@ -1,5 +1,46 @@
+import { extractPortableText } from "@/lib/utils";
 import type { ExperienceEntry, Skill, SocialLink, Tool } from "@/types/cms";
-import { client } from "./_client";
+import { client, type EmdashApiResponse } from "./_client";
+
+interface EmdashTimelineItem {
+  id: string;
+  slug: string;
+  data: {
+    type?: string;
+    title: string;
+    organization: string;
+    location?: string;
+    start_date?: string;
+    end_date?: string;
+    is_current?: boolean | number;
+    description?: unknown;
+    credential_url?: string;
+    order_index?: number;
+  };
+}
+
+interface EmdashSkillItem {
+  id: string;
+  slug: string;
+  data: {
+    name: string;
+    category?: string;
+    icon_name?: string | null;
+    proficiency_level?: string;
+    order_index?: number;
+  };
+}
+
+interface EmdashSocialLinkItem {
+  id: string;
+  slug: string;
+  data: {
+    platform_name: string;
+    url: string;
+    icon_name?: string | null;
+    order_index?: number;
+  };
+}
 
 export async function getExperienceEntries({
   locale,
@@ -7,14 +48,35 @@ export async function getExperienceEntries({
   locale: string;
 }): Promise<ExperienceEntry[]> {
   try {
-    const data = await client
-      .get("about/experience", { searchParams: { locale } })
-      .json<ExperienceEntry[]>();
-    return Array.isArray(data) ? data : [];
-  } catch (_err) {
-    console.warn(
-      "[Em-dash API] getExperienceEntries failed. Using fallback empty array.",
-    );
+    const res = await client
+      .get("content/timeline_items", { searchParams: { locale } })
+      .json<EmdashApiResponse<EmdashTimelineItem>>();
+
+    if (res?.success && Array.isArray(res.data?.items)) {
+      const sorted = [...res.data.items].sort(
+        (a, b) => (a.data.order_index ?? 99) - (b.data.order_index ?? 99),
+      );
+
+      return sorted.map((item) => {
+        const periodStr = [
+          item.data.start_date,
+          item.data.end_date || (item.data.is_current ? "Present" : undefined),
+        ]
+          .filter(Boolean)
+          .join(" — ");
+
+        return {
+          id: item.id,
+          company: item.data.organization || "",
+          role: item.data.title || "",
+          period: periodStr || "Present",
+          description: extractPortableText(item.data.description),
+        };
+      });
+    }
+    return [];
+  } catch (err) {
+    console.warn("[Em-dash API] getExperienceEntries failed:", err);
     return [];
   }
 }
@@ -25,12 +87,24 @@ export async function getSkills({
   locale: string;
 }): Promise<Skill[]> {
   try {
-    const data = await client
-      .get("about/skills", { searchParams: { locale } })
-      .json<Skill[]>();
-    return Array.isArray(data) ? data : [];
-  } catch (_err) {
-    console.warn("[Em-dash API] getSkills failed. Using fallback empty array.");
+    const res = await client
+      .get("content/skills", { searchParams: { locale } })
+      .json<EmdashApiResponse<EmdashSkillItem>>();
+
+    if (res?.success && Array.isArray(res.data?.items)) {
+      const sorted = [...res.data.items].sort(
+        (a, b) => (a.data.order_index ?? 99) - (b.data.order_index ?? 99),
+      );
+
+      return sorted.map((item) => ({
+        id: item.id,
+        label: item.data.name,
+        iconName: item.data.icon_name || null,
+      }));
+    }
+    return [];
+  } catch (err) {
+    console.warn("[Em-dash API] getSkills failed:", err);
     return [];
   }
 }
@@ -41,12 +115,20 @@ export async function getTools({
   locale: string;
 }): Promise<Tool[]> {
   try {
-    const data = await client
-      .get("about/tools", { searchParams: { locale } })
-      .json<Tool[]>();
-    return Array.isArray(data) ? data : [];
-  } catch (_err) {
-    console.warn("[Em-dash API] getTools failed. Using fallback empty array.");
+    const res = await client
+      .get("content/skills", { searchParams: { locale } })
+      .json<EmdashApiResponse<EmdashSkillItem>>();
+
+    if (res?.success && Array.isArray(res.data?.items)) {
+      return res.data.items.map((item) => ({
+        id: item.id,
+        name: item.data.name,
+        iconName: item.data.icon_name || null,
+      }));
+    }
+    return [];
+  } catch (err) {
+    console.warn("[Em-dash API] getTools failed:", err);
     return [];
   }
 }
@@ -57,14 +139,25 @@ export async function getSocialLinks({
   locale: string;
 }): Promise<SocialLink[]> {
   try {
-    const data = await client
-      .get("about/social-links", { searchParams: { locale } })
-      .json<SocialLink[]>();
-    return Array.isArray(data) ? data : [];
-  } catch (_err) {
-    console.warn(
-      "[Em-dash API] getSocialLinks failed. Using fallback empty array.",
-    );
+    const res = await client
+      .get("content/social_links", { searchParams: { locale } })
+      .json<EmdashApiResponse<EmdashSocialLinkItem>>();
+
+    if (res?.success && Array.isArray(res.data?.items)) {
+      const sorted = [...res.data.items].sort(
+        (a, b) => (a.data.order_index ?? 99) - (b.data.order_index ?? 99),
+      );
+
+      return sorted.map((item) => ({
+        platform: (item.data.platform_name || "link").toLowerCase(),
+        url: item.data.url || "#",
+        label: item.data.platform_name || "Link",
+        iconName: item.data.icon_name || null,
+      }));
+    }
+    return [];
+  } catch (err) {
+    console.warn("[Em-dash API] getSocialLinks failed:", err);
     return [];
   }
 }

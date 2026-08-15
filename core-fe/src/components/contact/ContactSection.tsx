@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { SocialLink } from "@/components/ui/SocialLink";
+import { env } from "@/env";
 import { CalendlyEmbed } from "./CalendlyEmbed";
 import { ContactForm } from "./ContactForm";
 
@@ -11,7 +12,7 @@ export interface ContactSectionProps {
 
 export function ContactSection({
   locale,
-  calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL,
+  calendlyUrl = env.NEXT_PUBLIC_CALENDLY_URL,
   className = "",
 }: ContactSectionProps) {
   const t = useTranslations("contact");

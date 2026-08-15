@@ -1,21 +1,23 @@
 import "server-only";
 import ky from "ky";
-
-const baseUrl = process.env.EMDASH_API_URL || "http://localhost:3000/api";
-const apiKey = process.env.EMDASH_API_KEY;
-
-if (!process.env.EMDASH_API_URL && process.env.NODE_ENV !== "test") {
-  console.warn(
-    "[Em-dash API Client] Warning: EMDASH_API_URL environment variable is not defined. Using fallback http://localhost:3000/api",
-  );
-}
+import { env } from "@/env";
 
 export const client = ky.create({
-  prefix: baseUrl,
+  prefix: env.EMDASH_API_URL,
   timeout: 10000,
   headers: {
-    ...(apiKey ? { Authorization: `Bearer ${apiKey}` } : {}),
+    ...(env.EMDASH_API_KEY
+      ? { Authorization: `Bearer ${env.EMDASH_API_KEY}` }
+      : {}),
   },
 });
+
+export interface EmdashApiResponse<T> {
+  success: boolean;
+  data: {
+    items: T[];
+    total: number;
+  };
+}
 
 export default client;

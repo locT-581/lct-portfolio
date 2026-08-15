@@ -1,40 +1,40 @@
 import { HTTPError } from "ky";
+import { extractPortableText } from "@/lib/utils";
 import type { ProfileIntro, SocialLinkItem } from "@/types/cms";
-import { client } from "./_client";
+import { client, type EmdashApiResponse } from "./_client";
 
-export const DEFAULT_SOCIAL_LINKS: SocialLinkItem[] = [
-  {
-    platform: "email",
-    url: "mailto:hello@jeanpierre.com",
-    label: "Email",
-  },
-  {
-    platform: "twitter",
-    url: "https://twitter.com/jeanpierre",
-    label: "Twitter / X",
-  },
-  {
-    platform: "instagram",
-    url: "https://instagram.com/jeanpierre",
-    label: "Instagram",
-  },
-  {
-    platform: "linkedin",
-    url: "https://linkedin.com/in/jeanpierre",
-    label: "LinkedIn",
-  },
-];
+interface EmdashProfileItem {
+  id: string;
+  slug: string;
+  data: {
+    persona_title?: string;
+    full_name?: string;
+    headline?: string;
+    tagline?: string;
+    bio?: unknown;
+    avatar?: { url?: string; previewUrl?: string } | null;
+    resume_url?: string | null;
+    resume_file?: { url?: string } | null;
+    location?: string;
+    is_open_to_work?: boolean | number;
+    is_default?: boolean | number;
+    order_index?: number;
+  };
+}
 
-export const DEFAULT_PROFILE_INTRO: ProfileIntro = {
-  avatarUrl: "/assets/avatar.png",
-  name: "Jean Pierre",
-  title: "Copywriter",
-  bio: "Hello there, I'm your copywriter. I help brands craft clear, thoughtful, and persuasive messaging that feels human—whether it's for websites, campaigns, or long-form storytelling.",
-};
+interface EmdashSocialLinkItem {
+  id: string;
+  slug: string;
+  data: {
+    platform_name: string;
+    url: string;
+    icon_name?: string | null;
+    order_index?: number;
+  };
+}
 
 /**
- * Fetches social links from Em-dash REST endpoint via shared Ky client.
- * Falls back to default structured configuration if CMS endpoint returns empty or errors.
+ * Fetches social links from Em-dash REST endpoint (content/social_links).
  */
 export async function getSocialLinks({
   locale,
@@ -42,27 +42,37 @@ export async function getSocialLinks({
   locale: string;
 }): Promise<SocialLinkItem[]> {
   try {
-    const data = await client
-      .get("about/social-links", { searchParams: { locale } })
-      .json<SocialLinkItem[]>();
+    const res = await client
+      .get("content/social_links", { searchParams: { locale } })
+      .json<EmdashApiResponse<EmdashSocialLinkItem>>();
 
-    if (Array.isArray(data) && data.length > 0) {
-      return data;
+    if (res?.success && Array.isArray(res.data?.items)) {
+      const sorted = [...res.data.items].sort(
+        (a, b) => (a.data.order_index ?? 99) - (b.data.order_index ?? 99),
+      );
+
+      return sorted.map((item) => ({
+        platform: (item.data.platform_name || "link").toLowerCase(),
+        url: item.data.url || "#",
+        label: item.data.platform_name || "Link",
+        icon: item.data.icon_name || null,
+      }));
     }
-    return DEFAULT_SOCIAL_LINKS;
+    return [];
   } catch (err) {
     if (err instanceof HTTPError) {
       console.warn(
-        `[Em-dash API] getSocialLinks failed with status ${err.response.status}. Using fallback.`,
+        `[Em-dash API] getSocialLinks failed with status ${err.response.status}.`,
       );
+    } else {
+      console.warn("[Em-dash API] getSocialLinks error:", err);
     }
-    return DEFAULT_SOCIAL_LINKS;
+    return [];
   }
 }
 
 /**
- * Fetches profile intro data from Em-dash REST endpoint via shared Ky client.
- * Falls back to default profile configuration if CMS endpoint returns empty or errors.
+ * Fetches active profile intro from Em-dash REST endpoint (content/profiles).
  */
 export async function getProfileIntro({
   locale,
@@ -70,20 +80,56 @@ export async function getProfileIntro({
   locale: string;
 }): Promise<ProfileIntro> {
   try {
-    const data = await client
-      .get("about/profile-intro", { searchParams: { locale } })
-      .json<ProfileIntro>();
+    const res = await client
+      .get("content/profiles", { searchParams: { locale } })
+      .json<EmdashApiResponse<EmdashProfileItem>>();
 
-    if (data?.name) {
-      return data;
+    if (
+      res?.success &&
+      Array.isArray(res.data?.items) &&
+      res.data.items.length > 0
+    ) {
+      // Find the default persona or take the first published persona
+      const profile =
+        res.data.items.find((item) => Boolean(item.data.is_default)) ??
+        res.data.items[0];
+
+      const bioText =
+        extractPortableText(profile.data.bio) || profile.data.tagline || "";
+
+      const avatarUrl =
+        profile.data.avatar?.url ||
+        profile.data.avatar?.previewUrl ||
+        "/assets/avatar.png";
+
+      return {
+        avatarUrl,
+        name: profile.data.full_name || "",
+        title: profile.data.headline || "",
+        bio: bioText,
+        bioRaw: profile.data.bio,
+      };
     }
-    return DEFAULT_PROFILE_INTRO;
+
+    return {
+      avatarUrl: "/assets/avatar.png",
+      name: "",
+      title: "",
+      bio: "",
+    };
   } catch (err) {
     if (err instanceof HTTPError) {
       console.warn(
-        `[Em-dash API] getProfileIntro failed with status ${err.response.status}. Using fallback.`,
+        `[Em-dash API] getProfileIntro failed with status ${err.response.status}.`,
       );
+    } else {
+      console.warn("[Em-dash API] getProfileIntro error:", err);
     }
-    return DEFAULT_PROFILE_INTRO;
+    return {
+      avatarUrl: "/assets/avatar.png",
+      name: "",
+      title: "",
+      bio: "",
+    };
   }
 }

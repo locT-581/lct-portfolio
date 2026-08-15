@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import { env } from "@/env";
 
 export function getSiteUrl(): string {
-  const url = process.env.NEXT_PUBLIC_SITE_URL || "https://loct.dev";
+  const url = env.NEXT_PUBLIC_SITE_URL;
   return url.replace(/\/+$/, "");
 }
 

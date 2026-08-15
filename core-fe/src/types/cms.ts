@@ -74,6 +74,7 @@ export interface ProfileIntro {
   name: string;
   title: string;
   bio: string;
+  bioRaw?: unknown;
 }
 
 export interface NewsletterSubscribePayload {

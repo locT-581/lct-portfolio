@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { notFound } from "next/navigation";
-import Script from "next/script";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { QueryProvider } from "@/components/providers/QueryProvider";
 import { Header } from "@/components/ui/Header";
 import { Navigation } from "@/components/ui/Navigation";
+import { env } from "@/env";
 import { routing } from "@/i18n/routing";
 import "../globals.css";
 
@@ -16,7 +16,7 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://loct.dev"),
+  metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
   title: {
     template: "%s | Loc Tran",
     default: "Loc Tran - Full Stack Engineer & Software Architect",
@@ -27,6 +27,16 @@ export const metadata: Metadata = {
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
+
+const themeInitScript = `(function() {
+  try {
+    var theme = localStorage.getItem('portfolio-theme');
+    if (!theme) {
+      theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    }
+    document.documentElement.setAttribute('data-theme', theme);
+  } catch (e) {}
+})();`;
 
 export default async function LocaleLayout({
   children,
@@ -46,19 +56,15 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={geistSans.variable} suppressHydrationWarning>
+      <head>
+        <script
+          async
+          suppressHydrationWarning
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: Theme initialization before paint to prevent FOUC
+          dangerouslySetInnerHTML={{ __html: themeInitScript }}
+        />
+      </head>
       <body className="antialiased">
-        <Script id="theme-script" strategy="beforeInteractive">
-          {`(function() {
-  var theme = null;
-  try {
-    theme = localStorage.getItem('portfolio-theme');
-  } catch (e) {}
-  if (!theme) {
-    theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  }
-  document.documentElement.setAttribute('data-theme', theme);
-})();`}
-        </Script>
         <NextIntlClientProvider messages={messages}>
           <QueryProvider>
             <div className="min-h-screen flex flex-col bg-bg-base-1 text-text-primary">

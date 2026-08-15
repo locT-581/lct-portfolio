@@ -62,7 +62,9 @@
     "twitter": "Twitter",
     "instagram": "Instagram",
     "linkedin": "LinkedIn",
-    "github": "GitHub"
+    "github": "GitHub",
+    "pinterest": "Pinterest",
+    "upwork": "Upwork"
   },
   "theme": {
     "toggleTheme": "Toggle theme",

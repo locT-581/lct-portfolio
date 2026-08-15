@@ -2,19 +2,361 @@
   "$schema": "https://emdashcms.com/seed.schema.json",
   "version": "1",
   "meta": {
-    "name": "Portfolio Starter",
-    "description": "A portfolio for showcasing creative work",
-    "author": "EmDash"
+    "name": "Full Portfolio CMS",
+    "description": "Comprehensive portfolio CMS schema featuring Profile, Social Links, Skills, Projects, Timeline, and Blog Posts",
+    "author": "Loc T."
   },
   "settings": {
-    "title": "Studio",
-    "tagline": "Design & Development"
+    "title": "Loc T. Portfolio",
+    "tagline": "Fullstack Engineer & UI/UX Specialist"
   },
   "collections": [
+    {
+      "slug": "profiles",
+      "label": "Profiles",
+      "labelSingular": "Profile",
+      "supports": ["revisions", "seo"],
+      "fields": [
+        {
+          "slug": "persona_title",
+          "label": "Persona Title / Audience Profile",
+          "type": "string",
+          "required": true,
+          "searchable": true
+        },
+        {
+          "slug": "full_name",
+          "label": "Full Name",
+          "type": "string",
+          "required": true,
+          "searchable": true
+        },
+        {
+          "slug": "headline",
+          "label": "Headline",
+          "type": "string",
+          "required": true
+        },
+        {
+          "slug": "tagline",
+          "label": "Tagline",
+          "type": "string"
+        },
+        {
+          "slug": "target_audience",
+          "label": "Target Audience",
+          "type": "string"
+        },
+        {
+          "slug": "bio",
+          "label": "Biography",
+          "type": "portableText",
+          "searchable": true
+        },
+        {
+          "slug": "avatar",
+          "label": "Avatar Image",
+          "type": "image"
+        },
+        {
+          "slug": "resume_file",
+          "label": "Resume File Upload (PDF/Doc)",
+          "type": "file"
+        },
+        {
+          "slug": "resume_url",
+          "label": "External Resume URL (Fallback)",
+          "type": "string"
+        },
+        {
+          "slug": "location",
+          "label": "Location",
+          "type": "string"
+        },
+        {
+          "slug": "is_open_to_work",
+          "label": "Open to Work",
+          "type": "boolean"
+        },
+        {
+          "slug": "is_default",
+          "label": "Is Default Persona",
+          "type": "boolean"
+        },
+        {
+          "slug": "order_index",
+          "label": "Display Order",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "slug": "social_links",
+      "label": "Social Links",
+      "labelSingular": "Social Link",
+      "supports": ["revisions"],
+      "fields": [
+        {
+          "slug": "platform_name",
+          "label": "Platform Name",
+          "type": "string",
+          "required": true,
+          "searchable": true
+        },
+        {
+          "slug": "url",
+          "label": "URL",
+          "type": "string",
+          "required": true
+        },
+        {
+          "slug": "icon_name",
+          "label": "Icon Identifier",
+          "type": "string"
+        },
+        {
+          "slug": "order_index",
+          "label": "Display Order",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "slug": "contact_submissions",
+      "label": "Contact Submissions",
+      "labelSingular": "Contact Submission",
+      "supports": ["search"],
+      "fields": [
+        {
+          "slug": "sender_name",
+          "label": "Sender Name",
+          "type": "string",
+          "required": true,
+          "searchable": true
+        },
+        {
+          "slug": "sender_email",
+          "label": "Sender Email",
+          "type": "string",
+          "required": true,
+          "searchable": true
+        },
+        {
+          "slug": "subject",
+          "label": "Subject",
+          "type": "string",
+          "searchable": true
+        },
+        {
+          "slug": "message",
+          "label": "Message",
+          "type": "text",
+          "required": true,
+          "searchable": true
+        },
+        {
+          "slug": "is_read",
+          "label": "Is Read",
+          "type": "boolean"
+        },
+        {
+          "slug": "submitted_at",
+          "label": "Submission Date",
+          "type": "datetime"
+        }
+      ]
+    },
+    {
+      "slug": "skill_categories",
+      "label": "Skill Categories",
+      "labelSingular": "Skill Category",
+      "supports": ["revisions", "search"],
+      "fields": [
+        {
+          "slug": "name",
+          "label": "Category Name",
+          "type": "string",
+          "required": true,
+          "searchable": true
+        },
+        {
+          "slug": "order_index",
+          "label": "Display Order",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "slug": "skills",
+      "label": "Skills",
+      "labelSingular": "Skill",
+      "supports": ["revisions", "search"],
+      "fields": [
+        {
+          "slug": "name",
+          "label": "Skill Name",
+          "type": "string",
+          "required": true,
+          "searchable": true
+        },
+        {
+          "slug": "category",
+          "label": "Category",
+          "type": "reference",
+          "options": {
+            "collection": "skill_categories"
+          }
+        },
+        {
+          "slug": "icon_name",
+          "label": "Icon Identifier",
+          "type": "string"
+        },
+        {
+          "slug": "proficiency_level",
+          "label": "Proficiency Level",
+          "type": "string"
+        },
+        {
+          "slug": "order_index",
+          "label": "Display Order",
+          "type": "number"
+        }
+      ]
+    },
     {
       "slug": "projects",
       "label": "Projects",
       "labelSingular": "Project",
+      "supports": ["drafts", "revisions", "search", "seo"],
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Project Title",
+          "type": "string",
+          "required": true,
+          "searchable": true
+        },
+        {
+          "slug": "short_description",
+          "label": "Short Description",
+          "type": "text",
+          "searchable": true
+        },
+        {
+          "slug": "full_description",
+          "label": "Full Description",
+          "type": "portableText",
+          "searchable": true
+        },
+        {
+          "slug": "thumbnail",
+          "label": "Thumbnail Image",
+          "type": "image"
+        },
+        {
+          "slug": "live_demo_url",
+          "label": "Live Demo URL",
+          "type": "string"
+        },
+        {
+          "slug": "github_url",
+          "label": "GitHub Repository URL",
+          "type": "string"
+        },
+        {
+          "slug": "is_featured",
+          "label": "Featured Project",
+          "type": "boolean"
+        },
+        {
+          "slug": "order_index",
+          "label": "Display Order",
+          "type": "number"
+        },
+        {
+          "slug": "metrics",
+          "label": "Metrics & Stats",
+          "type": "json"
+        },
+        {
+          "slug": "technologies",
+          "label": "Technologies Used",
+          "type": "reference",
+          "options": {
+            "collection": "skills",
+            "allowMultiple": true
+          }
+        }
+      ]
+    },
+    {
+      "slug": "timeline_items",
+      "label": "Timeline Items",
+      "labelSingular": "Timeline Item",
+      "supports": ["revisions", "search"],
+      "fields": [
+        {
+          "slug": "type",
+          "label": "Item Type",
+          "type": "string",
+          "required": true
+        },
+        {
+          "slug": "title",
+          "label": "Title / Role",
+          "type": "string",
+          "required": true,
+          "searchable": true
+        },
+        {
+          "slug": "organization",
+          "label": "Company / Organization",
+          "type": "string",
+          "required": true,
+          "searchable": true
+        },
+        {
+          "slug": "location",
+          "label": "Location",
+          "type": "string"
+        },
+        {
+          "slug": "start_date",
+          "label": "Start Date",
+          "type": "string"
+        },
+        {
+          "slug": "end_date",
+          "label": "End Date",
+          "type": "string"
+        },
+        {
+          "slug": "is_current",
+          "label": "Is Current",
+          "type": "boolean"
+        },
+        {
+          "slug": "description",
+          "label": "Description",
+          "type": "portableText"
+        },
+        {
+          "slug": "credential_url",
+          "label": "Credential / Certificate URL",
+          "type": "string"
+        },
+        {
+          "slug": "order_index",
+          "label": "Display Order",
+          "type": "number"
+        }
+      ]
+    },
+    {
+      "slug": "posts",
+      "label": "Blog Posts",
+      "labelSingular": "Blog Post",
       "supports": ["drafts", "revisions", "search", "seo"],
       "fields": [
         {
@@ -25,24 +367,8 @@
           "searchable": true
         },
         {
-          "slug": "featured_image",
-          "label": "Featured Image",
-          "type": "image",
-          "required": true
-        },
-        {
-          "slug": "client",
-          "label": "Client",
-          "type": "string"
-        },
-        {
-          "slug": "year",
-          "label": "Year",
-          "type": "string"
-        },
-        {
-          "slug": "summary",
-          "label": "Summary",
+          "slug": "excerpt",
+          "label": "Excerpt",
           "type": "text",
           "searchable": true
         },
@@ -53,14 +379,14 @@
           "searchable": true
         },
         {
-          "slug": "gallery",
-          "label": "Gallery",
-          "type": "json"
+          "slug": "cover_image",
+          "label": "Cover Image",
+          "type": "image"
         },
         {
-          "slug": "url",
-          "label": "Project URL",
-          "type": "string"
+          "slug": "reading_time_min",
+          "label": "Reading Time (Minutes)",
+          "type": "number"
         }
       ]
     },
@@ -68,7 +394,7 @@
       "slug": "pages",
       "label": "Pages",
       "labelSingular": "Page",
-      "supports": ["drafts", "revisions", "search"],
+      "supports": ["drafts", "revisions", "search", "seo"],
       "fields": [
         {
           "slug": "title",
@@ -92,23 +418,19 @@
       "label": "Categories",
       "labelSingular": "Category",
       "hierarchical": false,
-      "collections": ["projects"],
+      "collections": ["projects", "posts"],
       "terms": [
         {
-          "slug": "branding",
-          "label": "Branding"
+          "slug": "engineering",
+          "label": "Software Engineering"
         },
         {
-          "slug": "web",
-          "label": "Web Design"
+          "slug": "design",
+          "label": "UI/UX Design"
         },
         {
-          "slug": "print",
-          "label": "Print"
-        },
-        {
-          "slug": "photography",
-          "label": "Photography"
+          "slug": "architecture",
+          "label": "System Architecture"
         }
       ]
     },
@@ -117,35 +439,27 @@
       "label": "Tags",
       "labelSingular": "Tag",
       "hierarchical": false,
-      "collections": ["projects"],
+      "collections": ["projects", "posts"],
       "terms": [
         {
-          "slug": "identity",
-          "label": "Identity"
+          "slug": "react",
+          "label": "React"
         },
         {
-          "slug": "ui-ux",
-          "label": "UI/UX"
+          "slug": "typescript",
+          "label": "TypeScript"
         },
         {
-          "slug": "development",
-          "label": "Development"
+          "slug": "astro",
+          "label": "Astro"
         },
         {
-          "slug": "art-direction",
-          "label": "Art Direction"
+          "slug": "cloudflare",
+          "label": "Cloudflare"
         },
         {
-          "slug": "packaging",
-          "label": "Packaging"
-        },
-        {
-          "slug": "ecommerce",
-          "label": "E-commerce"
-        },
-        {
-          "slug": "editorial",
-          "label": "Editorial"
+          "slug": "tailwind",
+          "label": "Tailwind CSS"
         }
       ]
     }
@@ -157,8 +471,23 @@
       "items": [
         {
           "type": "custom",
-          "label": "Work",
-          "url": "/work"
+          "label": "Projects",
+          "url": "/projects"
+        },
+        {
+          "type": "custom",
+          "label": "Skills",
+          "url": "/#skills"
+        },
+        {
+          "type": "custom",
+          "label": "Timeline",
+          "url": "/#experience"
+        },
+        {
+          "type": "custom",
+          "label": "Blog",
+          "url": "/blog"
         },
         {
           "type": "custom",
@@ -169,13 +498,289 @@
     }
   ],
   "content": {
+    "profiles": [
+      {
+        "id": "fullstack-engineer",
+        "slug": "fullstack-engineer",
+        "status": "published",
+        "data": {
+          "persona_title": "Fullstack Engineering (Tech Focus)",
+          "full_name": "Loc T.",
+          "headline": "Senior Fullstack Engineer & Cloud Architect",
+          "tagline": "Building resilient web platforms, real-time systems, and serverless edge applications.",
+          "target_audience": "Tech Recruiters & Engineering Teams",
+          "location": "Ho Chi Minh City, Vietnam",
+          "is_open_to_work": true,
+          "is_default": true,
+          "order_index": 1,
+          "resume_url": "https://example.com/resume-engineering.pdf",
+          "bio": [
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Senior Engineer with 6+ years of expertise in React, Next.js, Astro, Cloudflare Workers, and high-performance Web Architecture.",
+                  "_key": "b1"
+                }
+              ],
+              "_key": "b0"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ui-ux-designer",
+        "slug": "ui-ux-designer",
+        "status": "published",
+        "data": {
+          "persona_title": "UI/UX Design & Product Systems",
+          "full_name": "Loc T.",
+          "headline": "Design Systems Lead & UI/UX Specialist",
+          "tagline": "Crafting pixel-perfect design systems, accessible micro-interactions, and high-conversion user journeys.",
+          "target_audience": "Founders, Product Teams & Design Agencies",
+          "location": "Ho Chi Minh City, Vietnam",
+          "is_open_to_work": true,
+          "is_default": false,
+          "order_index": 2,
+          "resume_url": "https://example.com/resume-design.pdf",
+          "bio": [
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Specializing in design tokens, Figma auto-layouts, micro-animations, and modern headless design implementations.",
+                  "_key": "b3"
+                }
+              ],
+              "_key": "b2"
+            }
+          ]
+        }
+      },
+      {
+        "id": "tech-consultant",
+        "slug": "tech-consultant",
+        "status": "published",
+        "data": {
+          "persona_title": "Technical Advisory & Architecture",
+          "full_name": "Loc T.",
+          "headline": "Technical Advisor & Solutions Architect",
+          "tagline": "Advising startups and enterprises on scalable web architecture, CMS modernization, and team workflows.",
+          "target_audience": "Startups & Enterprise Clients",
+          "location": "Ho Chi Minh City, Vietnam",
+          "is_open_to_work": true,
+          "is_default": false,
+          "order_index": 3,
+          "resume_url": "https://example.com/resume-consultant.pdf",
+          "bio": [
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Providing end-to-end technical consulting on cloud migrations, Astro / Next.js architectures, and scalable CMS integrations.",
+                  "_key": "b5"
+                }
+              ],
+              "_key": "b4"
+            }
+          ]
+        }
+      }
+    ],
+    "social_links": [
+      {
+        "id": "github",
+        "slug": "github",
+        "status": "published",
+        "data": {
+          "platform_name": "GitHub",
+          "url": "https://github.com/locT-581",
+          "icon_name": "github",
+          "order_index": 1
+        }
+      },
+      {
+        "id": "linkedin",
+        "slug": "linkedin",
+        "status": "published",
+        "data": {
+          "platform_name": "LinkedIn",
+          "url": "https://linkedin.com/in/loct",
+          "icon_name": "linkedin",
+          "order_index": 2
+        }
+      }
+    ],
+    "skill_categories": [
+      {
+        "id": "frontend",
+        "slug": "frontend",
+        "status": "published",
+        "data": {
+          "name": "Frontend Engineering",
+          "order_index": 1
+        }
+      },
+      {
+        "id": "backend",
+        "slug": "backend",
+        "status": "published",
+        "data": {
+          "name": "Backend & Cloud Infrastructure",
+          "order_index": 2
+        }
+      }
+    ],
+    "skills": [
+      {
+        "id": "react",
+        "slug": "react",
+        "status": "published",
+        "data": {
+          "name": "React & Next.js",
+          "icon_name": "react",
+          "proficiency_level": "Expert",
+          "order_index": 1,
+          "category": "frontend"
+        }
+      },
+      {
+        "id": "typescript",
+        "slug": "typescript",
+        "status": "published",
+        "data": {
+          "name": "TypeScript",
+          "icon_name": "typescript",
+          "proficiency_level": "Expert",
+          "order_index": 2,
+          "category": "frontend"
+        }
+      },
+      {
+        "id": "cloudflare",
+        "slug": "cloudflare",
+        "status": "published",
+        "data": {
+          "name": "Cloudflare Workers & Edge AI",
+          "icon_name": "cloudflare",
+          "proficiency_level": "Advanced",
+          "order_index": 3,
+          "category": "backend"
+        }
+      }
+    ],
+    "projects": [
+      {
+        "id": "portfolio-cms",
+        "slug": "portfolio-cms",
+        "status": "published",
+        "data": {
+          "title": "Personal Portfolio & CMS Engine",
+          "short_description": "A high-performance portfolio built on Astro, Emdash CMS, and Cloudflare Workers.",
+          "live_demo_url": "https://example.com",
+          "github_url": "https://github.com/locT-581/Website",
+          "is_featured": true,
+          "order_index": 1,
+          "technologies": ["react", "typescript", "cloudflare"],
+          "metrics": {
+            "performance_score": "100",
+            "lighthouse_lcp": "0.4s"
+          },
+          "full_description": [
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Comprehensive portfolio system integrated with Emdash CMS and serverless edge deployment.",
+                  "_key": "p1"
+                }
+              ],
+              "_key": "p0"
+            }
+          ]
+        },
+        "taxonomies": {
+          "category": ["engineering"],
+          "tag": ["react", "typescript", "astro", "cloudflare"]
+        }
+      }
+    ],
+    "timeline_items": [
+      {
+        "id": "senior-frontend-dev",
+        "slug": "senior-frontend-dev",
+        "status": "published",
+        "data": {
+          "type": "experience",
+          "title": "Senior Frontend Engineer",
+          "organization": "Teknix Enterprise",
+          "location": "Ho Chi Minh City",
+          "start_date": "2023-01",
+          "end_date": "Present",
+          "is_current": true,
+          "order_index": 1,
+          "description": [
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Architecting enterprise Web applications, voting systems, and high-performance UI design systems.",
+                  "_key": "t1"
+                }
+              ],
+              "_key": "t0"
+            }
+          ]
+        }
+      }
+    ],
+    "posts": [
+      {
+        "id": "building-modern-cms",
+        "slug": "building-modern-cms",
+        "status": "published",
+        "data": {
+          "title": "Building Modern Headless CMS on Cloudflare Workers",
+          "excerpt": "A deep dive into serverless CMS architectures using Astro and Emdash CMS.",
+          "reading_time_min": 5,
+          "content": [
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Serverless edge deployments allow instant global loading times and zero server maintenance overhead.",
+                  "_key": "b1"
+                }
+              ],
+              "_key": "b0"
+            }
+          ]
+        },
+        "taxonomies": {
+          "category": ["architecture"],
+          "tag": ["astro", "cloudflare", "typescript"]
+        }
+      }
+    ],
     "pages": [
       {
         "id": "about",
         "slug": "about",
         "status": "published",
         "data": {
-          "title": "About",
+          "title": "About Me",
           "content": [
             {
               "_type": "block",
@@ -183,316 +788,13 @@
               "children": [
                 {
                   "_type": "span",
-                  "text": "We are a small design studio focused on creating meaningful work for thoughtful clients. Founded in 2020, we've had the privilege of working with brands across technology, culture, and the arts.",
-                  "_key": "k1"
+                  "text": "Welcome to my portfolio website.",
+                  "_key": "a1"
                 }
               ],
-              "_key": "k0"
-            },
-            {
-              "_type": "block",
-              "style": "normal",
-              "children": [
-                {
-                  "_type": "span",
-                  "text": "Our approach is simple: listen carefully, think deeply, and craft with intention. We believe that good design is invisible — it gets out of the way and lets the work speak for itself.",
-                  "_key": "k3"
-                }
-              ],
-              "_key": "k2"
-            },
-            {
-              "_type": "block",
-              "style": "h2",
-              "children": [
-                {
-                  "_type": "span",
-                  "text": "What we do",
-                  "_key": "k5"
-                }
-              ],
-              "_key": "k4"
-            },
-            {
-              "_type": "block",
-              "style": "normal",
-              "children": [
-                {
-                  "_type": "span",
-                  "text": "We specialize in brand identity, web design, and art direction. Whether you need a complete visual identity or a single website, we bring the same level of care and attention to every project.",
-                  "_key": "k7"
-                }
-              ],
-              "_key": "k6"
+              "_key": "a0"
             }
           ]
-        }
-      }
-    ],
-    "projects": [
-      {
-        "id": "meridian-brand",
-        "slug": "meridian-brand",
-        "status": "published",
-        "data": {
-          "title": "Meridian",
-          "client": "Meridian Collective",
-          "year": "2024",
-          "summary": "A complete brand identity for a creative collective bringing together artists and technologists.",
-          "featured_image": {
-            "$media": {
-              "url": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=900&fit=crop",
-              "alt": "Meridian cover image",
-              "filename": "photo-1558618666-fcd25c85cd64.jpg"
-            }
-          },
-          "content": [
-            {
-              "_type": "block",
-              "style": "normal",
-              "children": [
-                {
-                  "_type": "span",
-                  "text": "Meridian Collective needed a visual identity that could bridge the gap between traditional art and emerging technology. The challenge was to create something that felt timeless yet forward-looking.",
-                  "_key": "k1"
-                }
-              ],
-              "_key": "k0"
-            },
-            {
-              "_type": "block",
-              "style": "h2",
-              "children": [
-                {
-                  "_type": "span",
-                  "text": "The approach",
-                  "_key": "k3"
-                }
-              ],
-              "_key": "k2"
-            },
-            {
-              "_type": "block",
-              "style": "normal",
-              "children": [
-                {
-                  "_type": "span",
-                  "text": "We developed a wordmark that combines classical typography with subtle geometric forms. The color palette draws from both digital interfaces and natural materials, creating a bridge between worlds.",
-                  "_key": "k5"
-                }
-              ],
-              "_key": "k4"
-            },
-            {
-              "_type": "block",
-              "style": "h2",
-              "children": [
-                {
-                  "_type": "span",
-                  "text": "The result",
-                  "_key": "k7"
-                }
-              ],
-              "_key": "k6"
-            },
-            {
-              "_type": "block",
-              "style": "normal",
-              "children": [
-                {
-                  "_type": "span",
-                  "text": "The new identity has been applied across print and digital touchpoints, from business cards to a fully responsive website. Meridian has received positive feedback from both artists and technologists alike.",
-                  "_key": "k9"
-                }
-              ],
-              "_key": "k8"
-            }
-          ]
-        },
-        "taxonomies": {
-          "category": ["branding"],
-          "tag": ["identity", "art-direction"]
-        }
-      },
-      {
-        "id": "volta-web",
-        "slug": "volta-web",
-        "status": "published",
-        "data": {
-          "title": "Volta",
-          "client": "Volta Energy",
-          "year": "2024",
-          "summary": "Website design for a renewable energy startup making clean power accessible to everyone.",
-          "featured_image": {
-            "$media": {
-              "url": "https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&h=900&fit=crop",
-              "alt": "Volta cover image",
-              "filename": "photo-1497366216548-37526070297c.jpg"
-            }
-          },
-          "url": "https://volta.example.com",
-          "content": [
-            {
-              "_type": "block",
-              "style": "normal",
-              "children": [
-                {
-                  "_type": "span",
-                  "text": "Volta is on a mission to make renewable energy accessible to everyone. They needed a website that could explain complex technology simply while inspiring trust in potential customers.",
-                  "_key": "k1"
-                }
-              ],
-              "_key": "k0"
-            },
-            {
-              "_type": "block",
-              "style": "h2",
-              "children": [
-                {
-                  "_type": "span",
-                  "text": "Design principles",
-                  "_key": "k3"
-                }
-              ],
-              "_key": "k2"
-            },
-            {
-              "_type": "block",
-              "style": "normal",
-              "children": [
-                {
-                  "_type": "span",
-                  "text": "We focused on clarity and warmth. The design uses generous whitespace and a vibrant green accent that evokes growth and sustainability without feeling clichéd.",
-                  "_key": "k5"
-                }
-              ],
-              "_key": "k4"
-            }
-          ]
-        },
-        "taxonomies": {
-          "category": ["web"],
-          "tag": ["ui-ux", "development"]
-        }
-      },
-      {
-        "id": "archive-print",
-        "slug": "archive-print",
-        "status": "published",
-        "data": {
-          "title": "The Archive",
-          "client": "City Museum",
-          "year": "2023",
-          "summary": "Exhibition catalog and print materials for a retrospective on modernist architecture.",
-          "featured_image": {
-            "$media": {
-              "url": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1200&h=900&fit=crop",
-              "alt": "The Archive cover image",
-              "filename": "photo-1507003211169-0a1dd7228f2d.jpg"
-            }
-          },
-          "content": [
-            {
-              "_type": "block",
-              "style": "normal",
-              "children": [
-                {
-                  "_type": "span",
-                  "text": "The Archive was a major exhibition at the City Museum, showcasing 50 years of modernist architecture through photographs, drawings, and models. We designed the complete print identity.",
-                  "_key": "k1"
-                }
-              ],
-              "_key": "k0"
-            },
-            {
-              "_type": "block",
-              "style": "h2",
-              "children": [
-                {
-                  "_type": "span",
-                  "text": "The catalog",
-                  "_key": "k3"
-                }
-              ],
-              "_key": "k2"
-            },
-            {
-              "_type": "block",
-              "style": "normal",
-              "children": [
-                {
-                  "_type": "span",
-                  "text": "The 240-page catalog uses a strict grid system inspired by the work being exhibited. Full-bleed photography alternates with dense text spreads, creating a rhythm that echoes the exhibition layout.",
-                  "_key": "k5"
-                }
-              ],
-              "_key": "k4"
-            }
-          ]
-        },
-        "taxonomies": {
-          "category": ["print"],
-          "tag": ["editorial", "art-direction"]
-        }
-      },
-      {
-        "id": "coastal-photo",
-        "slug": "coastal-photo",
-        "status": "published",
-        "data": {
-          "title": "Coastal",
-          "client": "Personal Project",
-          "year": "2023",
-          "summary": "A photographic study of the Pacific coastline, exploring the intersection of land, sea, and sky.",
-          "featured_image": {
-            "$media": {
-              "url": "https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=1200&h=900&fit=crop",
-              "alt": "Coastal cover image",
-              "filename": "photo-1505142468610-359e7d316be0.jpg"
-            }
-          },
-          "content": [
-            {
-              "_type": "block",
-              "style": "normal",
-              "children": [
-                {
-                  "_type": "span",
-                  "text": "Coastal began as a weekend project and grew into a year-long exploration of the Pacific shoreline. Shot entirely on medium format film, the series captures the quiet drama of the coast.",
-                  "_key": "k1"
-                }
-              ],
-              "_key": "k0"
-            },
-            {
-              "_type": "block",
-              "style": "h2",
-              "children": [
-                {
-                  "_type": "span",
-                  "text": "Process",
-                  "_key": "k3"
-                }
-              ],
-              "_key": "k2"
-            },
-            {
-              "_type": "block",
-              "style": "normal",
-              "children": [
-                {
-                  "_type": "span",
-                  "text": "Each image was made at dawn or dusk, when the light is softest and the beaches are empty. The slow process of shooting film encourages patience and intentionality — qualities that show in the final work.",
-                  "_key": "k5"
-                }
-              ],
-              "_key": "k4"
-            }
-          ]
-        },
-        "taxonomies": {
-          "category": ["photography"],
-          "tag": ["art-direction", "editorial"]
         }
       }
     ]

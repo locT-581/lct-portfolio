@@ -1,0 +1,100 @@
+{
+  "collections": [
+    {
+      "slug": "pages",
+      "label": "Pages",
+      "labelSingular": "Page",
+      "supports": [
+        "drafts",
+        "revisions",
+        "search"
+      ],
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Title",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "content",
+          "label": "Content",
+          "type": "portableText",
+          "required": false,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "slug": "projects",
+      "label": "Projects",
+      "labelSingular": "Project",
+      "supports": [
+        "drafts",
+        "revisions",
+        "search",
+        "seo"
+      ],
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Title",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "featured_image",
+          "label": "Featured Image",
+          "type": "image",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "client",
+          "label": "Client",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "year",
+          "label": "Year",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "summary",
+          "label": "Summary",
+          "type": "text",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "content",
+          "label": "Content",
+          "type": "portableText",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "gallery",
+          "label": "Gallery",
+          "type": "json",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "url",
+          "label": "Project URL",
+          "type": "string",
+          "required": false,
+          "unique": false
+        }
+      ]
+    }
+  ],
+  "version": "3bda4a2334ace43a"
+}

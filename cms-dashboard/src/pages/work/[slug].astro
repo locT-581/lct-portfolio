@@ -29,11 +29,6 @@ const otherProjects = relatedProjects
   .filter((p) => p.id !== project.id)
   .slice(0, 2);
 
-// Parse gallery if present
-const gallery = project.data.gallery as
-  | Array<{ url: string; alt?: string }>
-  | undefined;
-
 // Get image src for OG image
 function getImageSrc(img: unknown): string | undefined {
   if (!img || typeof img !== "object") return undefined;
@@ -44,76 +39,62 @@ function getImageSrc(img: unknown): string | undefined {
 
 <Base
 	title={project.data.title}
-	description={project.data.summary}
-	image={getImageSrc(project.data.featured_image)}
+	description={project.data.short_description}
+	image={getImageSrc(project.data.thumbnail)}
 >
 	<article class="project">
 		<header class="project-header">
-			<div class="project-meta">
-				{
-					project.data.client && (
-						<span class="project-client" {...project.edit.client}>
-							{project.data.client}
-						</span>
-					)
-				}
-				{
-					project.data.client && project.data.year && (
-						<span class="meta-separator">·</span>
-					)
-				}
-				{
-					project.data.year && (
-						<span class="project-year" {...project.edit.year}>
-							{project.data.year}
-						</span>
-					)
-				}
-			</div>
 			<h1 class="project-title" {...project.edit.title}>
 				{project.data.title}
 			</h1>
 			{
-				project.data.summary && (
-					<p class="project-summary" {...project.edit.summary}>
-						{project.data.summary}
+				project.data.short_description && (
+					<p class="project-summary" {...project.edit.short_description}>
+						{project.data.short_description}
 					</p>
 				)
 			}
-			{
-				project.data.url && (
-					<a
-						href={project.data.url ?? "#"}
-						class="project-link"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						View Live Project →
-					</a>
-				)
-			}
+			<div class="project-links">
+				{
+					project.data.live_demo_url && (
+						<a
+							href={project.data.live_demo_url}
+							class="project-link"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							View Live Project →
+						</a>
+					)
+				}
+				{
+					project.data.github_url && (
+						<a
+							href={project.data.github_url}
+							class="project-link"
+							target="_blank"
+							rel="noopener noreferrer"
+							style="margin-left: 1rem;"
+						>
+							View Code →
+						</a>
+					)
+				}
+			</div>
 		</header>
 
 		{
-			project.data.featured_image && (
-				<div class="featured-image" {...project.edit.featured_image}>
-					<Image image={project.data.featured_image} />
+			project.data.thumbnail && (
+				<div class="featured-image" {...project.edit.thumbnail}>
+					<Image image={project.data.thumbnail} />
 				</div>
 			)
 		}
 
-		<div class="project-content">
-			<PortableText value={project.data.content} />
-		</div>
-
 		{
-			gallery && gallery.length > 0 && (
-				<div class="project-gallery">
-					{gallery.map((img) => (
-						<div class="gallery-item">
-							<img src={img.url} alt={img.alt || ""} loading="lazy" />
-						</div>
-					))}
+			project.data.full_description && (
+				<div class="project-content">
+					<PortableText value={project.data.full_description} />
 				</div>
 			)
 		}
@@ -128,11 +109,9 @@ function getImageSrc(img: unknown): string | undefined {
 						{otherProjects.map((p) => (
 							<ProjectCard
 								title={p.data.title ?? "Untitled"}
-								summary={p.data.summary}
-								featuredImage={p.data.featured_image ?? ""}
+								summary={p.data.short_description}
+								featuredImage={p.data.thumbnail ?? ""}
 								href={`/work/${p.id}`}
-								client={p.data.client}
-								year={p.data.year}
 							/>
 						))}
 					</div>

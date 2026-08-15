@@ -3,7 +3,6 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ArticleDetailHeader, ArticleMultiRenderer } from "@/components/blog";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
-import { Header } from "@/components/ui/Header";
 import { getBlogPostBySlug } from "@/lib/api/blog";
 import { constructMetadata } from "@/lib/seo";
 
@@ -63,24 +62,21 @@ export default async function ArticleDetailPage({
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-bg-base-1 text-text-primary">
-      <Header />
-      <main className="flex-1 w-full max-w-300 mx-auto px-5 md:px-10 lg:px-20 py-8 md:py-12 flex flex-col gap-8">
-        {/* Breadcrumbs Navigation */}
-        <Breadcrumbs items={breadcrumbsItems} />
+    <main className="flex flex-col gap-8">
+      {/* Breadcrumbs Navigation */}
+      <Breadcrumbs items={breadcrumbsItems} />
 
-        {/* Article Container */}
-        <article className="max-w-4xl w-full mx-auto flex flex-col">
-          {/* Article Header */}
-          <ArticleDetailHeader post={post} locale={locale} />
+      {/* Article Container */}
+      <article className="max-w-4xl w-full mx-auto flex flex-col">
+        {/* Article Header */}
+        <ArticleDetailHeader post={post} locale={locale} />
 
-          {/* Multi-Format Content Renderer */}
-          <ArticleMultiRenderer
-            contentType={post.contentType}
-            content={post.content}
-          />
-        </article>
-      </main>
-    </div>
+        {/* Multi-Format Content Renderer */}
+        <ArticleMultiRenderer
+          contentType={post.contentType}
+          content={post.content}
+        />
+      </article>
+    </main>
   );
 }

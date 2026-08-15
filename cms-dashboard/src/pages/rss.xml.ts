@@ -19,7 +19,7 @@ export const GET: APIRoute = async ({ site, url }) => {
 
       const projectUrl = `${siteUrl}/work/${project.id}`;
       const title = escapeXml(project.data.title || "Untitled");
-      const description = escapeXml(project.data.summary || "");
+      const description = escapeXml(project.data.short_description || "");
 
       return `    <item>
       <title>${title}</title>

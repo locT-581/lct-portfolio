@@ -78,11 +78,9 @@ const projectsWithTags = sortedProjects.map((project) => ({
 					{projectsWithTags.map(({ project, projectTags }) => (
 						<ProjectCard
 							title={project.data.title ?? "Untitled"}
-							summary={project.data.summary}
-							featuredImage={project.data.featured_image ?? ""}
+							summary={project.data.short_description}
+							featuredImage={project.data.thumbnail ?? ""}
 							href={`/work/${project.id}`}
-							client={project.data.client}
-							year={project.data.year}
 							tags={projectTags.map((t) => t.label)}
 						/>
 					))}

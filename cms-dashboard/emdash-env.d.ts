@@ -3,7 +3,24 @@
 
 /// <reference types="emdash/locals" />
 
-import type { ContentBylineCredit, PortableTextBlock } from "emdash";
+import type { ContentBylineCredit, TaxonomyTerm, PortableTextBlock } from "emdash";
+
+export interface ContactSubmission {
+  id: string;
+  slug: string | null;
+  status: string;
+  sender_name: string;
+  sender_email: string;
+  subject?: string;
+  message: string;
+  is_read?: boolean;
+  submitted_at?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  bylines?: ContentBylineCredit[];
+  terms?: Record<string, TaxonomyTerm[]>;
+}
 
 export interface Page {
   id: string;
@@ -15,6 +32,47 @@ export interface Page {
   updatedAt: Date;
   publishedAt: Date | null;
   bylines?: ContentBylineCredit[];
+  terms?: Record<string, TaxonomyTerm[]>;
+}
+
+export interface Post {
+  id: string;
+  slug: string | null;
+  status: string;
+  title: string;
+  excerpt?: string;
+  content?: PortableTextBlock[];
+  cover_image?: { id: string; src?: string; alt?: string; width?: number; height?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> };
+  reading_time_min?: number;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  bylines?: ContentBylineCredit[];
+  terms?: Record<string, TaxonomyTerm[]>;
+}
+
+export interface Profile {
+  id: string;
+  slug: string | null;
+  status: string;
+  persona_title: string;
+  full_name: string;
+  headline: string;
+  tagline?: string;
+  target_audience?: string;
+  bio?: PortableTextBlock[];
+  avatar?: { id: string; src?: string; alt?: string; width?: number; height?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> };
+  resume_file?: { id: string; src?: string; filename?: string; mimeType?: string; size?: number; provider?: string; meta?: Record<string, unknown> };
+  resume_url?: string;
+  location?: string;
+  is_open_to_work?: boolean;
+  is_default?: boolean;
+  order_index?: number;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  bylines?: ContentBylineCredit[];
+  terms?: Record<string, TaxonomyTerm[]>;
 }
 
 export interface Project {
@@ -22,28 +80,97 @@ export interface Project {
   slug: string | null;
   status: string;
   title: string;
-  featured_image: {
-    id: string;
-    src?: string;
-    alt?: string;
-    width?: number;
-    height?: number;
-  };
-  client?: string;
-  year?: string;
-  summary?: string;
-  content?: PortableTextBlock[];
-  gallery?: unknown;
-  url?: string;
+  short_description?: string;
+  full_description?: PortableTextBlock[];
+  thumbnail?: { id: string; src?: string; alt?: string; width?: number; height?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> };
+  live_demo_url?: string;
+  github_url?: string;
+  is_featured?: boolean;
+  order_index?: number;
+  metrics?: unknown;
+  technologies?: string;
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date | null;
   bylines?: ContentBylineCredit[];
+  terms?: Record<string, TaxonomyTerm[]>;
+}
+
+export interface SkillCategory {
+  id: string;
+  slug: string | null;
+  status: string;
+  name: string;
+  order_index?: number;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  bylines?: ContentBylineCredit[];
+  terms?: Record<string, TaxonomyTerm[]>;
+}
+
+export interface Skill {
+  id: string;
+  slug: string | null;
+  status: string;
+  name: string;
+  category?: string;
+  icon_name?: string;
+  proficiency_level?: string;
+  order_index?: number;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  bylines?: ContentBylineCredit[];
+  terms?: Record<string, TaxonomyTerm[]>;
+}
+
+export interface SocialLink {
+  id: string;
+  slug: string | null;
+  status: string;
+  platform_name: string;
+  url: string;
+  icon_name?: string;
+  order_index?: number;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  bylines?: ContentBylineCredit[];
+  terms?: Record<string, TaxonomyTerm[]>;
+}
+
+export interface TimelineItem {
+  id: string;
+  slug: string | null;
+  status: string;
+  type: string;
+  title: string;
+  organization: string;
+  location?: string;
+  start_date?: string;
+  end_date?: string;
+  is_current?: boolean;
+  description?: PortableTextBlock[];
+  credential_url?: string;
+  order_index?: number;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  bylines?: ContentBylineCredit[];
+  terms?: Record<string, TaxonomyTerm[]>;
 }
 
 declare module "emdash" {
   interface EmDashCollections {
+    contact_submissions: ContactSubmission;
     pages: Page;
+    posts: Post;
+    profiles: Profile;
     projects: Project;
+    skill_categories: SkillCategory;
+    skills: Skill;
+    social_links: SocialLink;
+    timeline_items: TimelineItem;
   }
 }

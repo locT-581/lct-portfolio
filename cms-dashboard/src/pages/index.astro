@@ -36,11 +36,9 @@ if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
 					{featuredProjects.map((project) => (
 						<ProjectCard
 							title={project.data.title ?? "Untitled"}
-							summary={project.data.summary}
-							featuredImage={project.data.featured_image ?? ""}
+							summary={project.data.short_description}
+							featuredImage={project.data.thumbnail ?? ""}
 							href={`/work/${project.id}`}
-							client={project.data.client}
-							year={project.data.year}
 						/>
 					))}
 				</div>

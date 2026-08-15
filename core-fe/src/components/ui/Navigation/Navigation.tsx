@@ -1,6 +1,8 @@
-import Link from "next/link";
+"use client";
+
 import { useTranslations } from "next-intl";
 import type { HTMLAttributes, ReactNode } from "react";
+import { Link, usePathname } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 /**
@@ -142,16 +144,18 @@ function TestimonialIcon({ className = "w-6 h-6" }: { className?: string }) {
  */
 export function Navigation({
   items,
-  activePath = "/",
+  activePath,
   className = "",
   ...props
 }: NavigationProps) {
   const t = useTranslations("nav");
+  const pathname = usePathname();
+  const currentPath = activePath ?? pathname;
 
   const defaultItems: NavItem[] = [
     { label: t("about"), href: "/", icon: <UserIcon /> },
     { label: t("services"), href: "/services", icon: <ServiceIcon /> },
-    { label: t("portfolio"), href: "/portfolio", icon: <PortfolioIcon /> },
+    { label: t("portfolio"), href: "/projects", icon: <PortfolioIcon /> },
     { label: t("howIWork"), href: "/how-i-work", icon: <WorkIcon /> },
     {
       label: t("testimonials"),
@@ -173,8 +177,8 @@ export function Navigation({
     >
       {navItems.map((item) => {
         const isActive =
-          activePath === item.href ||
-          (item.href !== "/" && activePath.startsWith(`${item.href}/`));
+          currentPath === item.href ||
+          (item.href !== "/" && currentPath.startsWith(`${item.href}/`));
 
         return (
           <Link

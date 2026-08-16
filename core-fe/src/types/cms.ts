@@ -46,10 +46,38 @@ export interface ExperienceEntry {
   descriptionRaw?: unknown;
 }
 
+export interface SkillCategory {
+  id: string;
+  name: string;
+  groupType: "technical" | "soft_skills";
+  displayType: "badges" | "bullet_list";
+  description?: string | null;
+  orderIndex: number;
+  skills: SkillItem[];
+}
+
+export interface SkillItem {
+  id: string;
+  name: string;
+  category: string;
+  iconImage?: { url: string; previewUrl?: string } | null;
+  iconImageDark?: { url: string; previewUrl?: string } | null;
+  iconName?: string | null;
+  description?: string | null;
+  isHighlight?: boolean;
+  proficiencyLevel?: string | null;
+  orderIndex: number;
+}
+
 export interface Skill {
   id: string;
   label: string;
   iconName: string | null;
+  iconImage?: { url: string; previewUrl?: string } | null;
+  iconImageDark?: { url: string; previewUrl?: string } | null;
+  category?: string;
+  description?: string | null;
+  isHighlight?: boolean;
 }
 
 export interface Tool {

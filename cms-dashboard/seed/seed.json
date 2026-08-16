@@ -180,37 +180,137 @@
           "searchable": true
         },
         {
+          "slug": "group_type",
+          "label": "Group Type",
+          "type": "select",
+          "required": true,
+          "options": {
+            "choices": [
+              {
+                "value": "technical",
+                "label": "01. Kỹ năng chuyên môn (Technical)"
+              },
+              {
+                "value": "soft_skills",
+                "label": "02. Nghiệp vụ & Kỹ năng mềm (Soft Skills & Domain)"
+              }
+            ]
+          }
+        },
+        {
+          "slug": "display_type",
+          "label": "Display Format",
+          "type": "select",
+          "required": true,
+          "options": {
+            "choices": [
+              {
+                "value": "badges",
+                "label": "Tech Badges / Pills"
+              },
+              {
+                "value": "bullet_list",
+                "label": "Bullet List (Descriptive Items)"
+              }
+            ]
+          }
+        },
+        {
+          "slug": "description",
+          "label": "Description / Callout Text",
+          "type": "string"
+        },
+        {
           "slug": "order_index",
           "label": "Display Order",
-          "type": "number"
+          "type": "number",
+          "required": true
         }
       ]
     },
     {
       "slug": "skills",
-      "label": "Skills",
-      "labelSingular": "Skill",
+      "label": "Skills & Competencies",
+      "labelSingular": "Skill Item",
       "supports": ["revisions", "search"],
       "fields": [
         {
           "slug": "name",
-          "label": "Skill Name",
+          "label": "Skill Name / Title",
           "type": "string",
           "required": true,
           "searchable": true
         },
         {
           "slug": "category",
-          "label": "Category",
-          "type": "reference",
+          "label": "Category (Danh mục)",
+          "type": "select",
+          "required": true,
           "options": {
-            "collection": "skill_categories"
+            "choices": [
+              {
+                "value": "languages-core",
+                "label": "01. Ngôn ngữ & Nền tảng (Languages & Core)"
+              },
+              {
+                "value": "frameworks",
+                "label": "02. Frameworks (React, Next, Vue, Solid, Flutter)"
+              },
+              {
+                "value": "state-realtime",
+                "label": "03. Trạng thái & Realtime (State & Realtime)"
+              },
+              {
+                "value": "ui-animation",
+                "label": "04. UI & Animation"
+              },
+              {
+                "value": "tools-optimization",
+                "label": "05. Công cụ & Tối ưu hóa (Tools & Optimization)"
+              },
+              {
+                "value": "ai-tools",
+                "label": "06. Công cụ AI (AI Augmented)"
+              },
+              {
+                "value": "domain-expertise",
+                "label": "07. Nghiệp vụ thực chiến (Domain Knowledge)"
+              },
+              {
+                "value": "working-skills",
+                "label": "08. Kỹ năng làm việc (Working Skills)"
+              },
+              {
+                "value": "methodologies",
+                "label": "09. Quy trình (Agile / Methodologies)"
+              }
+            ]
           }
         },
         {
+          "slug": "icon_image",
+          "label": "Upload Icon (Light Mode / Default)",
+          "type": "image"
+        },
+        {
+          "slug": "icon_image_dark",
+          "label": "Upload Icon (Dark Mode)",
+          "type": "image"
+        },
+        {
           "slug": "icon_name",
-          "label": "Icon Identifier",
+          "label": "Icon Identifier (Fallback)",
           "type": "string"
+        },
+        {
+          "slug": "description",
+          "label": "Full Description (for Bullet Points or Notes)",
+          "type": "text"
+        },
+        {
+          "slug": "is_highlight",
+          "label": "Highlight / Featured Item",
+          "type": "boolean"
         },
         {
           "slug": "proficiency_level",
@@ -220,7 +320,8 @@
         {
           "slug": "order_index",
           "label": "Display Order",
-          "type": "number"
+          "type": "number",
+          "required": true
         }
       ]
     },
@@ -657,37 +758,107 @@
     ],
     "skill_categories": [
       {
-        "id": "frontend",
-        "slug": "frontend",
+        "id": "languages-core",
+        "slug": "languages-core",
         "status": "published",
         "data": {
-          "name": "Frontend Engineering",
+          "name": "Ngôn ngữ & Nền tảng",
+          "group_type": "technical",
+          "display_type": "badges",
           "order_index": 1
         }
       },
       {
-        "id": "backend",
-        "slug": "backend",
+        "id": "frameworks",
+        "slug": "frameworks",
         "status": "published",
         "data": {
-          "name": "Backend & Cloud Infrastructure",
+          "name": "Frameworks",
+          "group_type": "technical",
+          "display_type": "badges",
           "order_index": 2
+        }
+      },
+      {
+        "id": "state-realtime",
+        "slug": "state-realtime",
+        "status": "published",
+        "data": {
+          "name": "Trạng thái & Realtime",
+          "group_type": "technical",
+          "display_type": "badges",
+          "order_index": 3
+        }
+      },
+      {
+        "id": "ui-animation",
+        "slug": "ui-animation",
+        "status": "published",
+        "data": {
+          "name": "UI & Animation",
+          "group_type": "technical",
+          "display_type": "badges",
+          "order_index": 4
+        }
+      },
+      {
+        "id": "tools-optimization",
+        "slug": "tools-optimization",
+        "status": "published",
+        "data": {
+          "name": "Công cụ & Tối ưu hóa",
+          "group_type": "technical",
+          "display_type": "badges",
+          "order_index": 5
+        }
+      },
+      {
+        "id": "ai-tools",
+        "slug": "ai-tools",
+        "status": "published",
+        "data": {
+          "name": "Công cụ AI",
+          "group_type": "technical",
+          "display_type": "badges",
+          "description": "Sử dụng tốt các AI Agent (Claude, Codex,...) tăng tốc độ và chất lượng sản phẩm.",
+          "order_index": 6
+        }
+      },
+      {
+        "id": "domain-expertise",
+        "slug": "domain-expertise",
+        "status": "published",
+        "data": {
+          "name": "Nghiệp vụ thực chiến",
+          "group_type": "soft_skills",
+          "display_type": "bullet_list",
+          "order_index": 7
+        }
+      },
+      {
+        "id": "working-skills",
+        "slug": "working-skills",
+        "status": "published",
+        "data": {
+          "name": "Kỹ năng làm việc",
+          "group_type": "soft_skills",
+          "display_type": "bullet_list",
+          "order_index": 8
+        }
+      },
+      {
+        "id": "methodologies",
+        "slug": "methodologies",
+        "status": "published",
+        "data": {
+          "name": "Quy trình",
+          "group_type": "soft_skills",
+          "display_type": "badges",
+          "order_index": 9
         }
       }
     ],
     "skills": [
-      {
-        "id": "react",
-        "slug": "react",
-        "status": "published",
-        "data": {
-          "name": "React & Next.js",
-          "icon_name": "react",
-          "proficiency_level": "Expert",
-          "order_index": 1,
-          "category": "frontend"
-        }
-      },
       {
         "id": "typescript",
         "slug": "typescript",
@@ -696,20 +867,421 @@
           "name": "TypeScript",
           "icon_name": "typescript",
           "proficiency_level": "Expert",
-          "order_index": 2,
-          "category": "frontend"
+          "order_index": 1,
+          "category": "languages-core"
         }
       },
       {
-        "id": "cloudflare",
-        "slug": "cloudflare",
+        "id": "html5",
+        "slug": "html5",
         "status": "published",
         "data": {
-          "name": "Cloudflare Workers & Edge AI",
-          "icon_name": "cloudflare",
-          "proficiency_level": "Advanced",
+          "name": "HTML5",
+          "icon_name": "html5",
+          "order_index": 2,
+          "category": "languages-core"
+        }
+      },
+      {
+        "id": "css3",
+        "slug": "css3",
+        "status": "published",
+        "data": {
+          "name": "CSS3",
+          "icon_name": "css3",
           "order_index": 3,
-          "category": "backend"
+          "category": "languages-core"
+        }
+      },
+      {
+        "id": "restful-apis",
+        "slug": "restful-apis",
+        "status": "published",
+        "data": {
+          "name": "RESTful APIs",
+          "icon_name": "api",
+          "order_index": 4,
+          "category": "languages-core"
+        }
+      },
+      {
+        "id": "core-web-vitals",
+        "slug": "core-web-vitals",
+        "status": "published",
+        "data": {
+          "name": "Core Web Vitals Optimization",
+          "icon_name": "web-vitals",
+          "is_highlight": true,
+          "order_index": 5,
+          "category": "languages-core"
+        }
+      },
+      {
+        "id": "react",
+        "slug": "react",
+        "status": "published",
+        "data": {
+          "name": "React.js",
+          "icon_name": "react",
+          "proficiency_level": "Expert",
+          "order_index": 1,
+          "category": "frameworks"
+        }
+      },
+      {
+        "id": "nextjs",
+        "slug": "nextjs",
+        "status": "published",
+        "data": {
+          "name": "Next.js",
+          "icon_name": "nextjs",
+          "proficiency_level": "Expert",
+          "order_index": 2,
+          "category": "frameworks"
+        }
+      },
+      {
+        "id": "vue",
+        "slug": "vue",
+        "status": "published",
+        "data": {
+          "name": "Vue.js",
+          "icon_name": "vue",
+          "order_index": 3,
+          "category": "frameworks"
+        }
+      },
+      {
+        "id": "solid",
+        "slug": "solid",
+        "status": "published",
+        "data": {
+          "name": "Solid.js",
+          "icon_name": "solid",
+          "order_index": 4,
+          "category": "frameworks"
+        }
+      },
+      {
+        "id": "flutter",
+        "slug": "flutter",
+        "status": "published",
+        "data": {
+          "name": "Flutter",
+          "icon_name": "flutter",
+          "order_index": 5,
+          "category": "frameworks"
+        }
+      },
+      {
+        "id": "zustand",
+        "slug": "zustand",
+        "status": "published",
+        "data": {
+          "name": "Zustand",
+          "icon_name": "zustand",
+          "order_index": 1,
+          "category": "state-realtime"
+        }
+      },
+      {
+        "id": "redux",
+        "slug": "redux",
+        "status": "published",
+        "data": {
+          "name": "Redux Toolkit",
+          "icon_name": "redux",
+          "order_index": 2,
+          "category": "state-realtime"
+        }
+      },
+      {
+        "id": "websocket",
+        "slug": "websocket",
+        "status": "published",
+        "data": {
+          "name": "WebSocket",
+          "icon_name": "websocket",
+          "order_index": 3,
+          "category": "state-realtime"
+        }
+      },
+      {
+        "id": "ably",
+        "slug": "ably",
+        "status": "published",
+        "data": {
+          "name": "Ably",
+          "icon_name": "ably",
+          "order_index": 4,
+          "category": "state-realtime"
+        }
+      },
+      {
+        "id": "centrifuge",
+        "slug": "centrifuge",
+        "status": "published",
+        "data": {
+          "name": "Centrifuge",
+          "icon_name": "centrifuge",
+          "order_index": 5,
+          "category": "state-realtime"
+        }
+      },
+      {
+        "id": "shadcn-ui",
+        "slug": "shadcn-ui",
+        "status": "published",
+        "data": {
+          "name": "Shadcn UI",
+          "icon_name": "shadcn",
+          "order_index": 1,
+          "category": "ui-animation"
+        }
+      },
+      {
+        "id": "radix-ui",
+        "slug": "radix-ui",
+        "status": "published",
+        "data": {
+          "name": "Radix UI",
+          "icon_name": "radix",
+          "order_index": 2,
+          "category": "ui-animation"
+        }
+      },
+      {
+        "id": "tailwind-css",
+        "slug": "tailwind-css",
+        "status": "published",
+        "data": {
+          "name": "Tailwind CSS",
+          "icon_name": "tailwind",
+          "order_index": 3,
+          "category": "ui-animation"
+        }
+      },
+      {
+        "id": "mui",
+        "slug": "mui",
+        "status": "published",
+        "data": {
+          "name": "MUI",
+          "icon_name": "mui",
+          "order_index": 4,
+          "category": "ui-animation"
+        }
+      },
+      {
+        "id": "ant-design",
+        "slug": "ant-design",
+        "status": "published",
+        "data": {
+          "name": "Ant Design",
+          "icon_name": "ant-design",
+          "order_index": 5,
+          "category": "ui-animation"
+        }
+      },
+      {
+        "id": "gsap",
+        "slug": "gsap",
+        "status": "published",
+        "data": {
+          "name": "GSAP",
+          "icon_name": "gsap",
+          "order_index": 6,
+          "category": "ui-animation"
+        }
+      },
+      {
+        "id": "framer-motion",
+        "slug": "framer-motion",
+        "status": "published",
+        "data": {
+          "name": "Framer Motion",
+          "icon_name": "framer-motion",
+          "order_index": 7,
+          "category": "ui-animation"
+        }
+      },
+      {
+        "id": "storybook",
+        "slug": "storybook",
+        "status": "published",
+        "data": {
+          "name": "Storybook",
+          "icon_name": "storybook",
+          "order_index": 8,
+          "category": "ui-animation"
+        }
+      },
+      {
+        "id": "git-github",
+        "slug": "git-github",
+        "status": "published",
+        "data": {
+          "name": "Git / GitHub",
+          "icon_name": "git",
+          "order_index": 1,
+          "category": "tools-optimization"
+        }
+      },
+      {
+        "id": "playwright",
+        "slug": "playwright",
+        "status": "published",
+        "data": {
+          "name": "Playwright",
+          "icon_name": "playwright",
+          "order_index": 2,
+          "category": "tools-optimization"
+        }
+      },
+      {
+        "id": "vitest",
+        "slug": "vitest",
+        "status": "published",
+        "data": {
+          "name": "Vitest",
+          "icon_name": "vitest",
+          "order_index": 3,
+          "category": "tools-optimization"
+        }
+      },
+      {
+        "id": "jest",
+        "slug": "jest",
+        "status": "published",
+        "data": {
+          "name": "Jest",
+          "icon_name": "jest",
+          "order_index": 4,
+          "category": "tools-optimization"
+        }
+      },
+      {
+        "id": "figma",
+        "slug": "figma",
+        "status": "published",
+        "data": {
+          "name": "Figma",
+          "icon_name": "figma",
+          "order_index": 5,
+          "category": "tools-optimization"
+        }
+      },
+      {
+        "id": "pnpm",
+        "slug": "pnpm",
+        "status": "published",
+        "data": {
+          "name": "Pnpm",
+          "icon_name": "pnpm",
+          "order_index": 6,
+          "category": "tools-optimization"
+        }
+      },
+      {
+        "id": "claude",
+        "slug": "claude",
+        "status": "published",
+        "data": {
+          "name": "Claude Code / Opus",
+          "icon_name": "claude",
+          "is_highlight": true,
+          "order_index": 1,
+          "category": "ai-tools"
+        }
+      },
+      {
+        "id": "copilot-codex",
+        "slug": "copilot-codex",
+        "status": "published",
+        "data": {
+          "name": "GitHub Copilot / Codex",
+          "icon_name": "copilot",
+          "is_highlight": true,
+          "order_index": 2,
+          "category": "ai-tools"
+        }
+      },
+      {
+        "id": "ai-agents",
+        "slug": "ai-agents",
+        "status": "published",
+        "data": {
+          "name": "AI Agents Workflows",
+          "icon_name": "sparkles",
+          "is_highlight": true,
+          "order_index": 3,
+          "category": "ai-tools"
+        }
+      },
+      {
+        "id": "domain-social-sports-blockchain",
+        "slug": "domain-social-sports-blockchain",
+        "status": "published",
+        "data": {
+          "name": "Hệ thống Mạng xã hội & Web3",
+          "description": "Có kinh nghiệm phát triển hệ thống Mạng xã hội, Thể thao, Ứng dụng Blockchain.",
+          "order_index": 1,
+          "category": "domain-expertise"
+        }
+      },
+      {
+        "id": "domain-mobile-ux",
+        "slug": "domain-mobile-ux",
+        "status": "published",
+        "data": {
+          "name": "Tối ưu hóa Mobile UX/UI",
+          "description": "Hiểu biết sâu về UX/UI, đặc biệt là giao diện mobile.",
+          "order_index": 2,
+          "category": "domain-expertise"
+        }
+      },
+      {
+        "id": "work-debugging",
+        "slug": "work-debugging",
+        "status": "published",
+        "data": {
+          "name": "Tư duy gỡ lỗi & Độc lập",
+          "description": "Tư duy gỡ lỗi (Debugging mindset), chú trọng chi tiết, làm việc độc lập & giao tiếp hiệu quả.",
+          "order_index": 1,
+          "category": "working-skills"
+        }
+      },
+      {
+        "id": "work-adaptation-english",
+        "slug": "work-adaptation-english",
+        "status": "published",
+        "data": {
+          "name": "Thích ứng & Ngoại ngữ",
+          "description": "Thích ứng cực nhanh với công nghệ mới. Đọc hiểu tốt tài liệu tiếng Anh chuyên ngành.",
+          "order_index": 2,
+          "category": "working-skills"
+        }
+      },
+      {
+        "id": "agile-scrum",
+        "slug": "agile-scrum",
+        "status": "published",
+        "data": {
+          "name": "Agile (Scrum)",
+          "icon_name": "agile",
+          "order_index": 1,
+          "category": "methodologies"
+        }
+      },
+      {
+        "id": "kanban",
+        "slug": "kanban",
+        "status": "published",
+        "data": {
+          "name": "Kanban",
+          "icon_name": "kanban",
+          "order_index": 2,
+          "category": "methodologies"
         }
       }
     ],
@@ -809,6 +1381,129 @@
                 }
               ],
               "_key": "t2"
+            }
+          ]
+        }
+      },
+      {
+        "id": "2d-animator-freelance",
+        "slug": "2d-animator-freelance",
+        "status": "published",
+        "locale": "en",
+        "data": {
+          "type": "experience",
+          "title": "2D Animator",
+          "organization": "Freelance",
+          "location": "Remote",
+          "start_date": "2022/06",
+          "end_date": "2024/01",
+          "is_current": false,
+          "order_index": 2,
+          "company_url": "https://www.upwork.com/freelancers/~014f887f8f402e5149",
+          "description": [
+            {
+              "_type": "block",
+              "style": "normal",
+              "listItem": "bullet",
+              "level": 1,
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Designed concepts, storyboards, and produced high-quality 2D motion graphics, character animations, and logo stingers for diverse commercial & digital projects.",
+                  "_key": "t4"
+                }
+              ],
+              "_key": "t3b"
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "listItem": "bullet",
+              "level": 1,
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Communicated effectively with international clients, managed end-to-end deliverables independently, and maintained a 100% Job Success Score with 5-star reviews on Upwork.",
+                  "_key": "t5"
+                }
+              ],
+              "_key": "t4b"
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "listItem": "bullet",
+              "level": 1,
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Collaborated with art directors and frontend developers to optimize interactive animation assets (Lottie, SVG, WebM, MP4) for performant web and mobile applications.",
+                  "_key": "t6"
+                }
+              ],
+              "_key": "t5b"
+            }
+          ]
+        }
+      },
+      {
+        "id": "2d-animator-freelance-vi",
+        "slug": "2d-animator-freelance",
+        "status": "published",
+        "locale": "vi",
+        "translationOf": "2d-animator-freelance",
+        "data": {
+          "type": "experience",
+          "title": "2D Animator",
+          "organization": "Freelance",
+          "location": "Làm việc từ xa",
+          "start_date": "2022/06",
+          "end_date": "2024/01",
+          "is_current": false,
+          "order_index": 2,
+          "company_url": "https://www.upwork.com/freelancers/~014f887f8f402e5149",
+          "description": [
+            {
+              "_type": "block",
+              "style": "normal",
+              "listItem": "bullet",
+              "level": 1,
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Thiết kế ý tưởng, storyboard và sản xuất motion graphics, hoạt hình nhân vật/logo 2D chất lượng cao cho đa dạng dự án thương mại & truyền thông.",
+                  "_key": "t7"
+                }
+              ],
+              "_key": "t6b"
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "listItem": "bullet",
+              "level": 1,
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Giao tiếp hiệu quả với khách hàng quốc tế, quản lý tiến độ dự án độc lập và duy trì 100% đánh giá tốt (Job Success Score 100%) trên nền tảng Upwork.",
+                  "_key": "t8"
+                }
+              ],
+              "_key": "t7b"
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "listItem": "bullet",
+              "level": 1,
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Phối hợp cùng đạo diễn nghệ thuật và lập trình viên để tối ưu hóa asset hoạt ảnh (Lottie, SVG, WebM, MP4) cho ứng dụng web và mobile.",
+                  "_key": "t9"
+                }
+              ],
+              "_key": "t8b"
             }
           ]
         }

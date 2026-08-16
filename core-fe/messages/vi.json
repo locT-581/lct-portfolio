@@ -8,10 +8,8 @@
     "brandName": "Lộc Trần"
   },
   "footer": {
-    "copyright": "© 2026 Loc Tran. Tất cả các quyền được bảo lưu.",
-    "github": "GitHub",
-    "linkedin": "LinkedIn",
-    "twitter": "Twitter"
+    "brandName": "Copyseen by Somesquare",
+    "refundPolicy": "Refund Policy"
   },
   "newsletter": {
     "title": "Bản tin",
@@ -78,7 +76,11 @@
   },
   "home": {
     "ctaButtonLabel": "Xem dự án",
-    "downloadResume": "Tải hồ sơ"
+    "downloadResume": "Tải hồ sơ",
+    "experiences": "Kinh nghiệm",
+    "skills": "Kỹ năng",
+    "tools": "Công cụ",
+    "present": "Hiện tại"
   },
   "projects": {
     "pageTitle": "Dự án",
@@ -92,5 +94,15 @@
     "sectionLabel": "Góc viết",
     "emptyState": "Chưa có bài viết nào. Hãy quay lại sau nhé!",
     "readMore": "Đọc bài viết"
+  },
+  "skills": {
+    "sectionLabel": "Kỹ năng & Năng lực",
+    "technicalTitle": "Kỹ năng chuyên môn",
+    "softSkillsTitle": "Kinh nghiệm & Kỹ năng mềm"
+  },
+  "refundPolicy": {
+    "pageTitle": "Chính sách hoàn tiền",
+    "pageDescription": "Tìm hiểu về chính sách hoàn tiền và các điều khoản hợp lệ.",
+    "sectionLabel": "Pháp lý"
   }
 }

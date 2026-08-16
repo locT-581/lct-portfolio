@@ -10,6 +10,10 @@ export interface ToolsSectionProps {
    */
   tools: Tool[];
   /**
+   * Optional section tag label string. Defaults to "Tools".
+   */
+  sectionLabel?: string;
+  /**
    * Optional additional CSS class names.
    */
   className?: string;
@@ -24,17 +28,21 @@ export interface ToolsSectionProps {
  *
  * Adheres to AD-1 (RSC), AD-8 (design tokens), AD-14 (next/image with explicit dimensions).
  */
-export function ToolsSection({ tools, className = "" }: ToolsSectionProps) {
+export function ToolsSection({
+  tools,
+  sectionLabel = "Tools",
+  className = "",
+}: ToolsSectionProps) {
   if (!tools || tools.length === 0) {
     return null;
   }
 
   return (
     <section
-      aria-label="Tools"
+      aria-label={sectionLabel}
       className={cn("w-full flex flex-col gap-8 items-start", className)}
     >
-      <SectionTag label="Tools" />
+      <SectionTag label={sectionLabel} />
 
       {/* Horizontal logo row — wraps responsively */}
       <ScrollReveal

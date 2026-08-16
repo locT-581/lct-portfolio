@@ -71,7 +71,7 @@ export function HeroSection({
         <div className="w-full flex flex-col gap-8 items-start">
           {/* Profile Container */}
           <div className="flex flex-row gap-6 items-center">
-            <div className="relative shrink-0 overflow-hidden rounded-[12px] border border-stroke w-19.5 h-19.5 bg-bg-base-2">
+            <div className="relative shrink-0 overflow-hidden rounded-xl border border-stroke w-19.5 h-19.5 bg-bg-base-2">
               <Image
                 src={avatarUrl}
                 alt={name}

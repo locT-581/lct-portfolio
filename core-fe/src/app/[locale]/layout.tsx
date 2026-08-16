@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { QueryProvider } from "@/components/providers/QueryProvider";
+import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
+import { Footer } from "@/components/ui/Footer";
 import { Header } from "@/components/ui/Header";
 import { LinkPreviewProvider } from "@/components/ui/LinkPreview";
 import { Navigation } from "@/components/ui/Navigation";
@@ -69,13 +71,16 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <QueryProvider>
             <LinkPreviewProvider>
-              <div className="min-h-screen flex flex-col bg-bg-base-1 text-text-primary">
-                <Header />
-                <div className="flex-1 w-full max-w-300 mx-auto px-5 md:px-10 lg:px-20 py-8 md:py-12 flex flex-col min-[810px]:flex-row gap-8 md:gap-10">
-                  <Navigation />
-                  <div className="flex-1 min-w-0">{children}</div>
+              <SmoothScrollProvider>
+                <div className="min-h-screen flex flex-col bg-bg-base-1 text-text-primary">
+                  <Header />
+                  <div className="flex-1 w-full max-w-300 mx-auto px-5 md:px-10 lg:px-20 py-8 md:py-12 flex flex-col min-[810px]:flex-row min-[810px]:items-start gap-10 md:gap-14">
+                    <Navigation />
+                    <div className="flex-1 min-w-0">{children}</div>
+                  </div>
+                  <Footer />
                 </div>
-              </div>
+              </SmoothScrollProvider>
             </LinkPreviewProvider>
           </QueryProvider>
         </NextIntlClientProvider>

@@ -169,8 +169,8 @@ export function Navigation({
     <nav
       aria-label="Main Navigation"
       className={cn(
-        // Base layout: Mobile = horizontal bar; Desktop/Tablet (≥810px) = vertical left sidebar 103px wide
-        "flex w-full min-[810px]:w-25.75 min-[810px]:flex-col gap-1.5 items-center min-[810px]:items-stretch bg-bg-base-2 border border-divider min-[810px]:bg-transparent min-[810px]:border-none p-1.5 min-[810px]:p-0 rounded-xl min-[810px]:rounded-none shrink-0",
+        // Base layout: Mobile = horizontal bar; Desktop/Tablet (≥810px) = vertical left sidebar 103px wide, sticky at top
+        "flex w-full min-[810px]:w-25.75 min-[810px]:flex-col gap-1.5 items-center min-[810px]:items-stretch bg-bg-base-2 border border-divider min-[810px]:bg-transparent min-[810px]:border-none p-1.5 min-[810px]:p-0 rounded-xl min-[810px]:rounded-none shrink-0 min-[810px]:sticky min-[810px]:top-24 min-[810px]:self-start",
         className,
       )}
       {...props}

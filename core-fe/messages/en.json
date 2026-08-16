@@ -8,10 +8,8 @@
     "brandName": "Loc Tran"
   },
   "footer": {
-    "copyright": "© 2026 Loc Tran. All rights reserved.",
-    "github": "GitHub",
-    "linkedin": "LinkedIn",
-    "twitter": "Twitter"
+    "brandName": "Copyseen by Somesquare",
+    "refundPolicy": "Refund Policy"
   },
   "newsletter": {
     "title": "Newsletter",
@@ -78,7 +76,11 @@
   },
   "home": {
     "ctaButtonLabel": "View Projects",
-    "downloadResume": "Download resume"
+    "downloadResume": "Download resume",
+    "experiences": "Experiences",
+    "skills": "Skills",
+    "tools": "Tools",
+    "present": "Present"
   },
   "projects": {
     "pageTitle": "Projects",
@@ -92,5 +94,15 @@
     "sectionLabel": "Writing",
     "emptyState": "No articles published yet. Check back soon!",
     "readMore": "Read article"
+  },
+  "skills": {
+    "sectionLabel": "Skills & Expertise",
+    "technicalTitle": "Technical Expertise",
+    "softSkillsTitle": "Experience & Soft Skills"
+  },
+  "refundPolicy": {
+    "pageTitle": "Refund Policy",
+    "pageDescription": "Learn about our refund policies and eligibility terms.",
+    "sectionLabel": "Legal"
   }
 }

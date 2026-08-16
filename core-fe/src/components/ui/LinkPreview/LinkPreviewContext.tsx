@@ -384,7 +384,7 @@ export function LinkPreviewProvider({ children }: { children: ReactNode }) {
                 {/* Content Body */}
                 <div className="flex gap-3 items-start">
                   {metadata.image ? (
-                    <div className="relative w-16 h-16 sm:w-17 sm:h-17 shrink-0 rounded-xl overflow-hidden border border-stroke bg-bg-base-2 shadow-inner group-hover/card:border-brand-orange/40 transition-colors">
+                    <div className="relative w-16 h-16 sm:w-17 sm:h-17 shrink-0 rounded-xl overflow-hidden border border-stroke bg-bg-base-2 shadow-inner transition-colors">
                       {/* biome-ignore lint/performance/noImgElement: OpenGraph preview image */}
                       <img
                         src={metadata.image}

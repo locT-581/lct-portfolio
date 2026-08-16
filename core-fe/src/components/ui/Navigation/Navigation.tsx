@@ -63,24 +63,6 @@ function UserIcon({ className = "w-6 h-6" }: { className?: string }) {
   );
 }
 
-function ServiceIcon({ className = "w-6 h-6" }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-    </svg>
-  );
-}
-
 function PortfolioIcon({ className = "w-6 h-6" }: { className?: string }) {
   return (
     <svg
@@ -95,43 +77,6 @@ function PortfolioIcon({ className = "w-6 h-6" }: { className?: string }) {
       aria-hidden="true"
     >
       <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" />
-    </svg>
-  );
-}
-
-function WorkIcon({ className = "w-6 h-6" }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
-      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-    </svg>
-  );
-}
-
-function TestimonialIcon({ className = "w-6 h-6" }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
     </svg>
   );
 }
@@ -154,14 +99,8 @@ export function Navigation({
 
   const defaultItems: NavItem[] = [
     { label: t("about"), href: "/", icon: <UserIcon /> },
-    { label: t("services"), href: "/services", icon: <ServiceIcon /> },
     { label: t("portfolio"), href: "/projects", icon: <PortfolioIcon /> },
-    { label: t("howIWork"), href: "/how-i-work", icon: <WorkIcon /> },
-    {
-      label: t("testimonials"),
-      href: "/testimonials",
-      icon: <TestimonialIcon />,
-    },
+    { label: t('blog'), href: '/blog' },
   ];
 
   const navItems = items ?? defaultItems;

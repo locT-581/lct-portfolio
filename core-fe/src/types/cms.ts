@@ -46,6 +46,16 @@ export interface ExperienceEntry {
   descriptionRaw?: unknown;
 }
 
+export interface CertificationEntry {
+  id: string;
+  title: string;
+  issuer: string;
+  issueDate?: string;
+  credentialUrl?: string | null;
+  description?: string;
+  descriptionRaw?: unknown;
+}
+
 export interface SkillCategory {
   id: string;
   name: string;

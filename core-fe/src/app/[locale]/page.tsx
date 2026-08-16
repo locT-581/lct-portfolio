@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { CertificatesSection } from "@/components/home/CertificatesSection";
 import { ExperienceSection } from "@/components/home/ExperienceSection";
 import { HeroSection } from "@/components/home/HeroSection";
 import { SkillsSection } from "@/components/home/SkillsSection";
 import { PersonWebsiteJsonLd } from "@/components/seo/PersonWebsiteJsonLd";
 import {
+  getCertificationEntries,
   getExperienceEntries,
   getSkillCategories,
   getSkills,
@@ -40,6 +42,7 @@ export default async function HomePage({
     profile,
     socialLinks,
     experienceEntries,
+    certificationEntries,
     skillCategories,
     skills,
     tHome,
@@ -47,6 +50,7 @@ export default async function HomePage({
     getProfileIntro({ locale }),
     getSocialLinks({ locale }),
     getExperienceEntries({ locale }),
+    getCertificationEntries({ locale }),
     getSkillCategories({ locale }),
     getSkills({ locale }),
     getTranslations({ locale, namespace: "home" }),
@@ -68,6 +72,11 @@ export default async function HomePage({
         categories={skillCategories}
         skills={skills}
         sectionLabel={tHome("skills")}
+      />
+      <CertificatesSection
+        entries={certificationEntries}
+        sectionLabel={tHome("certifications")}
+        verifyLabel={tHome("verifyCredential")}
       />
       {/* <CTABlock href={`/${locale}/projects`} /> */}
     </main>

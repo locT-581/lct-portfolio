@@ -1,6 +1,7 @@
 import { env } from "@/env";
 import { extractPortableText } from "@/lib/utils";
 import type {
+  CertificationEntry,
   ExperienceEntry,
   Skill,
   SkillCategory,
@@ -124,9 +125,11 @@ export async function getExperienceEntries({
       .json<EmdashApiResponse<EmdashTimelineItem>>();
 
     if (res?.success && Array.isArray(res.data?.items)) {
-      const sorted = [...res.data.items].sort(
-        (a, b) => (a.data.order_index ?? 99) - (b.data.order_index ?? 99),
-      );
+      const sorted = [...res.data.items]
+        .filter((item) => item.data.type !== "certification")
+        .sort(
+          (a, b) => (a.data.order_index ?? 99) - (b.data.order_index ?? 99),
+        );
 
       return sorted.map((item) => {
         const isCurrentLabel = locale === "vi" ? "Hiện tại" : "Present";
@@ -161,6 +164,51 @@ export async function getExperienceEntries({
     return [];
   } catch (err) {
     console.warn("[Em-dash API] getExperienceEntries failed:", err);
+    return [];
+  }
+}
+
+export async function getCertificationEntries({
+  locale,
+}: {
+  locale: string;
+}): Promise<CertificationEntry[]> {
+  try {
+    const res = await client
+      .get("content/timeline_items", { searchParams: { locale } })
+      .json<EmdashApiResponse<EmdashTimelineItem>>();
+
+    if (res?.success && Array.isArray(res.data?.items)) {
+      const sorted = [...res.data.items]
+        .filter((item) => item.data.type === "certification")
+        .sort(
+          (a, b) => (a.data.order_index ?? 99) - (b.data.order_index ?? 99),
+        );
+
+      return sorted.map((item) => {
+        const issueDate = item.data.end_date || item.data.start_date || "";
+        const credentialUrl =
+          item.data.credential_url ||
+          item.data.company_url ||
+          item.data.organization_url ||
+          item.data.website_url ||
+          item.data.url ||
+          null;
+
+        return {
+          id: item.id,
+          title: item.data.title || "",
+          issuer: item.data.organization || "",
+          issueDate,
+          credentialUrl,
+          description: extractPortableText(item.data.description),
+          descriptionRaw: item.data.description,
+        };
+      });
+    }
+    return [];
+  } catch (err) {
+    console.warn("[Em-dash API] getCertificationEntries failed:", err);
     return [];
   }
 }

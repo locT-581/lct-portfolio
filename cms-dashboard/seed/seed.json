@@ -1507,6 +1507,138 @@
             }
           ]
         }
+      },
+      {
+        "id": "ctu-software-engineering",
+        "slug": "ctu-software-engineering",
+        "status": "published",
+        "locale": "en",
+        "data": {
+          "type": "education",
+          "title": "Software Engineering",
+          "organization": "Can Tho University",
+          "location": "Can Tho City, Vietnam",
+          "start_date": "2020",
+          "end_date": "2025",
+          "is_current": false,
+          "order_index": 3,
+          "company_url": "https://www.ctu.edu.vn",
+          "description": [
+            {
+              "_type": "block",
+              "style": "normal",
+              "listItem": "bullet",
+              "level": 1,
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Degree classification: Very Good (Loại: Giỏi)",
+                  "_key": "t10"
+                }
+              ],
+              "_key": "t9b"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ctu-software-engineering-vi",
+        "slug": "ctu-software-engineering",
+        "status": "published",
+        "locale": "vi",
+        "translationOf": "ctu-software-engineering",
+        "data": {
+          "type": "education",
+          "title": "Kỹ thuật Phần mềm",
+          "organization": "Đại học Cần Thơ",
+          "location": "Cần Thơ, Việt Nam",
+          "start_date": "2020",
+          "end_date": "2025",
+          "is_current": false,
+          "order_index": 3,
+          "company_url": "https://www.ctu.edu.vn",
+          "description": [
+            {
+              "_type": "block",
+              "style": "normal",
+              "listItem": "bullet",
+              "level": 1,
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Xếp loại tốt nghiệp: Giỏi",
+                  "_key": "t11"
+                }
+              ],
+              "_key": "t10b"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cert-meta-intro-frontend",
+        "slug": "cert-meta-intro-frontend",
+        "status": "published",
+        "locale": "en",
+        "data": {
+          "type": "certification",
+          "title": "Introduction to Front-End Development",
+          "organization": "Meta · Coursera",
+          "location": "Online",
+          "start_date": "2024",
+          "end_date": "2024",
+          "is_current": false,
+          "order_index": 1,
+          "credential_url": "https://coursera.org/share/cdc6c6946e58b6ed30835d5634319a5f",
+          "company_url": "https://coursera.org/share/cdc6c6946e58b6ed30835d5634319a5f",
+          "description": [
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Authorized by Meta and offered through Coursera. Verifies core skills in HTML5, CSS3, JavaScript, UI/UX frameworks, and responsive web design.",
+                  "_key": "c1"
+                }
+              ],
+              "_key": "cb1"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cert-meta-intro-frontend-vi",
+        "slug": "cert-meta-intro-frontend",
+        "status": "published",
+        "locale": "vi",
+        "translationOf": "cert-meta-intro-frontend",
+        "data": {
+          "type": "certification",
+          "title": "Introduction to Front-End Development",
+          "organization": "Meta · Coursera",
+          "location": "Trực tuyến",
+          "start_date": "2024",
+          "end_date": "2024",
+          "is_current": false,
+          "order_index": 1,
+          "credential_url": "https://coursera.org/share/cdc6c6946e58b6ed30835d5634319a5f",
+          "company_url": "https://coursera.org/share/cdc6c6946e58b6ed30835d5634319a5f",
+          "description": [
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Chứng chỉ hoàn thành do Meta cấp qua Coursera. Xác thực nền tảng về HTML5, CSS3, JavaScript, UI/UX frameworks và thiết kế web responsive.",
+                  "_key": "c2"
+                }
+              ],
+              "_key": "cb2"
+            }
+          ]
+        }
       }
     ],
     "posts": [

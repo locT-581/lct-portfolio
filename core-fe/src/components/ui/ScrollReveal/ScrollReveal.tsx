@@ -50,29 +50,29 @@ export function ScrollReveal({
 
       if (targets.length === 0) return;
 
-      let fromVars: gsap.TweenVars = {
-        opacity: 0,
-      };
-
-      if (animation === "fade-up") {
-        fromVars = { ...fromVars, y: 30 };
-      } else if (animation === "scale") {
-        fromVars = { ...fromVars, scale: 0.95 };
-      }
-
-      gsap.from(targets, {
-        ...fromVars,
-        duration,
-        delay,
-        stagger: stagger > 0 ? stagger : undefined,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: "top 85%",
-          toggleActions: "play none none none",
-          once: true,
+      gsap.fromTo(
+        targets,
+        {
+          opacity: 0,
+          y: animation === "fade-up" ? 30 : 0,
+          scale: animation === "scale" ? 0.95 : 1,
         },
-      });
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration,
+          delay,
+          stagger: stagger > 0 ? stagger : undefined,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 95%",
+            toggleActions: "play none none none",
+            once: true,
+          },
+        },
+      );
     },
     {
       scope: containerRef,

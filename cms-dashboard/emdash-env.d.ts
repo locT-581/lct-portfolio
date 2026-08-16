@@ -97,7 +97,7 @@ export interface Project {
   short_description?: string;
   full_description?: PortableTextBlock[];
   thumbnail?: { id: string; src?: string; alt?: string; width?: number; height?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> };
-  project_type?: "full-stack" | "frontend" | "backend" | "mobile" | "devops";
+  project_type?: string;
   working_period?: string;
   client_name?: string;
   live_demo_url?: string;

@@ -17,7 +17,7 @@ export function CodeBlockViewer({
   language = "tsx",
   filename,
   showLineNumbers = false,
-  allowCopy = true,
+  allowCopy = false,
   className = "",
 }: CodeBlockViewerProps) {
   // Normalize language for react-code-blocks (e.g. tsx, js, html, css, json)

@@ -83,7 +83,7 @@ function TechPill({
 function CheckDot() {
   return (
     <span
-      className="w-1.5 h-1.5 rounded-full bg-brand-orange mt-2 shrink-0"
+      className="w-1.5 h-1.5 rounded-full bg-text-secondary mt-2.5 opacity-90 shrink-0"
       aria-hidden="true"
     />
   );
@@ -197,7 +197,7 @@ export function SkillsSection({
                       category.skills.map((skill) => (
                         <div
                           key={skill.id || skill.name}
-                          className="flex items-start gap-2.5 text-body-m-regular text-text-primary"
+                          className="flex items-start gap-2.5 text-body-m-regular text-text-secondary"
                         >
                           <CheckDot />
                           <span className="leading-relaxed">

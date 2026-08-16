@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PortfolioGrid } from "@/components/portfolio/PortfolioGrid";
-import { SectionTag } from "@/components/ui/SectionTag/SectionTag";
+import { Breadcrumbs } from "@/components/ui/Breadcrumbs/Breadcrumbs";
 import { getProjects } from "@/lib/api/projects";
 import { constructMetadata } from "@/lib/seo";
 
@@ -32,15 +32,29 @@ export default async function ProjectsPage({
   setRequestLocale(locale);
 
   const t = await getTranslations({ locale, namespace: "projects" });
+  const b = await getTranslations({ locale, namespace: "breadcrumbs" });
   const projects = await getProjects({ locale }).catch(() => []);
 
-  return (
-    <main className="flex flex-col gap-8 md:gap-10">
-      {/* Section header */}
-      <SectionTag label={t("sectionLabel")} />
+  const breadcrumbItems = [
+    { label: b("brandName"), href: `/${locale}` },
+    { label: t("pageHeading") },
+  ];
 
-      {/* Portfolio grid */}
-      <PortfolioGrid projects={projects} sectionLabel={t("sectionLabel")} />
+  return (
+    <main className="max-w-200 w-full mx-auto flex flex-col gap-8">
+      {/* Breadcrumbs Navigation */}
+      <Breadcrumbs items={breadcrumbItems} />
+
+      {/* Content Section */}
+      <section className="flex flex-col gap-5 w-full">
+        {/* Introduction Title (Heading 4) */}
+        <h1 className="text-h4 font-semibold text-text-primary">
+          {t("pageHeading")}
+        </h1>
+
+        {/* Portfolio grid */}
+        <PortfolioGrid projects={projects} sectionLabel={t("sectionLabel")} />
+      </section>
     </main>
   );
 }

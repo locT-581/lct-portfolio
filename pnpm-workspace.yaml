@@ -9,6 +9,8 @@ allowBuilds:
   workerd: true
   better-sqlite3: false
   sharp: false
+  "@parcel/watcher": true
+  "@swc/core": true
 
 # Supply-chain hardening: cooldown on brand-new releases (EmDash exempt)
 # and no non-registry transitive sources. (No trustPolicy: no-downgrade --

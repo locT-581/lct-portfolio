@@ -1,9 +1,24 @@
+export interface ProjectType {
+  id: string;
+  slug: string;
+  name: string;
+  description?: string | null;
+  orderIndex?: number;
+}
+
 export interface Project {
   id: string;
   slug: string;
   name: string;
   logoUrl: string | null;
   shortDescription: string;
+  projectType?: string;
+  projectTypeId?: string;
+  workingPeriod?: string;
+  clientName?: string;
+  techStack?: string[];
+  githubUrl?: string | null;
+  liveUrl?: string | null;
 }
 
 export interface ProjectMediaItem {
@@ -14,9 +29,6 @@ export interface ProjectMediaItem {
 
 export interface ProjectDetail extends Project {
   description: string;
-  techStack: string[];
-  githubUrl: string | null;
-  liveUrl: string | null;
   media: ProjectMediaItem[] | null;
 }
 

@@ -3,6 +3,23 @@
 
 import type { PortableTextBlock } from "emdash";
 
+export interface ContactSubmission {
+  id: string;
+  slug: string | null;
+  status: string;
+  sender_name: string;
+  sender_email: string;
+  subject?: string;
+  message: string;
+  is_read?: boolean;
+  submitted_at?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  bylines?: ContentBylineCredit[];
+  terms?: Record<string, TaxonomyTerm[]>;
+}
+
 export interface Page {
   id: string;
   slug: string | null;
@@ -16,18 +33,149 @@ export interface Page {
   terms?: Record<string, TaxonomyTerm[]>;
 }
 
+export interface Post {
+  id: string;
+  slug: string | null;
+  status: string;
+  title: string;
+  excerpt?: string;
+  content?: PortableTextBlock[];
+  cover_image?: { id: string; src?: string; alt?: string; width?: number; height?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> };
+  reading_time_min?: number;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  bylines?: ContentBylineCredit[];
+  terms?: Record<string, TaxonomyTerm[]>;
+}
+
+export interface Profile {
+  id: string;
+  slug: string | null;
+  status: string;
+  persona_title: string;
+  full_name: string;
+  headline: string;
+  tagline?: string;
+  target_audience?: string;
+  bio?: PortableTextBlock[];
+  avatar?: { id: string; src?: string; alt?: string; width?: number; height?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> };
+  resume_file?: { id: string; src?: string; filename?: string; mimeType?: string; size?: number; provider?: string; meta?: Record<string, unknown> };
+  resume_url?: string;
+  location?: string;
+  is_open_to_work?: boolean;
+  is_default?: boolean;
+  order_index?: number;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  bylines?: ContentBylineCredit[];
+  terms?: Record<string, TaxonomyTerm[]>;
+}
+
+export interface ProjectType {
+  id: string;
+  slug: string | null;
+  status: string;
+  name: string;
+  description?: string;
+  order_index: number;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  bylines?: ContentBylineCredit[];
+  terms?: Record<string, TaxonomyTerm[]>;
+}
+
 export interface Project {
   id: string;
   slug: string | null;
   status: string;
   title: string;
-  featured_image: { id: string; src?: string; alt?: string; width?: number; height?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> };
-  client?: string;
-  year?: string;
-  summary?: string;
-  content?: PortableTextBlock[];
-  gallery?: unknown;
-  url?: string;
+  short_description?: string;
+  full_description?: PortableTextBlock[];
+  thumbnail?: { id: string; src?: string; alt?: string; width?: number; height?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> };
+  project_type?: "full-stack" | "frontend" | "backend" | "mobile" | "devops";
+  working_period?: string;
+  client_name?: string;
+  live_demo_url?: string;
+  github_url?: string;
+  is_featured?: boolean;
+  order_index?: number;
+  technologies?: unknown;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  bylines?: ContentBylineCredit[];
+  terms?: Record<string, TaxonomyTerm[]>;
+}
+
+export interface SkillCategory {
+  id: string;
+  slug: string | null;
+  status: string;
+  name: string;
+  group_type: string;
+  display_type: string;
+  description?: string;
+  order_index: number;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  bylines?: ContentBylineCredit[];
+  terms?: Record<string, TaxonomyTerm[]>;
+}
+
+export interface Skill {
+  id: string;
+  slug: string | null;
+  status: string;
+  name: string;
+  category: string;
+  icon_image?: { id: string; src?: string; alt?: string; width?: number; height?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> };
+  icon_image_dark?: { id: string; src?: string; alt?: string; width?: number; height?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> };
+  icon_name?: string;
+  description?: string;
+  is_highlight?: boolean;
+  proficiency_level?: string;
+  order_index: number;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  bylines?: ContentBylineCredit[];
+  terms?: Record<string, TaxonomyTerm[]>;
+}
+
+export interface SocialLink {
+  id: string;
+  slug: string | null;
+  status: string;
+  platform_name: string;
+  url: string;
+  icon_name?: string;
+  order_index?: number;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  bylines?: ContentBylineCredit[];
+  terms?: Record<string, TaxonomyTerm[]>;
+}
+
+export interface TimelineItem {
+  id: string;
+  slug: string | null;
+  status: string;
+  type: string;
+  title: string;
+  organization: string;
+  company_url?: string;
+  location?: string;
+  start_date?: string;
+  end_date?: string;
+  is_current?: boolean;
+  description?: PortableTextBlock[];
+  credential_url?: string;
+  order_index?: number;
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date | null;

@@ -31,6 +31,7 @@
     "about": "Về tôi",
     "blog": "Bài viết",
     "contact": "Liên hệ",
+    "portfolio": "Dự án",
     "brandName": "Copyseen"
   },
   "contact": {
@@ -86,9 +87,12 @@
   },
   "projects": {
     "pageTitle": "Dự án",
+    "pageHeading": "Dự án",
     "pageDescription": "Khám phá danh mục các dự án tôi đã thực hiện — từ ứng dụng web đến trải nghiệm kỹ thuật số sáng tạo.",
     "sectionLabel": "Dự án",
-    "emptyState": "Chưa có dự án nào. Hãy quay lại sau nhé!"
+    "emptyState": "Chưa có dự án nào. Hãy quay lại sau nhé!",
+    "conversionRate": "Tỷ lệ chuyển đổi",
+    "viewDetail": "Xem chi tiết dự án"
   },
   "blog": {
     "pageTitle": "Bài viết & Chia sẻ",

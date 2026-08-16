@@ -16,9 +16,9 @@ export interface PortfolioGridProps {
 /**
  * `<PortfolioGrid>` React Server Component rendering a responsive grid of projects.
  *
- * Grid layout per Figma design spec:
- * - Desktop (≥1200px): 3-column grid, gap-2
- * - Tablet / Mobile:   2-column grid, gap-2
+ * Grid layout per Framer design spec (`oVI4dxipr` / `AShdIf7RZ`):
+ * - Desktop: 2-column grid (`grid-cols-2`, `gap-x-3 gap-y-5`)
+ * - Tablet / Mobile: 1-column grid (`grid-cols-1`, `gap-y-8`)
  *
  * Handles the empty state gracefully when no projects are returned.
  * Strictly follows RSC paradigm (AD-1), design tokens (AD-8).
@@ -51,7 +51,7 @@ export function PortfolioGrid({
     <section aria-label={sectionLabel} className={cn("w-full", className)}>
       {/* Responsive grid with ScrollReveal staggered entry animations */}
       <ScrollReveal animation="fade-up" stagger={0.08} selector="li">
-        <ul className="grid grid-cols-2 lg:grid-cols-3 gap-2">
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-3 gap-y-8 md:gap-y-5">
           {projects.map((project) => (
             <li key={project.id}>
               <ProjectCard project={project} />

@@ -100,7 +100,7 @@ export function Navigation({
   const defaultItems: NavItem[] = [
     { label: t("about"), href: "/", icon: <UserIcon /> },
     { label: t("portfolio"), href: "/projects", icon: <PortfolioIcon /> },
-    { label: t('blog'), href: '/blog' },
+    { label: t("blog"), href: "/blog" },
   ];
 
   const navItems = items ?? defaultItems;

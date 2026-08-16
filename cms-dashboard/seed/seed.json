@@ -246,46 +246,44 @@
           "label": "Category (Danh mục)",
           "type": "select",
           "required": true,
-          "options": {
-            "choices": [
-              {
-                "value": "languages-core",
-                "label": "01. Ngôn ngữ & Nền tảng (Languages & Core)"
-              },
-              {
-                "value": "frameworks",
-                "label": "02. Frameworks (React, Next, Vue, Solid, Flutter)"
-              },
-              {
-                "value": "state-realtime",
-                "label": "03. Trạng thái & Realtime (State & Realtime)"
-              },
-              {
-                "value": "ui-animation",
-                "label": "04. UI & Animation"
-              },
-              {
-                "value": "tools-optimization",
-                "label": "05. Công cụ & Tối ưu hóa (Tools & Optimization)"
-              },
-              {
-                "value": "ai-tools",
-                "label": "06. Công cụ AI (AI Augmented)"
-              },
-              {
-                "value": "domain-expertise",
-                "label": "07. Nghiệp vụ thực chiến (Domain Knowledge)"
-              },
-              {
-                "value": "working-skills",
-                "label": "08. Kỹ năng làm việc (Working Skills)"
-              },
-              {
-                "value": "methodologies",
-                "label": "09. Quy trình (Agile / Methodologies)"
-              }
-            ]
-          }
+          "options": [
+            {
+              "value": "languages-core",
+              "label": "Ngôn ngữ & Nền tảng"
+            },
+            {
+              "value": "frameworks",
+              "label": "Frameworks"
+            },
+            {
+              "value": "state-realtime",
+              "label": "Trạng thái & Realtime"
+            },
+            {
+              "value": "ui-animation",
+              "label": "UI & Animation"
+            },
+            {
+              "value": "tools-optimization",
+              "label": "Công cụ & Tối ưu hóa"
+            },
+            {
+              "value": "ai-tools",
+              "label": "Công cụ AI"
+            },
+            {
+              "value": "domain-expertise",
+              "label": "Nghiệp vụ thực chiến"
+            },
+            {
+              "value": "working-skills",
+              "label": "Kỹ năng làm việc"
+            },
+            {
+              "value": "methodologies",
+              "label": "Quy trình"
+            }
+          ]
         },
         {
           "slug": "icon_image",
@@ -326,6 +324,32 @@
       ]
     },
     {
+      "slug": "project_types",
+      "label": "Project Types",
+      "labelSingular": "Project Type",
+      "supports": ["revisions", "search"],
+      "fields": [
+        {
+          "slug": "name",
+          "label": "Type Name",
+          "type": "string",
+          "required": true,
+          "searchable": true
+        },
+        {
+          "slug": "description",
+          "label": "Description",
+          "type": "text"
+        },
+        {
+          "slug": "order_index",
+          "label": "Display Order",
+          "type": "number",
+          "required": true
+        }
+      ]
+    },
+    {
       "slug": "projects",
       "label": "Projects",
       "labelSingular": "Project",
@@ -356,6 +380,45 @@
           "type": "image"
         },
         {
+          "slug": "project_type",
+          "label": "Project Type",
+          "type": "select",
+          "options": {
+            "choices": [
+              {
+                "value": "full-stack",
+                "label": "Full-stack Web App"
+              },
+              {
+                "value": "frontend",
+                "label": "Frontend / UI Engineering"
+              },
+              {
+                "value": "backend",
+                "label": "Backend & Microservices"
+              },
+              {
+                "value": "mobile",
+                "label": "Mobile Application"
+              },
+              {
+                "value": "devops",
+                "label": "DevOps & Cloud Infra"
+              }
+            ]
+          }
+        },
+        {
+          "slug": "working_period",
+          "label": "Working Period",
+          "type": "string"
+        },
+        {
+          "slug": "client_name",
+          "label": "Client Name",
+          "type": "string"
+        },
+        {
           "slug": "live_demo_url",
           "label": "Live Demo URL",
           "type": "string"
@@ -376,18 +439,9 @@
           "type": "number"
         },
         {
-          "slug": "metrics",
-          "label": "Metrics & Stats",
-          "type": "json"
-        },
-        {
           "slug": "technologies",
           "label": "Technologies Used",
-          "type": "reference",
-          "options": {
-            "collection": "skills",
-            "allowMultiple": true
-          }
+          "type": "json"
         }
       ]
     },
@@ -1285,23 +1339,139 @@
         }
       }
     ],
+    "project_types": [
+      {
+        "id": "full-stack",
+        "slug": "full-stack",
+        "status": "published",
+        "locale": "en",
+        "data": {
+          "name": "Full-stack Web App",
+          "description": "End-to-end full-stack web applications and SaaS platforms.",
+          "order_index": 1
+        }
+      },
+      {
+        "id": "full-stack-vi",
+        "slug": "full-stack",
+        "status": "published",
+        "locale": "vi",
+        "translationOf": "full-stack",
+        "data": {
+          "name": "Ứng dụng Web Full-stack",
+          "description": "Ứng dụng web toàn diện từ frontend đến backend và nền tảng SaaS.",
+          "order_index": 1
+        }
+      },
+      {
+        "id": "frontend",
+        "slug": "frontend",
+        "status": "published",
+        "locale": "en",
+        "data": {
+          "name": "Frontend / UI Engineering",
+          "description": "High-performance interactive web apps, design systems, and rich UX.",
+          "order_index": 2
+        }
+      },
+      {
+        "id": "frontend-vi",
+        "slug": "frontend",
+        "status": "published",
+        "locale": "vi",
+        "translationOf": "frontend",
+        "data": {
+          "name": "Kỹ thuật Frontend & UI",
+          "description": "Giao diện web hiệu năng cao, hệ thống Design System và tương tác mượt mà.",
+          "order_index": 2
+        }
+      },
+      {
+        "id": "backend",
+        "slug": "backend",
+        "status": "published",
+        "locale": "en",
+        "data": {
+          "name": "Backend & Microservices",
+          "description": "Scalable APIs, database architectures, and cloud services.",
+          "order_index": 3
+        }
+      },
+      {
+        "id": "backend-vi",
+        "slug": "backend",
+        "status": "published",
+        "locale": "vi",
+        "translationOf": "backend",
+        "data": {
+          "name": "Hệ thống Backend & Microservices",
+          "description": "Kiến trúc API mở rộng, cơ sở dữ liệu và các dịch vụ đám mây.",
+          "order_index": 3
+        }
+      },
+      {
+        "id": "mobile",
+        "slug": "mobile",
+        "status": "published",
+        "locale": "en",
+        "data": {
+          "name": "Mobile Application",
+          "description": "Cross-platform mobile apps for iOS and Android.",
+          "order_index": 4
+        }
+      },
+      {
+        "id": "mobile-vi",
+        "slug": "mobile",
+        "status": "published",
+        "locale": "vi",
+        "translationOf": "mobile",
+        "data": {
+          "name": "Ứng dụng Di động (Mobile)",
+          "description": "Ứng dụng đa nền tảng cho hệ điều hành iOS và Android.",
+          "order_index": 4
+        }
+      },
+      {
+        "id": "devops",
+        "slug": "devops",
+        "status": "published",
+        "locale": "en",
+        "data": {
+          "name": "DevOps & Cloud Infra",
+          "description": "CI/CD automation, Docker/Kubernetes, and cloud infrastructure.",
+          "order_index": 5
+        }
+      },
+      {
+        "id": "devops-vi",
+        "slug": "devops",
+        "status": "published",
+        "locale": "vi",
+        "translationOf": "devops",
+        "data": {
+          "name": "Hạ tầng DevOps & Cloud",
+          "description": "Tự động hóa CI/CD, đóng gói container Docker/Kubernetes và hạ tầng cloud.",
+          "order_index": 5
+        }
+      }
+    ],
     "projects": [
       {
-        "id": "portfolio-cms",
-        "slug": "portfolio-cms",
+        "id": "starclyde",
+        "slug": "starclyde",
         "status": "published",
+        "locale": "en",
         "data": {
-          "title": "Personal Portfolio & CMS Engine",
-          "short_description": "A high-performance portfolio built on Astro, Emdash CMS, and Cloudflare Workers.",
-          "live_demo_url": "https://example.com",
-          "github_url": "https://github.com/locT-581/Website",
+          "title": "StarClyde | Physical AI Gateway Texas – Vietnam",
+          "short_description": "High-performance AI ecosystem landing platform connecting 199-acre strategic physical AI infrastructure in Texas with Vietnam innovation hubs.",
+          "project_type": "full-stack",
+          "working_period": "2025 - 2026",
+          "client_name": "StarClyde & SIHUB",
+          "live_demo_url": "https://www.starclyde.us",
           "is_featured": true,
           "order_index": 1,
-          "technologies": ["react", "typescript", "cloudflare"],
-          "metrics": {
-            "performance_score": "100",
-            "lighthouse_lcp": "0.4s"
-          },
+          "technologies": ["nextjs", "typescript", "tailwind"],
           "full_description": [
             {
               "_type": "block",
@@ -1309,17 +1479,203 @@
               "children": [
                 {
                   "_type": "span",
-                  "text": "Comprehensive portfolio system integrated with Emdash CMS and serverless edge deployment.",
+                  "text": "StarClyde AI Gateway District is a physical AI bridge connecting Vietnam with Texas, located on a 199-acre site in Clyde, Texas (15 minutes from the $500B Stargate mega-project by Oracle, NVIDIA, and OpenAI).",
                   "_key": "p1"
                 }
               ],
               "_key": "p0"
+            },
+            {
+              "_type": "block",
+              "style": "h3",
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Technical Highlights & Architecture",
+                  "_key": "p2"
+                }
+              ],
+              "_key": "p1b"
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "listItem": "bullet",
+              "level": 1,
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "High-End Dark Mode UI: State-of-the-art dark theme featuring horizon glow effects, dynamic canvas animations, and refined typography (SF Pro, SVN Gilroy, Inter).",
+                  "_key": "p3"
+                }
+              ],
+              "_key": "p2b"
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "listItem": "bullet",
+              "level": 1,
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Performance & Smooth Motion: Powered by Next.js App Router and Turbopack, integrating kinetic typography and interactive scroll reveals.",
+                  "_key": "p4"
+                }
+              ],
+              "_key": "p3b"
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "listItem": "bullet",
+              "level": 1,
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Complete Internationalization (i18n): Seamless bilingual experience (Vietnamese & English) tailored for international investors and government partners.",
+                  "_key": "p5"
+                }
+              ],
+              "_key": "p4b"
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "listItem": "bullet",
+              "level": 1,
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Comprehensive SEO & Structured Data: Built-in JSON-LD schemas (Organization, WebPage), OpenGraph preview assets, and Core Web Vitals optimization.",
+                  "_key": "p6"
+                }
+              ],
+              "_key": "p5b"
             }
           ]
         },
         "taxonomies": {
           "category": ["engineering"],
-          "tag": ["react", "typescript", "astro", "cloudflare"]
+          "tag": ["react", "typescript"]
+        }
+      },
+      {
+        "id": "starclyde-vi",
+        "slug": "starclyde",
+        "status": "published",
+        "locale": "vi",
+        "translationOf": "starclyde",
+        "data": {
+          "title": "StarClyde | Cầu Nối AI Vật Lý Việt Nam – Texas",
+          "short_description": "Cổng thông tin hệ sinh thái AI kết nối quỹ đất chiến lược 199 mẫu Anh tại Clyde, Texas với SIHUB và Sở KH&CN TP.HCM.",
+          "project_type": "full-stack",
+          "working_period": "2025 - 2026",
+          "client_name": "StarClyde & SIHUB",
+          "live_demo_url": "https://www.starclyde.us",
+          "is_featured": true,
+          "order_index": 1,
+          "technologies": ["nextjs", "typescript", "tailwind"],
+          "full_description": [
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "StarClyde AI Gateway District là dự án cầu nối hạ tầng AI vật lý chiến lược giữa Việt Nam và Texas, tọa lạc trên khu đất 199 mẫu Anh tại Clyde, Texas (cách siêu dự án AI Stargate 500 tỷ USD của Oracle, NVIDIA, OpenAI 15 phút di chuyển).",
+                  "_key": "v1"
+                }
+              ],
+              "_key": "v0"
+            },
+            {
+              "_type": "block",
+              "style": "h3",
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Điểm nhấn kỹ thuật & Kiến trúc",
+                  "_key": "v2"
+                }
+              ],
+              "_key": "v1b"
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "listItem": "bullet",
+              "level": 1,
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Giao diện High-End Dark Mode: Thiết kế tối màu hiện đại, kết hợp hiệu ứng Horizon glow, dynamic canvas animation và typography chuyên nghiệp (SF Pro, SVN Gilroy, Inter).",
+                  "_key": "v3"
+                }
+              ],
+              "_key": "v2b"
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "listItem": "bullet",
+              "level": 1,
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Hiệu năng & Animation mượt mà: Xây dựng trên Next.js App Router và Turbopack, tích hợp hiệu ứng kinetic typography và cuộn tương tác (scroll reveal, sticky timeline).",
+                  "_key": "v4"
+                }
+              ],
+              "_key": "v3b"
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "listItem": "bullet",
+              "level": 1,
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Đa ngôn ngữ & i18n: Hệ thống song ngữ mượt mà (Tiếng Việt & English), tối ưu trải nghiệm cho các nhà đầu tư và đối tác quốc tế.",
+                  "_key": "v5"
+                }
+              ],
+              "_key": "v4b"
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "listItem": "bullet",
+              "level": 1,
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Chuẩn SEO & Schema Structured Data: Tích hợp đầy đủ JSON-LD (Organization, WebPage, Breadcrumbs), OpenGraph metadata và tối ưu hóa thời gian tải trang.",
+                  "_key": "v6"
+                }
+              ],
+              "_key": "v5b"
+            },
+            {
+              "_type": "block",
+              "style": "normal",
+              "listItem": "bullet",
+              "level": 1,
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Lộ trình đối tác & Vườn ươm: Trình bày trực quan chương trình ươm tạo 3 giai đoạn kết nối các kỹ sư AI Việt Nam với hệ sinh thái công nghệ hàng đầu tại Mỹ.",
+                  "_key": "v7"
+                }
+              ],
+              "_key": "v6b"
+            }
+          ]
+        },
+        "taxonomies": {
+          "category": ["engineering"],
+          "tag": ["react", "typescript"]
         }
       }
     ],

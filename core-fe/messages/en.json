@@ -31,6 +31,7 @@
     "about": "About me",
     "blog": "Blog",
     "contact": "Contact",
+    "portfolio": "Portfolio",
     "brandName": "Copyseen"
   },
   "contact": {
@@ -85,10 +86,13 @@
     "present": "Present"
   },
   "projects": {
-    "pageTitle": "Projects",
+    "pageTitle": "Portfolio",
+    "pageHeading": "Portfolio",
     "pageDescription": "Explore my portfolio of shipped projects — from web applications to creative digital experiences.",
-    "sectionLabel": "Projects",
-    "emptyState": "No projects to display yet. Check back soon!"
+    "sectionLabel": "Portfolio",
+    "emptyState": "No projects to display yet. Check back soon!",
+    "conversionRate": "Conversion rate",
+    "viewDetail": "View project detail"
   },
   "blog": {
     "pageTitle": "Articles & Insights",

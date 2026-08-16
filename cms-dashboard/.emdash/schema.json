@@ -1,13 +1,66 @@
 {
   "collections": [
     {
+      "slug": "contact_submissions",
+      "label": "Contact Submissions",
+      "labelSingular": "Contact Submission",
+      "supports": [
+        "search"
+      ],
+      "fields": [
+        {
+          "slug": "sender_name",
+          "label": "Sender Name",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "sender_email",
+          "label": "Sender Email",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "subject",
+          "label": "Subject",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "message",
+          "label": "Message",
+          "type": "text",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "is_read",
+          "label": "Is Read",
+          "type": "boolean",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "submitted_at",
+          "label": "Submission Date",
+          "type": "datetime",
+          "required": false,
+          "unique": false
+        }
+      ]
+    },
+    {
       "slug": "pages",
       "label": "Pages",
       "labelSingular": "Page",
       "supports": [
         "drafts",
         "revisions",
-        "search"
+        "search",
+        "seo"
       ],
       "fields": [
         {
@@ -27,9 +80,9 @@
       ]
     },
     {
-      "slug": "projects",
-      "label": "Projects",
-      "labelSingular": "Project",
+      "slug": "posts",
+      "label": "Blog Posts",
+      "labelSingular": "Blog Post",
       "supports": [
         "drafts",
         "revisions",
@@ -45,29 +98,8 @@
           "unique": false
         },
         {
-          "slug": "featured_image",
-          "label": "Featured Image",
-          "type": "image",
-          "required": true,
-          "unique": false
-        },
-        {
-          "slug": "client",
-          "label": "Client",
-          "type": "string",
-          "required": false,
-          "unique": false
-        },
-        {
-          "slug": "year",
-          "label": "Year",
-          "type": "string",
-          "required": false,
-          "unique": false
-        },
-        {
-          "slug": "summary",
-          "label": "Summary",
+          "slug": "excerpt",
+          "label": "Excerpt",
           "type": "text",
           "required": false,
           "unique": false
@@ -80,21 +112,596 @@
           "unique": false
         },
         {
-          "slug": "gallery",
-          "label": "Gallery",
-          "type": "json",
+          "slug": "cover_image",
+          "label": "Cover Image",
+          "type": "image",
           "required": false,
           "unique": false
         },
         {
-          "slug": "url",
-          "label": "Project URL",
+          "slug": "reading_time_min",
+          "label": "Reading Time (Minutes)",
+          "type": "number",
+          "required": false,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "slug": "profiles",
+      "label": "Profiles",
+      "labelSingular": "Profile",
+      "supports": [
+        "revisions",
+        "seo"
+      ],
+      "fields": [
+        {
+          "slug": "persona_title",
+          "label": "Persona Title / Audience Profile",
           "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "full_name",
+          "label": "Full Name",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "headline",
+          "label": "Headline",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "tagline",
+          "label": "Tagline",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "target_audience",
+          "label": "Target Audience",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "bio",
+          "label": "Biography",
+          "type": "portableText",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "avatar",
+          "label": "Avatar Image",
+          "type": "image",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "resume_file",
+          "label": "Resume File Upload (PDF/Doc)",
+          "type": "file",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "resume_url",
+          "label": "External Resume URL (Fallback)",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "location",
+          "label": "Location",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "is_open_to_work",
+          "label": "Open to Work",
+          "type": "boolean",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "is_default",
+          "label": "Is Default Persona",
+          "type": "boolean",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "order_index",
+          "label": "Display Order",
+          "type": "number",
+          "required": false,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "slug": "project_types",
+      "label": "Project Types",
+      "labelSingular": "Project Type",
+      "supports": [
+        "revisions",
+        "search"
+      ],
+      "fields": [
+        {
+          "slug": "name",
+          "label": "Type Name",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "description",
+          "label": "Description",
+          "type": "text",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "order_index",
+          "label": "Display Order",
+          "type": "number",
+          "required": true,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "slug": "projects",
+      "label": "Projects",
+      "labelSingular": "Project",
+      "supports": [
+        "drafts",
+        "revisions",
+        "search",
+        "seo"
+      ],
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Project Title",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "short_description",
+          "label": "Short Description",
+          "type": "text",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "full_description",
+          "label": "Full Description",
+          "type": "portableText",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "thumbnail",
+          "label": "Thumbnail Image",
+          "type": "image",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "project_type",
+          "label": "Project Type",
+          "type": "select",
+          "required": false,
+          "unique": false,
+          "validation": {
+            "options": [
+              "full-stack",
+              "frontend",
+              "backend",
+              "mobile",
+              "devops"
+            ]
+          },
+          "widget": "",
+          "options": {
+            "choices": [
+              {
+                "value": "full-stack",
+                "label": "Full-stack Web App"
+              },
+              {
+                "value": "frontend",
+                "label": "Frontend / UI Engineering"
+              },
+              {
+                "value": "backend",
+                "label": "Backend & Microservices"
+              },
+              {
+                "value": "mobile",
+                "label": "Mobile Application"
+              },
+              {
+                "value": "devops",
+                "label": "DevOps & Cloud Infra"
+              }
+            ]
+          }
+        },
+        {
+          "slug": "working_period",
+          "label": "Working Period",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "client_name",
+          "label": "Client Name",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "live_demo_url",
+          "label": "Live Demo URL",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "github_url",
+          "label": "GitHub Repository URL",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "is_featured",
+          "label": "Featured Project",
+          "type": "boolean",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "order_index",
+          "label": "Display Order",
+          "type": "number",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "technologies",
+          "label": "Technologies Used",
+          "type": "json",
+          "required": false,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "slug": "skill_categories",
+      "label": "Skill Categories",
+      "labelSingular": "Skill Category",
+      "supports": [
+        "revisions",
+        "search"
+      ],
+      "fields": [
+        {
+          "slug": "name",
+          "label": "Category Name",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "group_type",
+          "label": "Group Type",
+          "type": "select",
+          "required": true,
+          "unique": false,
+          "options": {
+            "choices": [
+              {
+                "value": "technical",
+                "label": "01. Kỹ năng chuyên môn (Technical)"
+              },
+              {
+                "value": "soft_skills",
+                "label": "02. Nghiệp vụ & Kỹ năng mềm (Soft Skills & Domain)"
+              }
+            ]
+          }
+        },
+        {
+          "slug": "display_type",
+          "label": "Display Format",
+          "type": "select",
+          "required": true,
+          "unique": false,
+          "options": {
+            "choices": [
+              {
+                "value": "badges",
+                "label": "Tech Badges / Pills"
+              },
+              {
+                "value": "bullet_list",
+                "label": "Bullet List (Descriptive Items)"
+              }
+            ]
+          }
+        },
+        {
+          "slug": "description",
+          "label": "Description / Callout Text",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "order_index",
+          "label": "Display Order",
+          "type": "number",
+          "required": true,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "slug": "skills",
+      "label": "Skills & Competencies",
+      "labelSingular": "Skill Item",
+      "supports": [
+        "revisions",
+        "search"
+      ],
+      "fields": [
+        {
+          "slug": "name",
+          "label": "Skill Name / Title",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "category",
+          "label": "Category (Danh mục)",
+          "type": "select",
+          "required": true,
+          "unique": false,
+          "options": {
+            "choices": [
+              {
+                "value": "languages-core",
+                "label": "01. Ngôn ngữ & Nền tảng (Languages & Core)"
+              },
+              {
+                "value": "frameworks",
+                "label": "02. Frameworks (React, Next, Vue, Solid, Flutter)"
+              },
+              {
+                "value": "state-realtime",
+                "label": "03. Trạng thái & Realtime (State & Realtime)"
+              },
+              {
+                "value": "ui-animation",
+                "label": "04. UI & Animation"
+              },
+              {
+                "value": "tools-optimization",
+                "label": "05. Công cụ & Tối ưu hóa (Tools & Optimization)"
+              },
+              {
+                "value": "ai-tools",
+                "label": "06. Công cụ AI (AI Augmented)"
+              },
+              {
+                "value": "domain-expertise",
+                "label": "07. Nghiệp vụ thực chiến (Domain Knowledge)"
+              },
+              {
+                "value": "working-skills",
+                "label": "08. Kỹ năng làm việc (Working Skills)"
+              },
+              {
+                "value": "methodologies",
+                "label": "09. Quy trình (Agile / Methodologies)"
+              }
+            ]
+          }
+        },
+        {
+          "slug": "icon_image",
+          "label": "Upload Icon (Light Mode / Default)",
+          "type": "image",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "icon_image_dark",
+          "label": "Upload Icon (Dark Mode)",
+          "type": "image",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "icon_name",
+          "label": "Icon Identifier (Fallback)",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "description",
+          "label": "Full Description (for Bullet Points or Notes)",
+          "type": "text",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "is_highlight",
+          "label": "Highlight / Featured Item",
+          "type": "boolean",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "proficiency_level",
+          "label": "Proficiency Level",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "order_index",
+          "label": "Display Order",
+          "type": "number",
+          "required": true,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "slug": "social_links",
+      "label": "Social Links",
+      "labelSingular": "Social Link",
+      "supports": [
+        "revisions"
+      ],
+      "fields": [
+        {
+          "slug": "platform_name",
+          "label": "Platform Name",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "url",
+          "label": "URL",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "icon_name",
+          "label": "Icon Identifier",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "order_index",
+          "label": "Display Order",
+          "type": "number",
+          "required": false,
+          "unique": false
+        }
+      ]
+    },
+    {
+      "slug": "timeline_items",
+      "label": "Timeline Items",
+      "labelSingular": "Timeline Item",
+      "supports": [
+        "revisions",
+        "search"
+      ],
+      "fields": [
+        {
+          "slug": "type",
+          "label": "Item Type",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "title",
+          "label": "Title / Role",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "organization",
+          "label": "Company / Organization",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "company_url",
+          "label": "Company URL (optional)",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "location",
+          "label": "Location",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "start_date",
+          "label": "Start Date",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "end_date",
+          "label": "End Date",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "is_current",
+          "label": "Is Current",
+          "type": "boolean",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "description",
+          "label": "Description",
+          "type": "portableText",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "credential_url",
+          "label": "Credential / Certificate URL",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "order_index",
+          "label": "Display Order",
+          "type": "number",
           "required": false,
           "unique": false
         }
       ]
     }
   ],
-  "version": "3bda4a2334ace43a"
+  "version": "92116823dd3927e7"
 }

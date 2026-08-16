@@ -75,6 +75,20 @@ export interface Profile {
   terms?: Record<string, TaxonomyTerm[]>;
 }
 
+export interface ProjectType {
+  id: string;
+  slug: string | null;
+  status: string;
+  name: string;
+  description?: string;
+  order_index: number;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date | null;
+  bylines?: ContentBylineCredit[];
+  terms?: Record<string, TaxonomyTerm[]>;
+}
+
 export interface Project {
   id: string;
   slug: string | null;
@@ -83,12 +97,14 @@ export interface Project {
   short_description?: string;
   full_description?: PortableTextBlock[];
   thumbnail?: { id: string; src?: string; alt?: string; width?: number; height?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> };
+  project_type?: "full-stack" | "frontend" | "backend" | "mobile" | "devops";
+  working_period?: string;
+  client_name?: string;
   live_demo_url?: string;
   github_url?: string;
   is_featured?: boolean;
   order_index?: number;
-  metrics?: unknown;
-  technologies?: string;
+  technologies?: unknown;
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date | null;
@@ -101,7 +117,10 @@ export interface SkillCategory {
   slug: string | null;
   status: string;
   name: string;
-  order_index?: number;
+  group_type: string;
+  display_type: string;
+  description?: string;
+  order_index: number;
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date | null;
@@ -114,10 +133,14 @@ export interface Skill {
   slug: string | null;
   status: string;
   name: string;
-  category?: string;
+  category: string;
+  icon_image?: { id: string; src?: string; alt?: string; width?: number; height?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> };
+  icon_image_dark?: { id: string; src?: string; alt?: string; width?: number; height?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> };
   icon_name?: string;
+  description?: string;
+  is_highlight?: boolean;
   proficiency_level?: string;
-  order_index?: number;
+  order_index: number;
   createdAt: Date;
   updatedAt: Date;
   publishedAt: Date | null;
@@ -168,6 +191,7 @@ declare module "emdash" {
     pages: Page;
     posts: Post;
     profiles: Profile;
+    project_types: ProjectType;
     projects: Project;
     skill_categories: SkillCategory;
     skills: Skill;

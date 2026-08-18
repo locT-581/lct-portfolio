@@ -3,6 +3,7 @@
     "about": "About me",
     "services": "Services",
     "portfolio": "Portfolio",
+    "blog": "Blog",
     "howIWork": "How I work",
     "testimonials": "Testimonials",
     "brandName": "Loc Tran"
@@ -92,7 +93,23 @@
     "sectionLabel": "Portfolio",
     "emptyState": "No projects to display yet. Check back soon!",
     "conversionRate": "Conversion rate",
-    "viewDetail": "View project detail"
+    "viewDetail": "View project detail",
+    "visitLive": "Visit Live Site",
+    "viewSource": "View Source",
+    "role": "Role",
+    "client": "Client",
+    "timeline": "Timeline",
+    "platform": "Platform",
+    "teamSize": "Team Size",
+    "techStack": "Tech Stack & Tools",
+    "tableOfContents": "Table of Contents",
+    "overview": "Project Overview",
+    "previousProject": "Previous Project",
+    "nextProject": "Next Project",
+    "allProjects": "All Projects",
+    "ctaTitle": "Have a project in mind?",
+    "ctaDescription": "Let's collaborate to build fast, scalable, and beautifully crafted digital products.",
+    "ctaButton": "Let's Talk"
   },
   "blog": {
     "pageTitle": "Articles & Insights",

@@ -84,6 +84,7 @@ export async function getBlogPostBySlug({
           contentType: "article",
           content:
             extractPortableText(item.data.content) || item.data.excerpt || "",
+          contentRaw: item.data.content ?? null,
         };
       }
     }

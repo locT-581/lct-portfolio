@@ -126,7 +126,7 @@ export function CertificatesSection({
 
                 {/* Description */}
                 {(cert.descriptionRaw || cert.description) && (
-                  <div className="text-text-secondary text-body-s-regular leading-relaxed mt-1">
+                  <div className="text-text-secondary text-body-s-regular leading-relaxed">
                     {cert.descriptionRaw ? (
                       <PortableText value={cert.descriptionRaw} />
                     ) : (

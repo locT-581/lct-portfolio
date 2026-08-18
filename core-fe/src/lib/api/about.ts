@@ -12,19 +12,31 @@ import { client, type EmdashApiResponse } from "./_client";
 
 export function extractMediaUrl(media: unknown): string | null {
   if (!media) return null;
-  if (typeof media === "string") {
-    if (
-      media.startsWith("http://") ||
-      media.startsWith("https://") ||
-      media.startsWith("/")
-    ) {
-      return media;
+
+  const baseUrl = env.EMDASH_API_URL.replace(/\/content$/, "").replace(
+    /\/_emdash\/api$/,
+    "",
+  );
+
+  const resolveUrl = (u?: string | null): string | null => {
+    if (!u || typeof u !== "string") return null;
+    const trimmed = u.trim();
+    if (!trimmed) return null;
+
+    if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
+      return trimmed;
     }
-    const baseUrl = env.EMDASH_API_URL.replace(/\/content$/, "").replace(
-      /\/_emdash\/api$/,
-      "",
-    );
-    return `${baseUrl}/_emdash/api/media/file/${media}`;
+    if (trimmed.startsWith("/_emdash/")) {
+      return `${baseUrl}${trimmed}`;
+    }
+    if (trimmed.startsWith("/")) {
+      return trimmed;
+    }
+    return `${baseUrl}/_emdash/api/media/file/${trimmed}`;
+  };
+
+  if (typeof media === "string") {
+    return resolveUrl(media);
   }
 
   if (typeof media === "object" && media !== null) {
@@ -32,21 +44,25 @@ export function extractMediaUrl(media: unknown): string | null {
       url?: string;
       src?: string;
       previewUrl?: string;
+      asset?: unknown;
       meta?: { storageKey?: string };
       filename?: string;
       id?: string;
+      _ref?: string;
     };
 
-    if (m.url) return m.url;
-    if (m.src) return m.src;
-    if (m.previewUrl) return m.previewUrl;
+    if (m.asset) {
+      const fromAsset = extractMediaUrl(m.asset);
+      if (fromAsset) return fromAsset;
+    }
+
+    if (m.url) return resolveUrl(m.url);
+    if (m.src) return resolveUrl(m.src);
+    if (m.previewUrl) return resolveUrl(m.previewUrl);
+    if (m._ref) return resolveUrl(m._ref);
 
     const storageKey = m.meta?.storageKey || m.filename || m.id;
     if (storageKey) {
-      const baseUrl = env.EMDASH_API_URL.replace(/\/content$/, "").replace(
-        /\/_emdash\/api$/,
-        "",
-      );
       return `${baseUrl}/_emdash/api/media/file/${storageKey}`;
     }
   }

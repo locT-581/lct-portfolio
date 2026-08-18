@@ -16,6 +16,9 @@ export interface Project {
   projectTypeId?: string;
   workingPeriod?: string;
   clientName?: string;
+  role?: string;
+  teamSize?: string;
+  gallery?: ProjectMediaItem[] | null;
   techStack?: string[];
   githubUrl?: string | null;
   liveUrl?: string | null;
@@ -29,6 +32,7 @@ export interface ProjectMediaItem {
 
 export interface ProjectDetail extends Project {
   description: string;
+  descriptionRaw?: unknown;
   media: ProjectMediaItem[] | null;
 }
 
@@ -45,6 +49,7 @@ export interface BlogPost {
 
 export interface BlogPostDetail extends BlogPost {
   content: string;
+  contentRaw?: unknown;
 }
 
 export interface ExperienceEntry {

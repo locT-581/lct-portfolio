@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { CaseStudyHeader } from "@/components/portfolio/CaseStudyHeader";
-import { CaseStudyMedia } from "@/components/portfolio/CaseStudyMedia";
+import {
+  CaseStudyHero,
+  CaseStudyMedia,
+  CaseStudyNavigation,
+} from "@/components/portfolio";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
-import { getProjectBySlug } from "@/lib/api/projects";
+import { PortableText } from "@/components/ui/PortableText";
+import { getProjectBySlug, getProjects } from "@/lib/api/projects";
 import { constructMetadata } from "@/lib/seo";
 
 export const revalidate = 3600;
@@ -52,11 +56,22 @@ export default async function CaseStudyDetailPage({
   });
   const tProjects = await getTranslations({ locale, namespace: "projects" });
 
-  const project = await getProjectBySlug({ slug, locale }).catch(() => null);
+  const [project, allProjects] = await Promise.all([
+    getProjectBySlug({ slug, locale }).catch(() => null),
+    getProjects({ locale }).catch(() => []),
+  ]);
 
   if (!project) {
     notFound();
   }
+
+  // Find previous and next projects
+  const currentIndex = allProjects.findIndex((p) => p.slug === slug);
+  const prevProject = currentIndex > 0 ? allProjects[currentIndex - 1] : null;
+  const nextProject =
+    currentIndex >= 0 && currentIndex < allProjects.length - 1
+      ? allProjects[currentIndex + 1]
+      : null;
 
   const breadcrumbsItems = [
     { label: tBreadcrumbs("home"), href: `/${locale}` },
@@ -64,16 +79,52 @@ export default async function CaseStudyDetailPage({
     { label: project.name },
   ];
 
+  const heroLabels = {
+    visitLive: tProjects("visitLive"),
+    viewSource: tProjects("viewSource"),
+    role: tProjects("role"),
+    client: tProjects("client"),
+    timeline: tProjects("timeline"),
+    platform: tProjects("platform"),
+    teamSize: tProjects("teamSize"),
+    techStack: tProjects("techStack"),
+  };
+
+  const navLabels = {
+    previousProject: tProjects("previousProject"),
+    nextProject: tProjects("nextProject"),
+    allProjects: tProjects("allProjects"),
+    ctaTitle: tProjects("ctaTitle"),
+    ctaDescription: tProjects("ctaDescription"),
+    ctaButton: tProjects("ctaButton"),
+  };
+
   return (
-    <main className="flex flex-col gap-8 md:gap-10">
+    <main className="flex flex-col gap-10 md:gap-12 w-full">
       {/* Breadcrumb Trail */}
       <Breadcrumbs items={breadcrumbsItems} />
 
-      {/* Case Study Header */}
-      <CaseStudyHeader project={project} />
+      {/* Modern Clean Hero Section */}
+      <CaseStudyHero project={project} labels={heroLabels} />
 
-      {/* Case Study Media Gallery */}
-      <CaseStudyMedia media={project.media} />
+      <section className="w-full flex flex-col gap-10">
+        <article className="case-study-story-content flex flex-col gap-4 w-full">
+          <PortableText value={project.descriptionRaw || project.description} />
+        </article>
+
+        {/* Case Study Media Gallery (Extra Screenshots if available) */}
+        {project.media && project.media.length > 1 && (
+          <CaseStudyMedia media={project.media.slice(1)} />
+        )}
+      </section>
+
+      {/* Bottom Project Navigation & CTA */}
+      <CaseStudyNavigation
+        prevProject={prevProject}
+        nextProject={nextProject}
+        locale={locale}
+        labels={navLabels}
+      />
     </main>
   );
 }

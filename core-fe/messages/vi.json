@@ -3,6 +3,7 @@
     "about": "Về tôi",
     "services": "Dịch vụ",
     "portfolio": "Dự án",
+    "blog": "Bài viết",
     "howIWork": "Quy trình làm việc",
     "testimonials": "Đánh giá",
     "brandName": "Lộc Trần"
@@ -92,7 +93,23 @@
     "sectionLabel": "Dự án",
     "emptyState": "Chưa có dự án nào. Hãy quay lại sau nhé!",
     "conversionRate": "Tỷ lệ chuyển đổi",
-    "viewDetail": "Xem chi tiết dự án"
+    "viewDetail": "Xem chi tiết dự án",
+    "visitLive": "Trải nghiệm trực tiếp",
+    "viewSource": "Xem mã nguồn",
+    "role": "Vai trò",
+    "client": "Khách hàng",
+    "timeline": "Thời gian",
+    "platform": "Nền tảng",
+    "teamSize": "Quy mô nhóm",
+    "techStack": "Công nghệ & Công cụ",
+    "tableOfContents": "Mục lục dự án",
+    "overview": "Tổng quan dự án",
+    "previousProject": "Dự án trước",
+    "nextProject": "Dự án tiếp theo",
+    "allProjects": "Tất cả dự án",
+    "ctaTitle": "Bạn có ý tưởng cho dự án mới?",
+    "ctaDescription": "Hãy cùng nhau hợp tác để xây dựng những sản phẩm kỹ thuật số đột phá và tối ưu.",
+    "ctaButton": "Liên hệ ngay"
   },
   "blog": {
     "pageTitle": "Bài viết & Chia sẻ",

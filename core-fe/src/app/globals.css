@@ -4,7 +4,7 @@
 
 :root,
 [data-theme="light"] {
-  --brand-orange: #e85a0c;
+  --brand-orange: #c44700;
   --bg-base-1: #ffffff;
   --bg-base-2: #f6f7f9;
   --bg-base-3: #d6d6d6;
@@ -17,7 +17,7 @@
 }
 
 [data-theme="dark"] {
-  --brand-orange: #e85a0c;
+  --brand-orange: #c44700;
   --bg-base-1: #151517;
   --bg-base-2: #1a1a1b;
   --bg-base-3: #2a2a2e;

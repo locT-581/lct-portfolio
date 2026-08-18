@@ -21,3 +21,10 @@ Replace `{skill-name}` with the name of the activated skill.
 - `bmad-create-epics-and-stories`
 
 This rule is enforced from the first commit per Architecture Decision AD-15.
+
+## Documentation
+
+Look up EmDash documentation via the `emdash-docs` MCP server when you need to
+verify an API, hook, config option, or pattern. Prefer the docs MCP over
+assumptions from training data -- the docs reflect the current published
+behaviour.

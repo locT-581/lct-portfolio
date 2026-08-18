@@ -31,7 +31,42 @@ interface EmdashProjectItem {
     project_type_id?: string;
     working_period?: string;
     client_name?: string;
+    role?: string;
+    team_size?: string;
+    gallery?: unknown;
   };
+}
+
+function parseGallery(
+  galleryRaw: unknown,
+): { type: string; url: string; caption?: string | null }[] | null {
+  if (Array.isArray(galleryRaw) && galleryRaw.length > 0) {
+    const items = galleryRaw
+      .map((item) => {
+        if (typeof item === "string")
+          return { type: "image", url: extractMediaUrl(item) || item };
+        if (item && typeof item === "object") {
+          const url =
+            extractMediaUrl(item) || (item as { url?: string }).url || "";
+          if (!url) return null;
+          return {
+            type: (item as { type?: string }).type || "image",
+            url,
+            caption:
+              (item as { caption?: string; alt?: string }).caption ||
+              (item as { alt?: string }).alt ||
+              null,
+          };
+        }
+        return null;
+      })
+      .filter(
+        (x): x is { type: string; url: string; caption?: string | null } =>
+          x !== null && Boolean(x.url),
+      );
+    return items.length > 0 ? items : null;
+  }
+  return null;
 }
 
 /**
@@ -99,6 +134,7 @@ export async function getProjects({
           (pt) => pt.slug === typeSlug || pt.id === typeSlug,
         );
         const typeName = matchedType?.name || typeSlug || undefined;
+        const gallery = parseGallery(item.data.gallery);
 
         return {
           id: item.id,
@@ -110,6 +146,10 @@ export async function getProjects({
           projectTypeId: typeSlug || undefined,
           workingPeriod: item.data.working_period,
           clientName: item.data.client_name,
+          role: item.data.role,
+          teamSize: item.data.team_size,
+          gallery:
+            gallery || (logoUrl ? [{ type: "image", url: logoUrl }] : null),
           techStack: item.data.technologies || [],
           githubUrl: item.data.github_url || null,
           liveUrl: item.data.live_demo_url || null,
@@ -162,6 +202,7 @@ export async function getProjectBySlug({
           (pt) => pt.slug === typeSlug || pt.id === typeSlug,
         );
         const typeName = matchedType?.name || typeSlug || undefined;
+        const gallery = parseGallery(item.data.gallery);
 
         return {
           id: item.id,
@@ -173,6 +214,10 @@ export async function getProjectBySlug({
           projectTypeId: typeSlug || undefined,
           workingPeriod: item.data.working_period,
           clientName: item.data.client_name,
+          role: item.data.role,
+          teamSize: item.data.team_size,
+          gallery:
+            gallery || (logoUrl ? [{ type: "image", url: logoUrl }] : null),
           techStack: item.data.technologies || [],
           githubUrl: item.data.github_url || null,
           liveUrl: item.data.live_demo_url || null,
@@ -180,7 +225,9 @@ export async function getProjectBySlug({
             extractPortableText(item.data.full_description) ||
             item.data.short_description ||
             "",
-          media: logoUrl ? [{ type: "image", url: logoUrl }] : null,
+          descriptionRaw: item.data.full_description ?? null,
+          media:
+            gallery || (logoUrl ? [{ type: "image", url: logoUrl }] : null),
         };
       }
     }

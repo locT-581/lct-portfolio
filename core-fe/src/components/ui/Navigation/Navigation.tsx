@@ -81,6 +81,26 @@ function PortfolioIcon({ className = "w-6 h-6" }: { className?: string }) {
   );
 }
 
+function BlogIcon({ className = "w-6 h-6" }: { className?: string }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z" />
+      <path d="M6 6h10" />
+      <path d="M6 10h10" />
+    </svg>
+  );
+}
+
 /**
  * `<Navigation>` component for site orientation and section navigation.
  *
@@ -100,7 +120,7 @@ export function Navigation({
   const defaultItems: NavItem[] = [
     { label: t("about"), href: "/", icon: <UserIcon /> },
     { label: t("portfolio"), href: "/projects", icon: <PortfolioIcon /> },
-    { label: t("blog"), href: "/blog" },
+    { label: t("blog"), href: "/blog", icon: <BlogIcon /> },
   ];
 
   const navItems = items ?? defaultItems;

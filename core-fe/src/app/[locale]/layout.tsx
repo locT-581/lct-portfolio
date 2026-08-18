@@ -74,9 +74,11 @@ export default async function LocaleLayout({
               <SmoothScrollProvider>
                 <div className="min-h-screen flex flex-col bg-bg-base-1 text-text-primary">
                   <Header />
-                  <div className="flex-1 w-full max-w-300 mx-auto px-5 md:px-10 lg:px-20 py-8 md:py-12 flex flex-col min-[810px]:flex-row min-[810px]:items-start gap-10 md:gap-14">
+                  <div className="flex-1 w-full max-w-300 mx-auto px-5 md:px-10 lg:px-20 py-8 md:py-12 flex flex-col min-[810px]:flex-row gap-10 md:gap-14 md:justify-center">
                     <Navigation />
-                    <div className="flex-1 min-w-0">{children}</div>
+                    <div className="flex-1 min-w-0 md:max-w-162.5">
+                      {children}
+                    </div>
                   </div>
                   <Footer />
                 </div>

@@ -1,3 +1,4 @@
+import { PortableText } from "@/components/ui/PortableText";
 import { cn } from "@/lib/utils";
 import type { ProjectDetail } from "@/types/cms";
 
@@ -15,7 +16,8 @@ export function CaseStudyHeader({
   project,
   className = "",
 }: CaseStudyHeaderProps) {
-  const { name, description, techStack, githubUrl, liveUrl } = project;
+  const { name, description, descriptionRaw, techStack, githubUrl, liveUrl } =
+    project;
 
   return (
     <header className={cn("flex flex-col gap-6 w-full", className)}>
@@ -25,9 +27,9 @@ export function CaseStudyHeader({
       </h1>
 
       {/* Description */}
-      <p className="text-body-l text-text-secondary leading-relaxed max-w-3xl">
-        {description}
-      </p>
+      <div className="text-body-l text-text-secondary leading-relaxed max-w-3xl">
+        <PortableText value={descriptionRaw || description} />
+      </div>
 
       {/* Tech Stack Badges */}
       {techStack && techStack.length > 0 && (

@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import type { Project } from "@/types/cms";
+import { PeriodLabel } from "../ui/PeriodLabel";
 
 export interface ProjectCardProps {
   /** Project data from Em-dash CMS. */
@@ -33,22 +34,21 @@ export function ProjectCard({ project, className = "" }: ProjectCardProps) {
       <div className="relative w-full h-60 bg-bg-base-2 border border-stroke rounded-2xl overflow-hidden flex items-center justify-center transition-all duration-300 ease-out group-hover:border-brand-orange/40">
         {/* Project Type Badge (Top-left) */}
         {projectType && (
-          <div className="absolute top-2.5 left-2.5 p-3 rounded-xl border border-stroke bg-bg-base-1/90 backdrop-blur-xs text-body-s-regular text-text-secondary z-10">
+          <PeriodLabel className="absolute top-2.5 left-2.5 z-10 border border-stroke">
             {projectType}
-          </div>
+          </PeriodLabel>
         )}
 
-        {/* Centered 72×72px Logo */}
-        <div className="relative w-18 h-18 flex items-center justify-center">
-          {logoUrl ? (
-            <Image
-              src={logoUrl}
-              alt={`${name} logo`}
-              width={72}
-              height={72}
-              className="object-contain w-full h-full transition-transform duration-300 ease-out group-hover:scale-105"
-            />
-          ) : (
+        {logoUrl ? (
+          <Image
+            src={logoUrl}
+            alt={name}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover w-full h-full transition-transform duration-300 ease-out"
+          />
+        ) : (
+          <div className="flex items-center justify-center w-full h-full text-text-secondary opacity-30">
             <svg
               width="40"
               height="40"
@@ -56,7 +56,7 @@ export function ProjectCard({ project, className = "" }: ProjectCardProps) {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
-              className="text-text-secondary opacity-30 transition-transform duration-300 ease-out group-hover:scale-105"
+              className="transition-transform duration-300 ease-out group-hover:scale-105"
             >
               <rect
                 x="4"
@@ -76,8 +76,8 @@ export function ProjectCard({ project, className = "" }: ProjectCardProps) {
                 strokeLinejoin="round"
               />
             </svg>
-          )}
-        </div>
+          </div>
+        )}
       </div>
 
       {/* Details Section */}

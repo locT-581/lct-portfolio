@@ -109,7 +109,18 @@
     "allProjects": "Tất cả dự án",
     "ctaTitle": "Bạn có ý tưởng cho dự án mới?",
     "ctaDescription": "Hãy cùng nhau hợp tác để xây dựng những sản phẩm kỹ thuật số đột phá và tối ưu.",
-    "ctaButton": "Liên hệ ngay"
+    "ctaButton": "Liên hệ ngay",
+    "engineeringMetricsTitle": "Chỉ Số Hiệu Năng & Kỹ Thuật",
+    "engineeringMetricsSubtitle": "Kết quả kiểm toán Core Web Vitals và các thước đo hiệu năng kỹ thuật",
+    "verifiedAudit": "Kiểm toán đã xác thực",
+    "inspectAudit": "Xem chi tiết kiểm toán",
+    "viewLighthouseReport": "Xem báo cáo Google Lighthouse chính thức",
+    "testOnPageSpeed": "Chạy kiểm tra trực tiếp trên Google PageSpeed",
+    "lighthouseScoreLabel": "Điểm Google Lighthouse",
+    "lcpLabel": "Thời gian hiển thị nội dung chính (LCP)",
+    "clsLabel": "Độ ổn định thị giác (CLS)",
+    "ttfbLabel": "Thời gian nhận phản hồi biên (Edge TTFB)",
+    "close": "Đóng"
   },
   "blog": {
     "pageTitle": "Bài viết & Chia sẻ",

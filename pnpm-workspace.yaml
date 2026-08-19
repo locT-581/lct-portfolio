@@ -5,12 +5,13 @@ packages:
 # Build scripts: allow only what each runtime needs; rest false so
 # strictDepBuilds (pnpm >=10.26 / 11) passes.
 allowBuilds:
-  esbuild: true
-  workerd: true
-  better-sqlite3: false
-  sharp: false
   "@parcel/watcher": true
   "@swc/core": true
+  better-sqlite3: false
+  esbuild: true
+  sharp: false
+  workerd: true
+blockExoticSubdeps: true
 
 # Supply-chain hardening: cooldown on brand-new releases (EmDash exempt)
 # and no non-registry transitive sources. (No trustPolicy: no-downgrade --
@@ -19,4 +20,5 @@ minimumReleaseAge: 1440
 minimumReleaseAgeExclude:
   - emdash
   - "@emdash-cms/*"
-blockExoticSubdeps: true
+patchedDependencies:
+  emdash: patches/emdash.patch

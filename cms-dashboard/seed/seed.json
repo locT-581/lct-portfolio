@@ -442,6 +442,36 @@
           "slug": "technologies",
           "label": "Technologies Used",
           "type": "json"
+        },
+        {
+          "slug": "lighthouse_score",
+          "label": "Lighthouse Score",
+          "type": "integer"
+        },
+        {
+          "slug": "metric_lcp",
+          "label": "Largest Contentful Paint (LCP)",
+          "type": "string"
+        },
+        {
+          "slug": "metric_cls",
+          "label": "Cumulative Layout Shift (CLS)",
+          "type": "string"
+        },
+        {
+          "slug": "metric_ttfb",
+          "label": "Global Edge TTFB",
+          "type": "string"
+        },
+        {
+          "slug": "lighthouse_report_file",
+          "label": "Lighthouse Report JSON File",
+          "type": "file"
+        },
+        {
+          "slug": "audit_metadata",
+          "label": "Audit Metadata",
+          "type": "json"
         }
       ]
     },

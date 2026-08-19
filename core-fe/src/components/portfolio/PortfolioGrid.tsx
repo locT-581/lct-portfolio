@@ -1,4 +1,7 @@
+"use client";
+
 import { useTranslations } from "next-intl";
+import { MagicBento } from "@/components/ui/MagicBento";
 import { ScrollReveal } from "@/components/ui/ScrollReveal/ScrollReveal";
 import { cn } from "@/lib/utils";
 import type { Project } from "@/types/cms";
@@ -11,22 +14,23 @@ export interface PortfolioGridProps {
   sectionLabel?: string;
   /** Additional CSS class names. */
   className?: string;
+  /** Custom glow color (RGB numbers without rgba, e.g. "232, 90, 12") */
+  glowColor?: string;
 }
 
 /**
- * `<PortfolioGrid>` React Server Component rendering a responsive grid of projects.
+ * `<PortfolioGrid>` React Client Component rendering a responsive grid of projects
+ * with clean, unboxed typography and MagicBento global cursor spotlight on media canvases.
  *
- * Grid layout per Framer design spec (`oVI4dxipr` / `AShdIf7RZ`):
- * - Desktop: 2-column grid (`grid-cols-2`, `gap-x-3 gap-y-5`)
+ * Grid layout per Framer design spec:
+ * - Desktop: 2-column grid (`grid-cols-2`, `gap-x-5 gap-y-10`)
  * - Tablet / Mobile: 1-column grid (`grid-cols-1`, `gap-y-8`)
- *
- * Handles the empty state gracefully when no projects are returned.
- * Strictly follows RSC paradigm (AD-1), design tokens (AD-8).
  */
 export function PortfolioGrid({
   projects,
   sectionLabel = "Portfolio",
   className = "",
+  glowColor = "232, 90, 12",
 }: PortfolioGridProps) {
   const t = useTranslations("projects");
 
@@ -49,16 +53,30 @@ export function PortfolioGrid({
 
   return (
     <section aria-label={sectionLabel} className={cn("w-full", className)}>
-      {/* Responsive grid with ScrollReveal staggered entry animations */}
-      <ScrollReveal animation="fade-up" stagger={0.08} selector="li">
-        <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-3 gap-y-8 md:gap-y-5">
+      <MagicBento
+        glowColor={glowColor}
+        enableSpotlight={true}
+        enableBorderGlow={true}
+        enableStars={true}
+        enableTilt={true}
+        enableMagnetism={true}
+        clickEffect={true}
+        className="w-full p-0! max-w-none!"
+        gridClassName="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-10 w-full"
+      >
+        <ScrollReveal
+          animation="fade-up"
+          stagger={0.08}
+          selector=".project-item"
+          className="contents"
+        >
           {projects.map((project) => (
-            <li key={project.id}>
-              <ProjectCard project={project} />
-            </li>
+            <div key={project.id} className="project-item w-full">
+              <ProjectCard project={project} glowColor={glowColor} />
+            </div>
           ))}
-        </ul>
-      </ScrollReveal>
+        </ScrollReveal>
+      </MagicBento>
     </section>
   );
 }

@@ -40,6 +40,14 @@ const LinkPreviewContext = createContext<LinkPreviewContextType | null>(null);
 // In-memory cache for fetched metadata
 const clientMetadataCache = new Map<string, LinkMetadata>();
 
+function isValidPreviewImage(image: string | null | undefined): boolean {
+  if (!image || typeof image !== "string") return false;
+  const trimmed = image.trim();
+  if (!trimmed || trimmed === "null" || trimmed === "undefined") return false;
+  if (trimmed.includes("google.com/s2/favicons")) return false;
+  return true;
+}
+
 export function useLinkPreview() {
   const context = useContext(LinkPreviewContext);
   return context;
@@ -49,6 +57,7 @@ export function LinkPreviewProvider({ children }: { children: ReactNode }) {
   const [mounted, setMounted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [imageError, setImageError] = useState(false);
   const [activePayload, setActivePayload] = useState<ShowPreviewPayload | null>(
     null,
   );
@@ -117,8 +126,12 @@ export function LinkPreviewProvider({ children }: { children: ReactNode }) {
       );
       if (res.ok) {
         const data = (await res.json()) as LinkMetadata;
-        clientMetadataCache.set(href, data);
-        setMetadata(data);
+        const cleanData: LinkMetadata = {
+          ...data,
+          image: isValidPreviewImage(data.image) ? data.image : null,
+        };
+        clientMetadataCache.set(href, cleanData);
+        setMetadata(cleanData);
       }
     } catch {
       // Graceful fallback
@@ -143,11 +156,12 @@ export function LinkPreviewProvider({ children }: { children: ReactNode }) {
           openTimerRef.current = null;
         }
         setActivePayload(payload);
-        setMetadata(
-          (payload.previewData as LinkMetadata) ||
-            clientMetadataCache.get(payload.href) ||
-            null,
-        );
+        setImageError(false);
+        const cached = clientMetadataCache.get(payload.href);
+        const initialMetadata = payload.previewData
+          ? ({ ...(cached || {}), ...payload.previewData } as LinkMetadata)
+          : cached || null;
+        setMetadata(initialMetadata);
         fetchMetadata(payload.href);
       } else {
         // Tooltip is not open -> open after short delay
@@ -155,11 +169,12 @@ export function LinkPreviewProvider({ children }: { children: ReactNode }) {
 
         openTimerRef.current = setTimeout(() => {
           setActivePayload(payload);
-          setMetadata(
-            (payload.previewData as LinkMetadata) ||
-              clientMetadataCache.get(payload.href) ||
-              null,
-          );
+          setImageError(false);
+          const cached = clientMetadataCache.get(payload.href);
+          const initialMetadata = payload.previewData
+            ? ({ ...(cached || {}), ...payload.previewData } as LinkMetadata)
+            : cached || null;
+          setMetadata(initialMetadata);
           setIsOpen(true);
           fetchMetadata(payload.href);
         }, 80);
@@ -191,6 +206,7 @@ export function LinkPreviewProvider({ children }: { children: ReactNode }) {
             setIsOpen(false);
             setActivePayload(null);
             setMetadata(null);
+            setImageError(false);
           },
         });
       } else {
@@ -198,6 +214,7 @@ export function LinkPreviewProvider({ children }: { children: ReactNode }) {
         setIsOpen(false);
         setActivePayload(null);
         setMetadata(null);
+        setImageError(false);
       }
     }, 150);
   }, []);
@@ -318,10 +335,6 @@ export function LinkPreviewProvider({ children }: { children: ReactNode }) {
     parsedHostname = activePayload?.href || "";
   }
 
-  const faviconUrl = parsedHostname
-    ? `https://www.google.com/s2/favicons?domain=${parsedHostname}&sz=64`
-    : null;
-
   return (
     <LinkPreviewContext.Provider value={{ showPreview, hidePreview }}>
       {children}
@@ -364,13 +377,10 @@ export function LinkPreviewProvider({ children }: { children: ReactNode }) {
 
             {loading && !metadata ? (
               /* Skeleton Loading State */
-              <div className="flex gap-3 items-center">
-                <div className="w-16 h-16 shrink-0 rounded-xl bg-bg-base-2 animate-pulse border border-stroke" />
-                <div className="flex flex-col gap-1.5 flex-1 min-w-0">
-                  <div className="w-4/5 h-3.5 rounded bg-bg-base-2 animate-pulse" />
-                  <div className="w-full h-2.5 rounded bg-bg-base-2 animate-pulse" />
-                  <div className="w-2/3 h-2.5 rounded bg-bg-base-2 animate-pulse" />
-                </div>
+              <div className="flex flex-col gap-1.5 flex-1 min-w-0 py-0.5">
+                <div className="w-4/5 h-3.5 rounded bg-bg-base-2 animate-pulse" />
+                <div className="w-full h-2.5 rounded bg-bg-base-2 animate-pulse" />
+                <div className="w-2/3 h-2.5 rounded bg-bg-base-2 animate-pulse" />
               </div>
             ) : metadata ? (
               /* Rich Metadata Card State - Clickable Link */
@@ -383,19 +393,14 @@ export function LinkPreviewProvider({ children }: { children: ReactNode }) {
               >
                 {/* Content Body */}
                 <div className="flex gap-3 items-start">
-                  {metadata.image ? (
+                  {metadata.image && !imageError ? (
                     <div className="relative w-16 h-16 sm:w-17 sm:h-17 shrink-0 rounded-xl overflow-hidden border border-stroke bg-bg-base-2 shadow-inner transition-colors">
                       {/* biome-ignore lint/performance/noImgElement: OpenGraph preview image */}
                       <img
                         src={metadata.image}
                         alt={metadata.title}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105"
-                        onError={(e) => {
-                          const target = e.currentTarget;
-                          if (faviconUrl && target.src !== faviconUrl) {
-                            target.src = faviconUrl;
-                          }
-                        }}
+                        onError={() => setImageError(true)}
                       />
                     </div>
                   ) : null}

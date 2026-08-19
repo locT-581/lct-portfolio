@@ -78,13 +78,10 @@ function extractMeta(html: string, targetUrl: string): LinkMetadata {
     }
   }
 
-  // Fallback to Google High-Res Favicon service if no OG image
-  const fallbackFavicon = `https://www.google.com/s2/favicons?domain=${parsedUrl.hostname}&sz=128`;
-
   return {
     title: title.trim() || hostname,
     description: description.trim(),
-    image: image.trim() || fallbackFavicon,
+    image: image.trim() || null,
     siteName: siteName.trim() || hostname,
     hostname,
     url: targetUrl,
@@ -146,7 +143,7 @@ export async function GET(request: NextRequest) {
       const fallbackData: LinkMetadata = {
         title: hostname,
         description: "",
-        image: `https://www.google.com/s2/favicons?domain=${validUrl.hostname}&sz=128`,
+        image: null,
         siteName: hostname,
         hostname,
         url: targetUrl,
@@ -170,7 +167,7 @@ export async function GET(request: NextRequest) {
     const fallbackData: LinkMetadata = {
       title: hostname,
       description: "",
-      image: `https://www.google.com/s2/favicons?domain=${validUrl.hostname}&sz=128`,
+      image: null,
       siteName: hostname,
       hostname,
       url: targetUrl,

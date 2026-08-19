@@ -5,6 +5,7 @@ import {
   CaseStudyHero,
   CaseStudyMedia,
   CaseStudyNavigation,
+  EngineeringMetrics,
 } from "@/components/portfolio";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { PortableText } from "@/components/ui/PortableText";
@@ -60,6 +61,7 @@ export default async function CaseStudyDetailPage({
     getProjectBySlug({ slug, locale }).catch(() => null),
     getProjects({ locale }).catch(() => []),
   ]);
+  console.log("🚀 ~ CaseStudyDetailPage ~ project:", project);
 
   if (!project) {
     notFound();
@@ -90,6 +92,20 @@ export default async function CaseStudyDetailPage({
     techStack: tProjects("techStack"),
   };
 
+  const metricsLabels = {
+    engineeringMetricsTitle: tProjects("engineeringMetricsTitle"),
+    engineeringMetricsSubtitle: tProjects("engineeringMetricsSubtitle"),
+    verifiedAudit: tProjects("verifiedAudit"),
+    inspectAudit: tProjects("inspectAudit"),
+    viewLighthouseReport: tProjects("viewLighthouseReport"),
+    testOnPageSpeed: tProjects("testOnPageSpeed"),
+    lighthouseScoreLabel: tProjects("lighthouseScoreLabel"),
+    lcpLabel: tProjects("lcpLabel"),
+    clsLabel: tProjects("clsLabel"),
+    ttfbLabel: tProjects("ttfbLabel"),
+    close: tProjects("close"),
+  };
+
   const navLabels = {
     previousProject: tProjects("previousProject"),
     nextProject: tProjects("nextProject"),
@@ -117,6 +133,14 @@ export default async function CaseStudyDetailPage({
           <CaseStudyMedia media={project.media.slice(1)} />
         )}
       </section>
+
+      {/* Engineering Metrics Section (if available on project) */}
+      {project.engineeringMetrics && (
+        <EngineeringMetrics
+          metrics={project.engineeringMetrics}
+          labels={metricsLabels}
+        />
+      )}
 
       {/* Bottom Project Navigation & CTA */}
       <CaseStudyNavigation

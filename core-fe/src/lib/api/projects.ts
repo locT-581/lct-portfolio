@@ -34,6 +34,56 @@ interface EmdashProjectItem {
     role?: string;
     team_size?: string;
     gallery?: unknown;
+    lighthouse_score?: number | null;
+    metric_lcp?: string | null;
+    metric_cls?: string | null;
+    metric_ttfb?: string | null;
+    lighthouse_report_file?: unknown;
+    audit_metadata?: unknown;
+  };
+}
+
+function parseEngineeringMetrics(
+  data: EmdashProjectItem["data"],
+): Project["engineeringMetrics"] {
+  const hasMetrics =
+    (data.lighthouse_score !== undefined && data.lighthouse_score !== null) ||
+    Boolean(data.metric_lcp) ||
+    Boolean(data.metric_cls) ||
+    Boolean(data.metric_ttfb) ||
+    Boolean(data.lighthouse_report_file);
+
+  if (!hasMetrics) return null;
+
+  const reportFileUrl =
+    extractMediaUrl(data.lighthouse_report_file) ||
+    (typeof data.lighthouse_report_file === "string"
+      ? data.lighthouse_report_file
+      : null);
+
+  let metadata = null;
+  if (typeof data.audit_metadata === "object" && data.audit_metadata !== null) {
+    metadata = data.audit_metadata as Project["engineeringMetrics"] extends {
+      metadata?: infer M;
+    }
+      ? M
+      : never;
+  } else if (typeof data.audit_metadata === "string") {
+    try {
+      metadata = JSON.parse(data.audit_metadata);
+    } catch {
+      metadata = null;
+    }
+  }
+
+  return {
+    lighthouseScore:
+      data.lighthouse_score != null ? Number(data.lighthouse_score) : null,
+    lcp: data.metric_lcp || null,
+    cls: data.metric_cls || null,
+    ttfb: data.metric_ttfb || null,
+    reportFileUrl: reportFileUrl || null,
+    metadata,
   };
 }
 
@@ -153,6 +203,7 @@ export async function getProjects({
           techStack: item.data.technologies || [],
           githubUrl: item.data.github_url || null,
           liveUrl: item.data.live_demo_url || null,
+          engineeringMetrics: parseEngineeringMetrics(item.data),
         };
       });
     }
@@ -221,6 +272,7 @@ export async function getProjectBySlug({
           techStack: item.data.technologies || [],
           githubUrl: item.data.github_url || null,
           liveUrl: item.data.live_demo_url || null,
+          engineeringMetrics: parseEngineeringMetrics(item.data),
           description:
             extractPortableText(item.data.full_description) ||
             item.data.short_description ||

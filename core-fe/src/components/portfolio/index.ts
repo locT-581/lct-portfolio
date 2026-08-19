@@ -6,6 +6,8 @@ export type { CaseStudyMediaProps } from "./CaseStudyMedia";
 export { CaseStudyMedia } from "./CaseStudyMedia";
 export type { CaseStudyNavigationProps } from "./CaseStudyNavigation";
 export { CaseStudyNavigation } from "./CaseStudyNavigation";
+export type { EngineeringMetricsProps } from "./EngineeringMetrics";
+export { EngineeringMetrics } from "./EngineeringMetrics";
 export type { PortfolioGridProps } from "./PortfolioGrid";
 export { PortfolioGrid } from "./PortfolioGrid";
 export type { ProjectCardProps } from "./ProjectCard";

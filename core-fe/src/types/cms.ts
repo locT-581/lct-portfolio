@@ -6,6 +6,30 @@ export interface ProjectType {
   orderIndex?: number;
 }
 
+export interface AuditMetadata {
+  device?: string;
+  network?: string;
+  engine?: string;
+  testedAt?: string;
+  location?: string;
+  scores?: {
+    performance?: number;
+    accessibility?: number;
+    bestPractices?: number;
+    seo?: number;
+  };
+  [key: string]: unknown;
+}
+
+export interface EngineeringMetrics {
+  lighthouseScore?: number | null;
+  lcp?: string | null;
+  cls?: string | null;
+  ttfb?: string | null;
+  reportFileUrl?: string | null;
+  metadata?: AuditMetadata | null;
+}
+
 export interface Project {
   id: string;
   slug: string;
@@ -22,6 +46,7 @@ export interface Project {
   techStack?: string[];
   githubUrl?: string | null;
   liveUrl?: string | null;
+  engineeringMetrics?: EngineeringMetrics | null;
 }
 
 export interface ProjectMediaItem {

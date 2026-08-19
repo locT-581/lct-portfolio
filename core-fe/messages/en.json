@@ -109,7 +109,18 @@
     "allProjects": "All Projects",
     "ctaTitle": "Have a project in mind?",
     "ctaDescription": "Let's collaborate to build fast, scalable, and beautifully crafted digital products.",
-    "ctaButton": "Let's Talk"
+    "ctaButton": "Let's Talk",
+    "engineeringMetricsTitle": "Engineering & Web Performance",
+    "engineeringMetricsSubtitle": "Audited Core Web Vitals and technical performance benchmarks",
+    "verifiedAudit": "Verified Audit",
+    "inspectAudit": "Inspect Audit Details",
+    "viewLighthouseReport": "View Official Lighthouse Report",
+    "testOnPageSpeed": "Run Live PageSpeed Test",
+    "lighthouseScoreLabel": "Google Lighthouse Score",
+    "lcpLabel": "Largest Contentful Paint (LCP)",
+    "clsLabel": "Cumulative Layout Shift (CLS)",
+    "ttfbLabel": "Global Edge TTFB",
+    "close": "Close"
   },
   "blog": {
     "pageTitle": "Articles & Insights",

@@ -28,7 +28,7 @@ export function CaseStudyMedia({ media, className = "" }: CaseStudyMediaProps) {
             key={`${item.url}-${index}`}
             className="flex flex-col gap-3 group w-full"
           >
-            <div className="relative w-full aspect-[16/10] bg-bg-base-2 border border-stroke rounded-xl overflow-hidden shadow-xs">
+            <div className="relative w-full aspect-16/10 bg-bg-base-2 border border-stroke rounded-xl overflow-hidden shadow-xs">
               <Image
                 src={item.url}
                 alt={item.caption || `Project screenshot ${index + 1}`}

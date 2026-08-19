@@ -1,0 +1,38 @@
+diff --git a/dist/media-allowlist-jUppPWFy.mjs b/dist/media-allowlist-jUppPWFy.mjs
+index 3f2a57fa0165008b31b20f693428e65ef60fc7b2..05b5776cb6b2d83a4b83858859baeff4e65b147f 100644
+--- a/dist/media-allowlist-jUppPWFy.mjs
++++ b/dist/media-allowlist-jUppPWFy.mjs
+@@ -10,7 +10,8 @@ const GLOBAL_UPLOAD_ALLOWLIST = [
+ 	"image/",
+ 	"video/",
+ 	"audio/",
+-	"application/pdf"
++	"application/pdf",
++	"application/json"
+ ];
+ /**
+ * Resolve the MIME allowlist for a specific field.
+diff --git a/src/api/handlers/media-allowlist.ts b/src/api/handlers/media-allowlist.ts
+index ca5cd4894669f0f4bec62032f036c399bd17379a..34310afe8c5d3f2e680d94ac8525773ef97df2c8 100644
+--- a/src/api/handlers/media-allowlist.ts
++++ b/src/api/handlers/media-allowlist.ts
+@@ -13,6 +13,7 @@ export const GLOBAL_UPLOAD_ALLOWLIST: readonly string[] = [
+ 	"video/",
+ 	"audio/",
+ 	"application/pdf",
++	"application/json",
+ ];
+ 
+ /**
+diff --git a/src/media/mime.ts b/src/media/mime.ts
+index 495e9f62c5514b90d4c728cdf987f0d8cdb5cb9e..23ebefcf81499a929dde286669424ff0ba77b94b 100644
+--- a/src/media/mime.ts
++++ b/src/media/mime.ts
+@@ -17,6 +17,7 @@ export function matchesMimeAllowlist(mime: string, allowList: readonly string[])
+ }
+ 
+ export const EXTENSION_TO_MIME: Readonly<Record<string, string>> = {
++	".json": "application/json",
+ 	".pdf": "application/pdf",
+ 	".png": "image/png",
+ 	".jpg": "image/jpeg",

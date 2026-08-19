@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next"
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { notFound } from "next/navigation";
@@ -68,6 +69,7 @@ export default async function LocaleLayout({
         />
       </head>
       <body className="antialiased">
+        <Analytics />
         <NextIntlClientProvider messages={messages}>
           <QueryProvider>
             <LinkPreviewProvider>

@@ -1,9 +1,10 @@
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
+import { ProjectFlipProvider } from "@/components/providers/ProjectFlipProvider";
 import { QueryProvider } from "@/components/providers/QueryProvider";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
 import { Footer } from "@/components/ui/Footer";
@@ -74,16 +75,18 @@ export default async function LocaleLayout({
           <QueryProvider>
             <LinkPreviewProvider>
               <SmoothScrollProvider>
-                <div className="min-h-screen flex flex-col bg-bg-base-1 text-text-primary">
-                  <Header />
-                  <div className="flex-1 w-full max-w-300 mx-auto px-5 md:px-10 lg:px-20 py-8 md:py-12 flex flex-col min-[810px]:flex-row gap-10 md:gap-14 md:justify-center">
-                    <Navigation />
-                    <div className="flex-1 min-w-0 md:max-w-162.5">
-                      {children}
+                <ProjectFlipProvider>
+                  <div className="min-h-screen flex flex-col bg-bg-base-1 text-text-primary">
+                    <Header />
+                    <div className="flex-1 w-full max-w-300 mx-auto px-5 md:px-10 lg:px-20 py-8 md:py-12 flex flex-col min-[810px]:flex-row gap-10 md:gap-14 md:justify-center">
+                      <Navigation />
+                      <div className="flex-1 min-w-0 md:max-w-162.5">
+                        {children}
+                      </div>
                     </div>
+                    <Footer />
                   </div>
-                  <Footer />
-                </div>
+                </ProjectFlipProvider>
               </SmoothScrollProvider>
             </LinkPreviewProvider>
           </QueryProvider>

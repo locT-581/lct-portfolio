@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionTag } from "@/components/ui/SectionTag/SectionTag";
 import { cn } from "@/lib/utils";
 import type { Skill, SkillCategory } from "@/types/cms";
@@ -121,34 +120,84 @@ export function SkillsSection({
       className={cn("w-full flex flex-col gap-8 items-start", className)}
     >
       <SectionTag label={sectionLabel ?? t("sectionLabel")} />
+      {technicalCategories.length > 0 && (
+        <div className="skill-group-container w-full flex flex-col gap-5">
+          <div className="flex items-center gap-2.5 pb-2 border-b border-stroke">
+            <span className="text-body-s-medium uppercase tracking-wider text-brand-orange font-semibold">
+              01
+            </span>
+            <h3 className="text-text-primary text-body-m-medium font-semibold">
+              {t("technicalTitle")}
+            </h3>
+          </div>
 
-      <ScrollReveal
-        animation="fade-up"
-        selector=".skill-group-container"
-        stagger={0.15}
-        className="w-full flex flex-col gap-10"
-      >
-        {technicalCategories.length > 0 && (
-          <div className="skill-group-container w-full flex flex-col gap-5">
-            <div className="flex items-center gap-2.5 pb-2 border-b border-stroke">
-              <span className="text-body-s-medium uppercase tracking-wider text-brand-orange font-semibold">
-                01
-              </span>
-              <h3 className="text-text-primary text-body-m-medium font-semibold">
-                {t("technicalTitle")}
-              </h3>
-            </div>
+          <div className="w-full flex flex-col divide-y divide-stroke">
+            {technicalCategories.map((category) => (
+              <div
+                key={category.id || category.name}
+                className="py-4 flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6"
+              >
+                <span className="w-full sm:w-48 md:w-56 shrink-0 text-body-m-medium text-text-secondary font-medium">
+                  {category.name}
+                </span>
+                <div className="flex-1 flex flex-col gap-2.5">
+                  <div className="flex flex-wrap gap-2 items-center">
+                    {category.skills.map((skill) => (
+                      <TechPill
+                        key={skill.id || skill.name}
+                        name={skill.name}
+                        iconImage={skill.iconImage}
+                        iconImageDark={skill.iconImageDark}
+                        highlight={skill.isHighlight}
+                      />
+                    ))}
+                  </div>
+                  {category.description && (
+                    <p className="text-body-s-regular text-text-secondary bg-bg-base-2/50 border border-stroke/70 rounded-lg p-3 leading-relaxed">
+                      {category.description}
+                    </p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
 
-            <div className="w-full flex flex-col divide-y divide-stroke">
-              {technicalCategories.map((category) => (
-                <div
-                  key={category.id || category.name}
-                  className="py-4 flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6"
-                >
-                  <span className="w-full sm:w-48 md:w-56 shrink-0 text-body-m-medium text-text-secondary font-medium">
-                    {category.name}
-                  </span>
-                  <div className="flex-1 flex flex-col gap-2.5">
+      {softSkillCategories.length > 0 && (
+        <div className="skill-group-container w-full flex flex-col gap-5">
+          <div className="flex items-center gap-2.5 pb-2 border-b border-stroke">
+            <span className="text-body-s-medium uppercase tracking-wider text-brand-orange font-semibold">
+              02
+            </span>
+            <h3 className="text-text-primary text-body-m-medium font-semibold">
+              {t("softSkillsTitle")}
+            </h3>
+          </div>
+
+          <div className="w-full flex flex-col divide-y divide-stroke">
+            {softSkillCategories.map((category) => (
+              <div
+                key={category.id || category.name}
+                className="py-4 flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6"
+              >
+                <span className="w-full sm:w-48 md:w-56 shrink-0 text-body-m-medium text-text-secondary font-medium">
+                  {category.name}
+                </span>
+                <div className="flex-1 flex flex-col gap-2.5">
+                  {category.displayType === "bullet_list" ? (
+                    category.skills.map((skill) => (
+                      <div
+                        key={skill.id || skill.name}
+                        className="flex items-start gap-2.5 text-body-m-regular text-text-secondary"
+                      >
+                        <CheckDot />
+                        <span className="leading-relaxed">
+                          {skill.description || skill.name}
+                        </span>
+                      </div>
+                    ))
+                  ) : (
                     <div className="flex flex-wrap gap-2 items-center">
                       {category.skills.map((skill) => (
                         <TechPill
@@ -160,71 +209,13 @@ export function SkillsSection({
                         />
                       ))}
                     </div>
-                    {category.description && (
-                      <p className="text-body-s-regular text-text-secondary bg-bg-base-2/50 border border-stroke/70 rounded-lg p-3 leading-relaxed">
-                        {category.description}
-                      </p>
-                    )}
-                  </div>
+                  )}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        )}
-
-        {softSkillCategories.length > 0 && (
-          <div className="skill-group-container w-full flex flex-col gap-5">
-            <div className="flex items-center gap-2.5 pb-2 border-b border-stroke">
-              <span className="text-body-s-medium uppercase tracking-wider text-brand-orange font-semibold">
-                02
-              </span>
-              <h3 className="text-text-primary text-body-m-medium font-semibold">
-                {t("softSkillsTitle")}
-              </h3>
-            </div>
-
-            <div className="w-full flex flex-col divide-y divide-stroke">
-              {softSkillCategories.map((category) => (
-                <div
-                  key={category.id || category.name}
-                  className="py-4 flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6"
-                >
-                  <span className="w-full sm:w-48 md:w-56 shrink-0 text-body-m-medium text-text-secondary font-medium">
-                    {category.name}
-                  </span>
-                  <div className="flex-1 flex flex-col gap-2.5">
-                    {category.displayType === "bullet_list" ? (
-                      category.skills.map((skill) => (
-                        <div
-                          key={skill.id || skill.name}
-                          className="flex items-start gap-2.5 text-body-m-regular text-text-secondary"
-                        >
-                          <CheckDot />
-                          <span className="leading-relaxed">
-                            {skill.description || skill.name}
-                          </span>
-                        </div>
-                      ))
-                    ) : (
-                      <div className="flex flex-wrap gap-2 items-center">
-                        {category.skills.map((skill) => (
-                          <TechPill
-                            key={skill.id || skill.name}
-                            name={skill.name}
-                            iconImage={skill.iconImage}
-                            iconImageDark={skill.iconImageDark}
-                            highlight={skill.isHighlight}
-                          />
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </ScrollReveal>
+        </div>
+      )}
     </section>
   );
 }

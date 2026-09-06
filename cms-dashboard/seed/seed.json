@@ -1962,6 +1962,71 @@
         }
       },
       {
+        "id": "cert-meta-programming-javascript",
+        "slug": "cert-meta-programming-javascript",
+        "status": "published",
+        "locale": "en",
+        "data": {
+          "type": "certification",
+          "title": "Programming with JavaScript",
+          "organization": "Meta · Coursera",
+          "location": "Online",
+          "start_date": "2026",
+          "end_date": "2026",
+          "is_current": false,
+          "order_index": 1,
+          "credential_url": "https://www.coursera.org/account/accomplishments/verify/I9JVQ3COJPFG",
+          "company_url": "https://www.coursera.org/account/accomplishments/verify/I9JVQ3COJPFG",
+          "description": [
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Authorized by Meta and offered through Coursera. Verifies core skills in modern JavaScript, ES6+, DOM manipulation, object-oriented and functional programming, and automated unit testing with Jest.",
+                  "_key": "c3"
+                }
+              ],
+              "_key": "cb3"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cert-meta-programming-javascript-vi",
+        "slug": "cert-meta-programming-javascript",
+        "status": "published",
+        "locale": "vi",
+        "translationOf": "cert-meta-programming-javascript",
+        "data": {
+          "type": "certification",
+          "title": "Programming with JavaScript",
+          "organization": "Meta · Coursera",
+          "location": "Trực tuyến",
+          "start_date": "2026",
+          "end_date": "2026",
+          "is_current": false,
+          "order_index": 1,
+          "credential_url": "https://www.coursera.org/account/accomplishments/verify/I9JVQ3COJPFG",
+          "company_url": "https://www.coursera.org/account/accomplishments/verify/I9JVQ3COJPFG",
+          "description": [
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Chứng chỉ hoàn thành do Meta cấp qua Coursera. Xác thực kỹ năng chuyên sâu về JavaScript hiện đại, ES6+, thao tác DOM, lập trình hàm, lập trình hướng đối tượng và kiểm thử tự động với Jest.",
+                  "_key": "c4"
+                }
+              ],
+              "_key": "cb4"
+            }
+          ]
+        }
+      },
+      {
         "id": "cert-meta-intro-frontend",
         "slug": "cert-meta-intro-frontend",
         "status": "published",
@@ -1974,7 +2039,7 @@
           "start_date": "2024",
           "end_date": "2024",
           "is_current": false,
-          "order_index": 1,
+          "order_index": 2,
           "credential_url": "https://coursera.org/share/cdc6c6946e58b6ed30835d5634319a5f",
           "company_url": "https://coursera.org/share/cdc6c6946e58b6ed30835d5634319a5f",
           "description": [
@@ -2007,7 +2072,7 @@
           "start_date": "2024",
           "end_date": "2024",
           "is_current": false,
-          "order_index": 1,
+          "order_index": 2,
           "credential_url": "https://coursera.org/share/cdc6c6946e58b6ed30835d5634319a5f",
           "company_url": "https://coursera.org/share/cdc6c6946e58b6ed30835d5634319a5f",
           "description": [
@@ -2022,6 +2087,71 @@
                 }
               ],
               "_key": "cb2"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cert-ibm-intro-project-management",
+        "slug": "cert-ibm-intro-project-management",
+        "status": "published",
+        "locale": "en",
+        "data": {
+          "type": "certification",
+          "title": "Introduction to Project Management",
+          "organization": "IBM · Coursera",
+          "location": "Online",
+          "start_date": "2026",
+          "end_date": "2026",
+          "is_current": false,
+          "order_index": 3,
+          "credential_url": "https://www.coursera.org/account/accomplishments/verify/K8S6OUKSSVRE",
+          "company_url": "https://www.coursera.org/account/accomplishments/verify/K8S6OUKSSVRE",
+          "description": [
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Authorized by IBM and offered through Coursera. Verifies fundamental skills in project management concepts, project life cycle, stakeholder engagement, risk management, and agile methodology.",
+                  "_key": "c5"
+                }
+              ],
+              "_key": "cb5"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cert-ibm-intro-project-management-vi",
+        "slug": "cert-ibm-intro-project-management",
+        "status": "published",
+        "locale": "vi",
+        "translationOf": "cert-ibm-intro-project-management",
+        "data": {
+          "type": "certification",
+          "title": "Introduction to Project Management",
+          "organization": "IBM · Coursera",
+          "location": "Trực tuyến",
+          "start_date": "2026",
+          "end_date": "2026",
+          "is_current": false,
+          "order_index": 3,
+          "credential_url": "https://www.coursera.org/account/accomplishments/verify/K8S6OUKSSVRE",
+          "company_url": "https://www.coursera.org/account/accomplishments/verify/K8S6OUKSSVRE",
+          "description": [
+            {
+              "_type": "block",
+              "style": "normal",
+              "children": [
+                {
+                  "_type": "span",
+                  "text": "Chứng chỉ hoàn thành do IBM cấp qua Coursera. Xác thực kiến thức nền tảng về quản lý dự án, vòng đời phát triển dự án, quản lý các bên liên quan, quản trị rủi ro và phương pháp luận Agile.",
+                  "_key": "c6"
+                }
+              ],
+              "_key": "cb6"
             }
           ]
         }

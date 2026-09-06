@@ -682,7 +682,7 @@ export function PortableText({ value, className = "" }: PortableTextProps) {
             return (
               <p
                 key={key}
-                className="text-body-m-regular text-text-secondary leading-relaxed mb-4 last:mb-0"
+                className="text-body-m-regular text-text-secondary leading-relaxed mb-4 last:mb-0 line-clamp-3"
               >
                 {renderedChildren}
               </p>

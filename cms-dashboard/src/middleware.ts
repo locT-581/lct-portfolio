@@ -133,9 +133,7 @@ export const onRequest = defineMiddleware(async (context, next) => {
       try {
         const cloudflareEnv = env as unknown as {
           MEDIA?: {
-            get: (
-              key: string,
-            ) => Promise<{
+            get: (key: string) => Promise<{
               body: ReadableStream;
             } | null>;
           };

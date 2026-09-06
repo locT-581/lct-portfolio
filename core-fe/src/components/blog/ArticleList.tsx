@@ -1,5 +1,4 @@
 import { useTranslations } from "next-intl";
-import { ScrollReveal } from "@/components/ui/ScrollReveal/ScrollReveal";
 import { cn } from "@/lib/utils";
 import type { BlogPost } from "@/types/cms";
 import { ArticleCard } from "./ArticleCard";
@@ -58,15 +57,13 @@ export function ArticleList({
 
   return (
     <section aria-label={sectionLabel} className={cn("w-full", className)}>
-      <ScrollReveal animation="fade-up" stagger={0.08} selector="li">
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {sortedPosts.map((post) => (
-            <li key={post.id} className="flex">
-              <ArticleCard post={post} locale={locale} />
-            </li>
-          ))}
-        </ul>
-      </ScrollReveal>
+      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {sortedPosts.map((post) => (
+          <li key={post.id} className="flex">
+            <ArticleCard post={post} locale={locale} />
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

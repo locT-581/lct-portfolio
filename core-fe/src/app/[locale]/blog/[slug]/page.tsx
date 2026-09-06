@@ -3,10 +3,26 @@ import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ArticleDetailHeader, ArticleMultiRenderer } from "@/components/blog";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
-import { getBlogPostBySlug } from "@/lib/api/blog";
+import { getBlogPostBySlug, getBlogPosts } from "@/lib/api/blog";
 import { constructMetadata } from "@/lib/seo";
 
 export const revalidate = 3600;
+
+export async function generateStaticParams() {
+  const locales = ["en", "vi"];
+  const allParams: { locale: string; slug: string }[] = [];
+
+  for (const locale of locales) {
+    const posts = await getBlogPosts({ locale }).catch(() => []);
+    for (const post of posts) {
+      if (post.slug) {
+        allParams.push({ locale, slug: post.slug });
+      }
+    }
+  }
+
+  return allParams;
+}
 
 export async function generateMetadata({
   params,

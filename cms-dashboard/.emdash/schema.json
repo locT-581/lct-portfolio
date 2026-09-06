@@ -4,9 +4,7 @@
       "slug": "contact_submissions",
       "label": "Contact Submissions",
       "labelSingular": "Contact Submission",
-      "supports": [
-        "search"
-      ],
+      "supports": ["search"],
       "fields": [
         {
           "slug": "sender_name",
@@ -56,12 +54,7 @@
       "slug": "pages",
       "label": "Pages",
       "labelSingular": "Page",
-      "supports": [
-        "drafts",
-        "revisions",
-        "search",
-        "seo"
-      ],
+      "supports": ["drafts", "revisions", "search", "seo"],
       "fields": [
         {
           "slug": "title",
@@ -83,12 +76,7 @@
       "slug": "posts",
       "label": "Blog Posts",
       "labelSingular": "Blog Post",
-      "supports": [
-        "drafts",
-        "revisions",
-        "search",
-        "seo"
-      ],
+      "supports": ["drafts", "revisions", "search", "seo"],
       "fields": [
         {
           "slug": "title",
@@ -131,10 +119,7 @@
       "slug": "profiles",
       "label": "Profiles",
       "labelSingular": "Profile",
-      "supports": [
-        "revisions",
-        "seo"
-      ],
+      "supports": ["revisions", "seo"],
       "fields": [
         {
           "slug": "persona_title",
@@ -233,10 +218,7 @@
       "slug": "project_types",
       "label": "Project Types",
       "labelSingular": "Project Type",
-      "supports": [
-        "revisions",
-        "search"
-      ],
+      "supports": ["revisions", "search"],
       "fields": [
         {
           "slug": "name",
@@ -265,12 +247,7 @@
       "slug": "projects",
       "label": "Projects",
       "labelSingular": "Project",
-      "supports": [
-        "drafts",
-        "revisions",
-        "search",
-        "seo"
-      ],
+      "supports": ["drafts", "revisions", "search", "seo"],
       "fields": [
         {
           "slug": "title",
@@ -307,13 +284,7 @@
           "required": false,
           "unique": false,
           "validation": {
-            "options": [
-              "full-stack",
-              "frontend",
-              "backend",
-              "mobile",
-              "devops"
-            ]
+            "options": ["full-stack", "frontend", "backend", "mobile", "devops"]
           },
           "widget": "",
           "options": {
@@ -396,10 +367,7 @@
       "slug": "skill_categories",
       "label": "Skill Categories",
       "labelSingular": "Skill Category",
-      "supports": [
-        "revisions",
-        "search"
-      ],
+      "supports": ["revisions", "search"],
       "fields": [
         {
           "slug": "name",
@@ -466,10 +434,7 @@
       "slug": "skills",
       "label": "Skills & Competencies",
       "labelSingular": "Skill Item",
-      "supports": [
-        "revisions",
-        "search"
-      ],
+      "supports": ["revisions", "search"],
       "fields": [
         {
           "slug": "name",
@@ -580,9 +545,7 @@
       "slug": "social_links",
       "label": "Social Links",
       "labelSingular": "Social Link",
-      "supports": [
-        "revisions"
-      ],
+      "supports": ["revisions"],
       "fields": [
         {
           "slug": "platform_name",
@@ -618,10 +581,7 @@
       "slug": "timeline_items",
       "label": "Timeline Items",
       "labelSingular": "Timeline Item",
-      "supports": [
-        "revisions",
-        "search"
-      ],
+      "supports": ["revisions", "search"],
       "fields": [
         {
           "slug": "type",

@@ -40,7 +40,16 @@ export interface Post {
   title: string;
   excerpt?: string;
   content?: PortableTextBlock[];
-  cover_image?: { id: string; src?: string; alt?: string; width?: number; height?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> };
+  cover_image?: {
+    id: string;
+    src?: string;
+    alt?: string;
+    width?: number;
+    height?: number;
+    provider?: string;
+    previewUrl?: string;
+    meta?: Record<string, unknown>;
+  };
   reading_time_min?: number;
   createdAt: Date;
   updatedAt: Date;
@@ -59,8 +68,25 @@ export interface Profile {
   tagline?: string;
   target_audience?: string;
   bio?: PortableTextBlock[];
-  avatar?: { id: string; src?: string; alt?: string; width?: number; height?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> };
-  resume_file?: { id: string; src?: string; filename?: string; mimeType?: string; size?: number; provider?: string; meta?: Record<string, unknown> };
+  avatar?: {
+    id: string;
+    src?: string;
+    alt?: string;
+    width?: number;
+    height?: number;
+    provider?: string;
+    previewUrl?: string;
+    meta?: Record<string, unknown>;
+  };
+  resume_file?: {
+    id: string;
+    src?: string;
+    filename?: string;
+    mimeType?: string;
+    size?: number;
+    provider?: string;
+    meta?: Record<string, unknown>;
+  };
   resume_url?: string;
   location?: string;
   is_open_to_work?: boolean;
@@ -94,7 +120,16 @@ export interface Project {
   title: string;
   short_description?: string;
   full_description?: PortableTextBlock[];
-  thumbnail?: { id: string; src?: string; alt?: string; width?: number; height?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> };
+  thumbnail?: {
+    id: string;
+    src?: string;
+    alt?: string;
+    width?: number;
+    height?: number;
+    provider?: string;
+    previewUrl?: string;
+    meta?: Record<string, unknown>;
+  };
   project_type?: "full-stack" | "frontend" | "backend" | "mobile" | "devops";
   working_period?: string;
   client_name?: string;
@@ -132,8 +167,26 @@ export interface Skill {
   status: string;
   name: string;
   category: string;
-  icon_image?: { id: string; src?: string; alt?: string; width?: number; height?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> };
-  icon_image_dark?: { id: string; src?: string; alt?: string; width?: number; height?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> };
+  icon_image?: {
+    id: string;
+    src?: string;
+    alt?: string;
+    width?: number;
+    height?: number;
+    provider?: string;
+    previewUrl?: string;
+    meta?: Record<string, unknown>;
+  };
+  icon_image_dark?: {
+    id: string;
+    src?: string;
+    alt?: string;
+    width?: number;
+    height?: number;
+    provider?: string;
+    previewUrl?: string;
+    meta?: Record<string, unknown>;
+  };
   icon_name?: string;
   description?: string;
   is_highlight?: boolean;

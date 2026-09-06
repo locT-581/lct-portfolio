@@ -1,7 +1,6 @@
 import Image from "next/image";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { PortableText } from "@/components/ui/PortableText";
-import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SocialLink } from "@/components/ui/SocialLink";
 import { cn } from "@/lib/utils";
 import type { ProfileIntro, SocialLinkItem } from "@/types/cms";
@@ -63,75 +62,65 @@ export function HeroSection({
       className={cn("w-full flex flex-col gap-8 items-start", className)}
     >
       <Breadcrumbs />
-
-      <ScrollReveal
-        animation="fade-up"
-        className="w-full flex flex-col gap-6 items-start"
-      >
-        <div className="w-full flex flex-col gap-8 items-start">
-          {/* Profile Container */}
-          <div className="flex flex-row gap-6 items-center">
-            <div className="relative shrink-0 overflow-hidden rounded-xl border border-stroke w-19.5 h-19.5 bg-bg-base-2">
-              <Image
-                src={avatarUrl}
-                alt={name}
-                width={78}
-                height={78}
-                priority
-                className="w-19.5 h-19.5 object-cover"
-              />
-            </div>
-
-            <div className="flex flex-col justify-center gap-3">
-              <h1 className="text-h2 font-semibold text-text-primary">
-                {name}
-              </h1>
-
-              <div className="flex items-center gap-1 flex-wrap">
-                {socialLinks.map((link) => (
-                  <SocialLink
-                    key={`${link.platform}-${link.url}`}
-                    platform={link.platform}
-                    href={link.url}
-                    label={link.label}
-                    iconOnly
-                  />
-                ))}
-              </div>
-            </div>
+      <div className="w-full flex flex-col gap-8 items-start">
+        {/* Profile Container */}
+        <div className="flex flex-row gap-6 items-center">
+          <div className="relative shrink-0 overflow-hidden rounded-xl border border-stroke w-19.5 h-19.5 bg-bg-base-2">
+            <Image
+              src={avatarUrl}
+              alt={name}
+              width={78}
+              height={78}
+              priority
+              className="w-19.5 h-19.5 object-cover"
+            />
           </div>
 
-          {/* Introduction container */}
-          <div className="w-full flex flex-col gap-2">
-            {headline && (
-              <p className="text-text-primary text-body-m-medium font-medium">
-                {headline}
-              </p>
-            )}
+          <div className="flex flex-col justify-center gap-3">
+            <h1 className="text-h2 font-semibold text-text-primary">{name}</h1>
 
-            <div className="text-text-secondary text-body-m-regular leading-normal sm:leading-relaxed whitespace-pre-line">
-              {bioRaw ? <PortableText value={bioRaw} /> : <p>{bio}</p>}
+            <div className="flex items-center gap-1 flex-wrap">
+              {socialLinks.map((link) => (
+                <SocialLink
+                  key={`${link.platform}-${link.url}`}
+                  platform={link.platform}
+                  href={link.url}
+                  label={link.label}
+                  iconOnly
+                />
+              ))}
             </div>
           </div>
         </div>
 
-        {/* Download Button */}
-        {resumeUrl && (
-          <a
-            href={resumeUrl}
-            download
-            target={resumeUrl.startsWith("http") ? "_blank" : undefined}
-            rel={
-              resumeUrl.startsWith("http") ? "noopener noreferrer" : undefined
-            }
-            aria-label="Resume download button"
-            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg border border-stroke bg-bg-base-1 hover:bg-bg-base-2 text-text-primary text-body-s-medium font-medium transition-colors focus-visible:outline-2 focus-visible:outline-brand-orange"
-          >
-            <DownloadIcon className="w-4.5 h-4.5" />
-            <span>{resumeLabel}</span>
-          </a>
-        )}
-      </ScrollReveal>
+        {/* Introduction container */}
+        <div className="w-full flex flex-col gap-2">
+          {headline && (
+            <p className="text-text-primary text-body-m-medium font-medium">
+              {headline}
+            </p>
+          )}
+
+          <div className="text-text-secondary text-body-m-regular leading-normal sm:leading-relaxed whitespace-pre-line">
+            {bioRaw ? <PortableText value={bioRaw} /> : <p>{bio}</p>}
+          </div>
+        </div>
+      </div>
+
+      {/* Download Button */}
+      {resumeUrl && (
+        <a
+          href={resumeUrl}
+          download
+          target={resumeUrl.startsWith("http") ? "_blank" : undefined}
+          rel={resumeUrl.startsWith("http") ? "noopener noreferrer" : undefined}
+          aria-label="Resume download button"
+          className="inline-flex items-center gap-2 px-5 py-3 rounded-lg border border-stroke bg-bg-base-1 hover:bg-bg-base-2 text-text-primary text-body-s-medium font-medium transition-colors focus-visible:outline-2 focus-visible:outline-brand-orange"
+        >
+          <DownloadIcon className="w-4.5 h-4.5" />
+          <span>{resumeLabel}</span>
+        </a>
+      )}
     </section>
   );
 }

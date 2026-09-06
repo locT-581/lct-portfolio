@@ -14,6 +14,22 @@ import { constructMetadata } from "@/lib/seo";
 
 export const revalidate = 3600;
 
+export async function generateStaticParams() {
+  const locales = ["en", "vi"];
+  const allParams: { locale: string; slug: string }[] = [];
+
+  for (const locale of locales) {
+    const projects = await getProjects({ locale }).catch(() => []);
+    for (const project of projects) {
+      if (project.slug) {
+        allParams.push({ locale, slug: project.slug });
+      }
+    }
+  }
+
+  return allParams;
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -61,7 +77,6 @@ export default async function CaseStudyDetailPage({
     getProjectBySlug({ slug, locale }).catch(() => null),
     getProjects({ locale }).catch(() => []),
   ]);
-  console.log("🚀 ~ CaseStudyDetailPage ~ project:", project);
 
   if (!project) {
     notFound();

@@ -2,7 +2,6 @@
 
 import { useTranslations } from "next-intl";
 import { MagicBento } from "@/components/ui/MagicBento";
-import { ScrollReveal } from "@/components/ui/ScrollReveal/ScrollReveal";
 import { cn } from "@/lib/utils";
 import type { Project } from "@/types/cms";
 import { ProjectCard } from "./ProjectCard";
@@ -64,18 +63,15 @@ export function PortfolioGrid({
         className="w-full p-0! max-w-none!"
         gridClassName="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-10 w-full"
       >
-        <ScrollReveal
-          animation="fade-up"
-          stagger={0.08}
-          selector=".project-item"
-          className="contents"
-        >
-          {projects.map((project) => (
-            <div key={project.id} className="project-item w-full">
-              <ProjectCard project={project} glowColor={glowColor} />
-            </div>
-          ))}
-        </ScrollReveal>
+        {projects.map((project, index) => (
+          <div key={project.id} className="project-item w-full">
+            <ProjectCard
+              project={project}
+              glowColor={glowColor}
+              priority={index < 4}
+            />
+          </div>
+        ))}
       </MagicBento>
     </section>
   );

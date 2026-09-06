@@ -1,7 +1,6 @@
 import { BorderGlow } from "@/components/ui/BorderGlow";
 import { LinkPreview } from "@/components/ui/LinkPreview";
 import { PortableText } from "@/components/ui/PortableText";
-import { ScrollReveal } from "@/components/ui/ScrollReveal";
 import { SectionTag } from "@/components/ui/SectionTag/SectionTag";
 import { cn } from "@/lib/utils";
 import type { CertificationEntry } from "@/types/cms";
@@ -87,17 +86,11 @@ export function CertificatesSection({
       className={cn("w-full flex flex-col gap-8 items-start", className)}
     >
       <SectionTag label={sectionLabel} />
-
-      <ScrollReveal
-        animation="fade-up"
-        selector=".cert-card"
-        stagger={0.12}
-        className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4"
-      >
+      <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-4">
         {entries.map((cert) => (
           <BorderGlow
             key={cert.id || cert.title}
-            className="cert-card group border-stroke transition-all duration-200 shadow-xs hover:border-stroke-orange/40"
+            className="cert-card group border-stroke transition-all duration-200 shadow-xs hover:border-stroke-orange/40 h-full"
             backgroundColor="var(--bg-base-1)"
             borderRadius={12}
             glowRadius={28}
@@ -151,7 +144,7 @@ export function CertificatesSection({
             </div>
           </BorderGlow>
         ))}
-      </ScrollReveal>
+      </div>
     </section>
   );
 }

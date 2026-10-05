@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { getBlogPostBySlug } from "@/lib/api/blog";
 
-export const alt = "Blog Post | Loc Tran";
+export const alt = "Blog Post | LocT";
 export const size = {
   width: 1200,
   height: 630,
@@ -55,7 +55,7 @@ export default async function Image({
             color: "#38bdf8",
           }}
         >
-          Loc Tran
+          LocT
         </div>
         <div style={{ fontSize: 24, color: "#64748b" }}>/</div>
         <div style={{ fontSize: 24, color: "#94a3b8" }}>Blog</div>

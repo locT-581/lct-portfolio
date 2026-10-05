@@ -37,7 +37,7 @@ export function constructMetadata({
     url: `${getSiteUrl()}/og-default.png`,
     width: 1200,
     height: 630,
-    alt: title || "Loc Tran Portfolio",
+    alt: title || "LocT Portfolio",
   };
 
   const images =

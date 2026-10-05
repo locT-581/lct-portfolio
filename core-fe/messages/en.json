@@ -6,11 +6,10 @@
     "blog": "Blog",
     "howIWork": "How I work",
     "testimonials": "Testimonials",
-    "brandName": "Loc Tran"
+    "brandName": "LocT"
   },
   "footer": {
-    "brandName": "Copyseen by Somesquare",
-    "refundPolicy": "Refund Policy"
+    "brandName": "LocT"
   },
   "newsletter": {
     "title": "Newsletter",
@@ -33,7 +32,7 @@
     "blog": "Blog",
     "contact": "Contact",
     "portfolio": "Portfolio",
-    "brandName": "Copyseen"
+    "brandName": "LocT"
   },
   "contact": {
     "pageTitle": "Get in touch",
@@ -79,6 +78,8 @@
   "home": {
     "ctaButtonLabel": "View Projects",
     "downloadResume": "Download resume",
+    "selectResumeRole": "Select targeted resume",
+    "primaryResume": "Primary",
     "experiences": "Experiences",
     "skills": "Skills",
     "certifications": "Certifications",
@@ -153,10 +154,5 @@
       "work-debugging": "Debugging mindset, attention to detail, autonomous working & effective communication.",
       "work-adaptation-english": "Rapid adaptation to emerging technologies. Strong comprehension of technical English documentation."
     }
-  },
-  "refundPolicy": {
-    "pageTitle": "Refund Policy",
-    "pageDescription": "Learn about our refund policies and eligibility terms.",
-    "sectionLabel": "Legal"
   }
 }

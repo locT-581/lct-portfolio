@@ -154,6 +154,16 @@ export interface SocialLinkItem {
   label: string;
 }
 
+export interface ResumeItem {
+  id: string;
+  slug: string;
+  title: string;
+  roleBadge?: string | null;
+  url: string;
+  isPrimary?: boolean;
+  orderIndex?: number;
+}
+
 export interface ProfileIntro {
   avatarUrl: string;
   name: string;
@@ -162,6 +172,7 @@ export interface ProfileIntro {
   bio: string;
   bioRaw?: unknown;
   resumeUrl?: string | null;
+  resumes?: ResumeItem[];
 }
 
 export interface NewsletterSubscribePayload {

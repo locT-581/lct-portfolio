@@ -11,6 +11,7 @@ import {
   getSkillCategories,
   getSkills,
 } from "@/lib/api/about";
+import { getResumes } from "@/lib/api/resume";
 import { getProfileIntro, getSocialLinks } from "@/lib/api/social";
 import { constructMetadata } from "@/lib/seo";
 
@@ -40,6 +41,7 @@ export default async function HomePage({
 
   const [
     profile,
+    resumes,
     socialLinks,
     experienceEntries,
     certificationEntries,
@@ -48,6 +50,7 @@ export default async function HomePage({
     tHome,
   ] = await Promise.all([
     getProfileIntro({ locale }),
+    getResumes({ locale }),
     getSocialLinks({ locale }),
     getExperienceEntries({ locale }),
     getCertificationEntries({ locale }),
@@ -62,7 +65,10 @@ export default async function HomePage({
       <HeroSection
         profile={profile}
         socialLinks={socialLinks}
+        resumes={resumes}
         resumeLabel={tHome("downloadResume")}
+        selectRoleLabel={tHome("selectResumeRole")}
+        primaryBadgeLabel={tHome("primaryResume")}
       />
       <ExperienceSection
         entries={experienceEntries}

@@ -23,10 +23,10 @@ const geistSans = Geist({
 export const metadata: Metadata = {
   metadataBase: new URL(env.NEXT_PUBLIC_SITE_URL),
   title: {
-    template: "%s | Loc Tran",
-    default: "Loc Tran - Full Stack Engineer & Software Architect",
+    template: "%s | LocT",
+    default: "LocT - Full Stack Engineer & Software Architect",
   },
-  description: "Personal portfolio and blog of Loc Tran",
+  description: "Personal portfolio and blog of LocT",
 };
 
 export function generateStaticParams() {

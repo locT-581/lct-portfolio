@@ -1,6 +1,5 @@
 import { useTranslations } from "next-intl";
 import type { HTMLAttributes, ReactNode } from "react";
-import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 /**
@@ -30,7 +29,7 @@ export interface FooterLinkItem {
  */
 export interface FooterProps extends HTMLAttributes<HTMLElement> {
   /**
-   * Copyright prefix symbol. Defaults to "@".
+   * Copyright prefix symbol. Defaults to "©".
    */
   copyrightPrefix?: string;
   /**
@@ -38,21 +37,9 @@ export interface FooterProps extends HTMLAttributes<HTMLElement> {
    */
   year?: number | string;
   /**
-   * Brand name/attribution text. Defaults to "Copyseen by Somesquare".
+   * Brand name/attribution text. Defaults to localized name from footer.brandName.
    */
   brandName?: string;
-  /**
-   * Brand external link URL. Defaults to "https://somesquare.com".
-   */
-  brandHref?: string;
-  /**
-   * Label for the policy link. Defaults to "Refund Policy".
-   */
-  refundPolicyLabel?: string;
-  /**
-   * Path for the policy link. Defaults to "/refund-policy".
-   */
-  refundPolicyHref?: string;
   /**
    * Optional legacy list of links for custom override.
    */
@@ -68,21 +55,12 @@ export interface FooterProps extends HTMLAttributes<HTMLElement> {
 }
 
 /**
- * `<Footer>` responsive navigation footer component.
- *
- * Implements the Framer Footer design (Node: c8H11t9VG / DvHOcLavi):
- * - Max-width 800px content container with responsive horizontal/vertical stacks
- * - Left: `@2026 Copyseen by Somesquare` with external link to Somesquare
- * - Right: `Refund Policy` internal route link
- * - Breakpoints: Desktop (lg:px-50), Tablet (md:px-25), Mobile (px-5, vertical stack)
+ * `<Footer>` responsive navigation footer component displaying localized copyright text.
  */
 export function Footer({
-  copyrightPrefix = "@",
+  copyrightPrefix = "©",
   year,
   brandName,
-  brandHref = "https://somesquare.com",
-  refundPolicyLabel,
-  refundPolicyHref = "/refund-policy",
   links,
   children,
   className = "",
@@ -92,7 +70,6 @@ export function Footer({
 
   const currentYear = year ?? new Date().getFullYear();
   const displayBrandName = brandName ?? t("brandName");
-  const displayRefundPolicy = refundPolicyLabel ?? t("refundPolicy");
 
   const baseStyles =
     "w-full bg-bg-base-1 flex items-center justify-center text-footer text-text-secondary py-5 px-5 md:px-25 lg:px-50";
@@ -117,32 +94,13 @@ export function Footer({
             ))}
           </div>
         ) : (
-          <>
-            <div className="flex items-center text-footer text-text-secondary">
-              <span>{copyrightPrefix}</span>
-              <span>{currentYear}</span>
-              <span>&nbsp;</span>
-              <a
-                href={brandHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-footer text-text-secondary hover:text-text-primary transition-colors duration-200 rounded focus-visible:outline-2 focus-visible:outline-brand-orange"
-              >
-                {displayBrandName}
-              </a>
-            </div>
-
-            <div className="flex items-center">
-              <Link
-                href={refundPolicyHref}
-                className="text-footer text-text-secondary hover:text-text-primary transition-colors duration-200 rounded focus-visible:outline-2 focus-visible:outline-brand-orange"
-              >
-                {displayRefundPolicy}
-              </Link>
-            </div>
-          </>
+          <p className="text-footer text-text-secondary select-none">
+            {copyrightPrefix} {currentYear} {displayBrandName}
+          </p>
         )}
       </div>
     </footer>
   );
 }
+
+export default Footer;

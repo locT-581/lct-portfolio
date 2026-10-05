@@ -6,11 +6,10 @@
     "blog": "Bài viết",
     "howIWork": "Quy trình làm việc",
     "testimonials": "Đánh giá",
-    "brandName": "Lộc Trần"
+    "brandName": "LocT"
   },
   "footer": {
-    "brandName": "Copyseen by Somesquare",
-    "refundPolicy": "Refund Policy"
+    "brandName": "LocT"
   },
   "newsletter": {
     "title": "Bản tin",
@@ -33,7 +32,7 @@
     "blog": "Bài viết",
     "contact": "Liên hệ",
     "portfolio": "Dự án",
-    "brandName": "Copyseen"
+    "brandName": "LocT"
   },
   "contact": {
     "pageTitle": "Liên hệ",
@@ -79,6 +78,8 @@
   "home": {
     "ctaButtonLabel": "Xem dự án",
     "downloadResume": "Tải hồ sơ",
+    "selectResumeRole": "Chọn hồ sơ theo vị trí",
+    "primaryResume": "Mặc định",
     "experiences": "Kinh nghiệm",
     "skills": "Kỹ năng",
     "certifications": "Chứng chỉ",
@@ -153,10 +154,5 @@
       "work-debugging": "Tư duy gỡ lỗi (Debugging mindset), chú trọng chi tiết, làm việc độc lập & giao tiếp hiệu quả.",
       "work-adaptation-english": "Thích ứng cực nhanh với công nghệ mới. Đọc hiểu tốt tài liệu tiếng Anh chuyên ngành."
     }
-  },
-  "refundPolicy": {
-    "pageTitle": "Chính sách hoàn tiền",
-    "pageDescription": "Tìm hiểu về chính sách hoàn tiền và các điều khoản hợp lệ.",
-    "sectionLabel": "Pháp lý"
   }
 }

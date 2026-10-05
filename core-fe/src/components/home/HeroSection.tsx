@@ -1,9 +1,10 @@
 import Image from "next/image";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { PortableText } from "@/components/ui/PortableText";
+import { ResumeDropdown } from "@/components/ui/ResumeDropdown";
 import { SocialLink } from "@/components/ui/SocialLink";
 import { cn } from "@/lib/utils";
-import type { ProfileIntro, SocialLinkItem } from "@/types/cms";
+import type { ProfileIntro, ResumeItem, SocialLinkItem } from "@/types/cms";
 
 export interface HeroSectionProps {
   /**
@@ -15,33 +16,25 @@ export interface HeroSectionProps {
    */
   socialLinks: SocialLinkItem[];
   /**
+   * List of targeted resumes. If omitted or empty, falls back to profile.resumeUrl.
+   */
+  resumes?: ResumeItem[];
+  /**
    * Optional download resume button label.
    */
   resumeLabel?: string;
   /**
+   * Header label for dropdown menu.
+   */
+  selectRoleLabel?: string;
+  /**
+   * Badge label for primary resume.
+   */
+  primaryBadgeLabel?: string;
+  /**
    * Additional CSS class names.
    */
   className?: string;
-}
-
-function DownloadIcon({ className = "w-4.5 h-4.5" }: { className?: string }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.75"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-      <polyline points="7 10 12 15 17 10" />
-      <line x1="12" y1="15" x2="12" y2="3" />
-    </svg>
-  );
 }
 
 /**
@@ -51,10 +44,30 @@ function DownloadIcon({ className = "w-4.5 h-4.5" }: { className?: string }) {
 export function HeroSection({
   profile,
   socialLinks,
+  resumes = [],
   resumeLabel = "Download resume",
+  selectRoleLabel,
+  primaryBadgeLabel,
   className = "",
 }: HeroSectionProps) {
   const { avatarUrl, name, headline, bio, bioRaw, resumeUrl } = profile;
+
+  // Active resumes: prefer passed `resumes` list, fallback to `profile.resumeUrl` if available
+  const activeResumes: ResumeItem[] =
+    resumes.length > 0
+      ? resumes
+      : resumeUrl
+        ? [
+            {
+              id: "profile-resume",
+              slug: "default",
+              title: resumeLabel,
+              url: resumeUrl,
+              isPrimary: true,
+              orderIndex: 0,
+            },
+          ]
+        : [];
 
   return (
     <section
@@ -107,20 +120,13 @@ export function HeroSection({
         </div>
       </div>
 
-      {/* Download Button */}
-      {resumeUrl && (
-        <a
-          href={resumeUrl}
-          download
-          target={resumeUrl.startsWith("http") ? "_blank" : undefined}
-          rel={resumeUrl.startsWith("http") ? "noopener noreferrer" : undefined}
-          aria-label="Resume download button"
-          className="inline-flex items-center gap-2 px-5 py-3 rounded-lg border border-stroke bg-bg-base-1 hover:bg-bg-base-2 text-text-primary text-body-s-medium font-medium transition-colors focus-visible:outline-2 focus-visible:outline-brand-orange"
-        >
-          <DownloadIcon className="w-4.5 h-4.5" />
-          <span>{resumeLabel}</span>
-        </a>
-      )}
+      {/* Download Button / Multiple Resumes Dropdown */}
+      <ResumeDropdown
+        resumes={activeResumes}
+        label={resumeLabel}
+        selectRoleLabel={selectRoleLabel}
+        primaryBadgeLabel={primaryBadgeLabel}
+      />
     </section>
   );
 }

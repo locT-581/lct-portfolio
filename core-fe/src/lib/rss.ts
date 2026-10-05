@@ -5,7 +5,7 @@ export function generateRssFeed(posts: BlogPost[], siteUrl: string): string {
   const cleanSiteUrl = siteUrl.replace(/\/$/, "");
 
   const feed = new Feed({
-    title: "Loc Tran - Blog",
+    title: "LocT - Blog",
     description:
       "Articles and thoughts on software engineering, web development, and architecture.",
     id: cleanSiteUrl,
@@ -13,7 +13,7 @@ export function generateRssFeed(posts: BlogPost[], siteUrl: string): string {
     language: "vi",
     image: `${cleanSiteUrl}/favicon.ico`,
     favicon: `${cleanSiteUrl}/favicon.ico`,
-    copyright: `All rights reserved ${new Date().getFullYear()}, Loc Tran`,
+    copyright: `All rights reserved ${new Date().getFullYear()}, LocT`,
     updated:
       posts.length > 0 && posts[0]?.publishedAt
         ? new Date(posts[0].publishedAt)
@@ -22,7 +22,7 @@ export function generateRssFeed(posts: BlogPost[], siteUrl: string): string {
       rss2: `${cleanSiteUrl}/feed.xml`,
     },
     author: {
-      name: "Loc Tran",
+      name: "LocT",
       email: "contact@loct.dev",
       link: cleanSiteUrl,
     },

@@ -661,6 +661,56 @@
           "unique": false
         }
       ]
+    },
+    {
+      "slug": "resumes",
+      "label": "Resumes / CVs",
+      "labelSingular": "Resume / CV",
+      "supports": ["revisions"],
+      "fields": [
+        {
+          "slug": "title",
+          "label": "Job Title / Role Name",
+          "type": "string",
+          "required": true,
+          "unique": false
+        },
+        {
+          "slug": "role_badge",
+          "label": "Role Badge / Tags",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "resume_file",
+          "label": "Resume File (PDF/Doc)",
+          "type": "file",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "resume_url",
+          "label": "External URL (Fallback)",
+          "type": "string",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "is_primary",
+          "label": "Is Primary Resume",
+          "type": "boolean",
+          "required": false,
+          "unique": false
+        },
+        {
+          "slug": "order_index",
+          "label": "Display Order",
+          "type": "integer",
+          "required": false,
+          "unique": false
+        }
+      ]
     }
   ],
   "version": "92116823dd3927e7"

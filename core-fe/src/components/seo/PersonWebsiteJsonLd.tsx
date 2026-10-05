@@ -9,7 +9,7 @@ export function PersonWebsiteJsonLd() {
       {
         "@type": "Person",
         "@id": `${siteUrl}/#person`,
-        name: "Loc Tran",
+        name: "LocT",
         jobTitle: "Full Stack Engineer & Software Architect",
         url: siteUrl,
         sameAs: ["https://github.com/locT-581"],
@@ -18,7 +18,7 @@ export function PersonWebsiteJsonLd() {
         "@type": "WebSite",
         "@id": `${siteUrl}/#website`,
         url: siteUrl,
-        name: "Loc Tran - Portfolio",
+        name: "LocT - Portfolio",
         publisher: {
           "@id": `${siteUrl}/#person`,
         },

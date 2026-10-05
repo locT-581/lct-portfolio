@@ -1,4 +1,5 @@
 import { HTTPError } from "ky";
+import { extractMediaUrl } from "@/lib/api/about";
 import { extractPortableText } from "@/lib/utils";
 import type { ProfileIntro, SocialLinkItem } from "@/types/cms";
 import { client, type EmdashApiResponse } from "./_client";
@@ -12,7 +13,7 @@ interface EmdashProfileItem {
     headline?: string;
     tagline?: string;
     bio?: unknown;
-    avatar?: { url?: string; previewUrl?: string } | null;
+    avatar?: unknown;
     resume_url?: string | null;
     resume_file?: { url?: string } | null;
     location?: string;
@@ -98,8 +99,13 @@ export async function getProfileIntro({
         extractPortableText(profile.data.bio) || profile.data.tagline || "";
 
       const avatarUrl =
-        profile.data.avatar?.url ||
-        profile.data.avatar?.previewUrl ||
+        extractMediaUrl(profile.data.avatar) ||
+        (typeof profile.data.avatar === "object" && profile.data.avatar !== null
+          ? (profile.data.avatar as { url?: string; previewUrl?: string })
+              .url ||
+            (profile.data.avatar as { url?: string; previewUrl?: string })
+              .previewUrl
+          : null) ||
         "/assets/avatar.png";
 
       return {

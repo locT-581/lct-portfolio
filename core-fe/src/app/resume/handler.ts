@@ -6,8 +6,8 @@ export async function handleResumeRequest(request: NextRequest, slug?: string) {
   // 1. Look up target resume by slug (or get primary if slug is empty)
   let resume = await getResumeBySlug(slug);
 
-  // 2. Fallback to profile.resumeUrl if no specific resume was found
-  if (!resume || !resume.url) {
+  // 2. Only fallback to profile.resumeUrl if no specific slug was requested
+  if (!slug && (!resume || !resume.url)) {
     const profile = await getProfileIntro({ locale: "en" }).catch(() => null);
     if (profile?.resumeUrl) {
       resume = {
@@ -23,15 +23,29 @@ export async function handleResumeRequest(request: NextRequest, slug?: string) {
 
   // 3. Not found
   if (!resume || !resume.url) {
-    return new NextResponse("Resume not found", {
-      status: 404,
-      headers: { "Content-Type": "text/plain; charset=utf-8" },
-    });
+    return new NextResponse(
+      `Resume not found for "${slug || "default"}". Please configure this role in EmDash CMS.`,
+      {
+        status: 404,
+        headers: { "Content-Type": "text/plain; charset=utf-8" },
+      },
+    );
   }
 
   const targetUrl = resume.url;
 
-  // 4. Build absolute URL if relative
+  // 4. Handle placeholder example.com URLs gracefully
+  if (targetUrl.includes("example.com")) {
+    return new NextResponse(
+      `Resume "${resume.title}" (${resume.slug}) is currently using placeholder data: ${targetUrl}.\nPlease upload your actual PDF resume file in EmDash CMS.`,
+      {
+        status: 200,
+        headers: { "Content-Type": "text/plain; charset=utf-8" },
+      },
+    );
+  }
+
+  // 5. Build absolute URL if relative
   const absoluteUrl =
     targetUrl.startsWith("http://") || targetUrl.startsWith("https://")
       ? targetUrl

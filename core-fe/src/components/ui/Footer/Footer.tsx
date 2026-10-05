@@ -76,11 +76,11 @@ export function Footer({
 
   return (
     <footer className={cn(baseStyles, className)} {...props}>
-      <div className="w-full max-w-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 md:gap-1">
+      <div className="w-full max-w-200 flex items-center justify-end">
         {children ? (
           children
         ) : links ? (
-          <div className="flex flex-wrap items-center gap-4 md:gap-6">
+          <div className="flex flex-wrap items-center justify-end gap-4 md:gap-6">
             {links.map((link) => (
               <a
                 key={link.href + link.label}
@@ -94,7 +94,7 @@ export function Footer({
             ))}
           </div>
         ) : (
-          <p className="text-footer text-text-secondary select-none">
+          <p className="text-footer text-text-secondary select-none text-right">
             {copyrightPrefix} {currentYear} {displayBrandName}
           </p>
         )}

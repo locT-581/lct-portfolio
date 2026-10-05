@@ -90,8 +90,7 @@ export async function getResumeBySlug(
   const normalized = slug.trim().toLowerCase();
   return (
     resumes.find((r) => r.slug.toLowerCase() === normalized) ||
-    resumes.find((r) => r.id === slug) ||
-    resumes.find((r) => r.isPrimary) ||
-    resumes[0]
+    resumes.find((r) => r.id.toLowerCase() === normalized) ||
+    null
   );
 }

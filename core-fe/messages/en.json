@@ -132,7 +132,27 @@
   "skills": {
     "sectionLabel": "Skills & Expertise",
     "technicalTitle": "Technical Expertise",
-    "softSkillsTitle": "Experience & Soft Skills"
+    "softSkillsTitle": "Experience & Soft Skills",
+    "categories": {
+      "languages-core": "Languages & Core",
+      "frameworks": "Frameworks",
+      "state-realtime": "State & Realtime",
+      "ui-animation": "UI & Animation",
+      "tools-optimization": "Tools & Optimization",
+      "ai-tools": "AI Tools",
+      "domain-expertise": "Domain Expertise",
+      "working-skills": "Working Skills",
+      "methodologies": "Methodologies"
+    },
+    "categoryDescriptions": {
+      "ai-tools": "Proficient with AI agents (Claude, Codex, etc.) to accelerate development and boost product quality."
+    },
+    "items": {
+      "domain-social-sports-blockchain": "Experienced in developing Social Networks, Sports platforms, and Blockchain applications.",
+      "domain-mobile-ux": "Deep understanding of UX/UI, particularly mobile interfaces.",
+      "work-debugging": "Debugging mindset, attention to detail, autonomous working & effective communication.",
+      "work-adaptation-english": "Rapid adaptation to emerging technologies. Strong comprehension of technical English documentation."
+    }
   },
   "refundPolicy": {
     "pageTitle": "Refund Policy",

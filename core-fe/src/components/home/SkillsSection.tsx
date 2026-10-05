@@ -132,34 +132,44 @@ export function SkillsSection({
           </div>
 
           <div className="w-full flex flex-col divide-y divide-stroke">
-            {technicalCategories.map((category) => (
-              <div
-                key={category.id || category.name}
-                className="py-4 flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6"
-              >
-                <span className="w-full sm:w-48 md:w-56 shrink-0 text-body-m-medium text-text-secondary font-medium">
-                  {category.name}
-                </span>
-                <div className="flex-1 flex flex-col gap-2.5">
-                  <div className="flex flex-wrap gap-2 items-center">
-                    {category.skills.map((skill) => (
-                      <TechPill
-                        key={skill.id || skill.name}
-                        name={skill.name}
-                        iconImage={skill.iconImage}
-                        iconImageDark={skill.iconImageDark}
-                        highlight={skill.isHighlight}
-                      />
-                    ))}
+            {technicalCategories.map((category) => {
+              const categoryTitle =
+                category.slug && t.has(`categories.${category.slug}`)
+                  ? t(`categories.${category.slug}`)
+                  : category.name;
+
+              return (
+                <div
+                  key={category.id || category.name}
+                  className="py-4 flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6"
+                >
+                  <span className="w-full sm:w-48 md:w-56 shrink-0 text-body-m-medium text-text-secondary font-medium">
+                    {categoryTitle}
+                  </span>
+                  <div className="flex-1 flex flex-col gap-2.5">
+                    <div className="flex flex-wrap gap-2 items-center">
+                      {category.skills.map((skill) => (
+                        <TechPill
+                          key={skill.id || skill.name}
+                          name={skill.name}
+                          iconImage={skill.iconImage}
+                          iconImageDark={skill.iconImageDark}
+                          highlight={skill.isHighlight}
+                        />
+                      ))}
+                    </div>
+                    {category.description && (
+                      <p className="text-body-s-regular text-text-secondary bg-bg-base-2/50 border border-stroke/70 rounded-lg p-3 leading-relaxed">
+                        {category.slug &&
+                        t.has(`categoryDescriptions.${category.slug}`)
+                          ? t(`categoryDescriptions.${category.slug}`)
+                          : category.description}
+                      </p>
+                    )}
                   </div>
-                  {category.description && (
-                    <p className="text-body-s-regular text-text-secondary bg-bg-base-2/50 border border-stroke/70 rounded-lg p-3 leading-relaxed">
-                      {category.description}
-                    </p>
-                  )}
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
@@ -176,43 +186,57 @@ export function SkillsSection({
           </div>
 
           <div className="w-full flex flex-col divide-y divide-stroke">
-            {softSkillCategories.map((category) => (
-              <div
-                key={category.id || category.name}
-                className="py-4 flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6"
-              >
-                <span className="w-full sm:w-48 md:w-56 shrink-0 text-body-m-medium text-text-secondary font-medium">
-                  {category.name}
-                </span>
-                <div className="flex-1 flex flex-col gap-2.5">
-                  {category.displayType === "bullet_list" ? (
-                    category.skills.map((skill) => (
-                      <div
-                        key={skill.id || skill.name}
-                        className="flex items-start gap-2.5 text-body-m-regular text-text-secondary"
-                      >
-                        <CheckDot />
-                        <span className="leading-relaxed">
-                          {skill.description || skill.name}
-                        </span>
+            {softSkillCategories.map((category) => {
+              const categoryTitle =
+                category.slug && t.has(`categories.${category.slug}`)
+                  ? t(`categories.${category.slug}`)
+                  : category.name;
+
+              return (
+                <div
+                  key={category.id || category.name}
+                  className="py-4 flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-6"
+                >
+                  <span className="w-full sm:w-48 md:w-56 shrink-0 text-body-m-medium text-text-secondary font-medium">
+                    {categoryTitle}
+                  </span>
+                  <div className="flex-1 flex flex-col gap-2.5">
+                    {category.displayType === "bullet_list" ? (
+                      category.skills.map((skill) => {
+                        const description =
+                          skill.slug && t.has(`items.${skill.slug}`)
+                            ? t(`items.${skill.slug}`)
+                            : skill.description || skill.name;
+
+                        return (
+                          <div
+                            key={skill.id || skill.name}
+                            className="flex items-start gap-2.5 text-body-m-regular text-text-secondary"
+                          >
+                            <CheckDot />
+                            <span className="leading-relaxed">
+                              {description}
+                            </span>
+                          </div>
+                        );
+                      })
+                    ) : (
+                      <div className="flex flex-wrap gap-2 items-center">
+                        {category.skills.map((skill) => (
+                          <TechPill
+                            key={skill.id || skill.name}
+                            name={skill.name}
+                            iconImage={skill.iconImage}
+                            iconImageDark={skill.iconImageDark}
+                            highlight={skill.isHighlight}
+                          />
+                        ))}
                       </div>
-                    ))
-                  ) : (
-                    <div className="flex flex-wrap gap-2 items-center">
-                      {category.skills.map((skill) => (
-                        <TechPill
-                          key={skill.id || skill.name}
-                          name={skill.name}
-                          iconImage={skill.iconImage}
-                          iconImageDark={skill.iconImageDark}
-                          highlight={skill.isHighlight}
-                        />
-                      ))}
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}

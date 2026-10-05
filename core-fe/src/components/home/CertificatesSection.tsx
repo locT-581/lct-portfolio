@@ -90,7 +90,7 @@ export function CertificatesSection({
         {entries.map((cert) => (
           <BorderGlow
             key={cert.id || cert.title}
-            className="cert-card group border-stroke transition-all duration-200 shadow-xs hover:border-stroke-orange/40 h-full"
+            className="cert-card group border-stroke transition-all duration-200 hover:border-stroke-orange/40 h-full"
             backgroundColor="var(--bg-base-1)"
             borderRadius={12}
             glowRadius={28}

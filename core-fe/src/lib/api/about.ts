@@ -269,6 +269,7 @@ export async function getSkillCategories({
             const mediaUrlDark = extractMediaUrl(s.data.icon_image_dark);
             return {
               id: s.id,
+              slug: s.slug,
               name: s.data.name,
               category: s.data.category || cat.slug,
               iconImage: mediaUrl
@@ -287,6 +288,7 @@ export async function getSkillCategories({
 
         return {
           id: cat.id,
+          slug: cat.slug,
           name: cat.data.name,
           groupType: cat.data.group_type || "technical",
           displayType: cat.data.display_type || "badges",

@@ -100,6 +100,7 @@ export interface CertificationEntry {
 
 export interface SkillCategory {
   id: string;
+  slug?: string;
   name: string;
   groupType: "technical" | "soft_skills";
   displayType: "badges" | "bullet_list";
@@ -110,6 +111,7 @@ export interface SkillCategory {
 
 export interface SkillItem {
   id: string;
+  slug?: string;
   name: string;
   category: string;
   iconImage?: { url: string; previewUrl?: string } | null;

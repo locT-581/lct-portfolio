@@ -132,7 +132,27 @@
   "skills": {
     "sectionLabel": "Kỹ năng & Năng lực",
     "technicalTitle": "Kỹ năng chuyên môn",
-    "softSkillsTitle": "Kinh nghiệm & Kỹ năng mềm"
+    "softSkillsTitle": "Kinh nghiệm & Kỹ năng mềm",
+    "categories": {
+      "languages-core": "Ngôn ngữ & Nền tảng",
+      "frameworks": "Frameworks",
+      "state-realtime": "Trạng thái & Realtime",
+      "ui-animation": "UI & Animation",
+      "tools-optimization": "Công cụ & Tối ưu hóa",
+      "ai-tools": "Công cụ AI",
+      "domain-expertise": "Nghiệp vụ thực chiến",
+      "working-skills": "Kỹ năng làm việc",
+      "methodologies": "Quy trình"
+    },
+    "categoryDescriptions": {
+      "ai-tools": "Sử dụng tốt các AI Agent (Claude, Codex,...) tăng tốc độ và chất lượng sản phẩm."
+    },
+    "items": {
+      "domain-social-sports-blockchain": "Có kinh nghiệm phát triển hệ thống Mạng xã hội, Thể thao, Ứng dụng Blockchain.",
+      "domain-mobile-ux": "Hiểu biết sâu về UX/UI, đặc biệt là giao diện mobile.",
+      "work-debugging": "Tư duy gỡ lỗi (Debugging mindset), chú trọng chi tiết, làm việc độc lập & giao tiếp hiệu quả.",
+      "work-adaptation-english": "Thích ứng cực nhanh với công nghệ mới. Đọc hiểu tốt tài liệu tiếng Anh chuyên ngành."
+    }
   },
   "refundPolicy": {
     "pageTitle": "Chính sách hoàn tiền",

@@ -72,8 +72,8 @@ export default async function ArticleDetailPage({
   }
 
   const breadcrumbsItems = [
-    { label: tBreadcrumbs("home"), href: `/${locale}` },
-    { label: tBreadcrumbs("blog"), href: `/${locale}/blog` },
+    { label: tBreadcrumbs("home"), href: "/" },
+    { label: tBreadcrumbs("blog"), href: "/blog" },
     { label: post.title },
   ];
 

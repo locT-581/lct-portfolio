@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
+import { routing } from "@/i18n/routing";
 import { getBlogPosts } from "@/lib/api/blog";
 import { getProjects } from "@/lib/api/projects";
-import { getSiteUrl } from "@/lib/seo";
+import { constructUrl } from "@/lib/seo";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = getSiteUrl();
-  const locales = ["en", "vi"];
+  const locales = routing.locales;
   const staticPaths = ["", "/projects", "/blog", "/contact", "/uses"];
 
   const entries: MetadataRoute.Sitemap = [];
@@ -14,7 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const locale of locales) {
     for (const path of staticPaths) {
       entries.push({
-        url: `${baseUrl}/${locale}${path}`,
+        url: constructUrl(locale, path),
         lastModified: new Date(),
         changeFrequency: "weekly",
         priority: path === "" ? 1.0 : 0.8,
@@ -30,7 +30,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         for (const post of posts) {
           if (post.slug) {
             entries.push({
-              url: `${baseUrl}/${locale}/blog/${post.slug}`,
+              url: constructUrl(locale, `blog/${post.slug}`),
               lastModified: post.publishedAt
                 ? new Date(post.publishedAt)
                 : new Date(),
@@ -53,7 +53,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         for (const project of projects) {
           if (project.slug) {
             entries.push({
-              url: `${baseUrl}/${locale}/projects/${project.slug}`,
+              url: constructUrl(locale, `projects/${project.slug}`),
               lastModified: new Date(),
               changeFrequency: "monthly",
               priority: 0.7,

@@ -84,7 +84,7 @@ export default async function HomePage({
         sectionLabel={tHome("certifications")}
         verifyLabel={tHome("verifyCredential")}
       />
-      {/* <CTABlock href={`/${locale}/projects`} /> */}
+      {/* <CTABlock href="/projects" /> */}
     </main>
   );
 }

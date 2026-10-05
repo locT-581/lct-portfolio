@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import type { Project } from "@/types/cms";
 
@@ -23,7 +23,7 @@ export interface CaseStudyNavigationProps {
 export function CaseStudyNavigation({
   prevProject,
   nextProject,
-  locale,
+  locale: _locale,
   labels,
   className = "",
 }: CaseStudyNavigationProps) {
@@ -39,7 +39,7 @@ export function CaseStudyNavigation({
         {/* Previous Project Card */}
         {prevProject ? (
           <Link
-            href={`/${locale}/projects/${prevProject.slug}`}
+            href={`/projects/${prevProject.slug}`}
             className="group flex flex-col gap-1.5 p-5 rounded-xl border border-stroke bg-bg-base-2 hover:border-brand-orange/40 transition-colors"
           >
             <span className="flex items-center gap-1.5 text-body-s-regular text-text-secondary group-hover:text-brand-orange transition-colors">
@@ -69,7 +69,7 @@ export function CaseStudyNavigation({
         {/* Next Project Card */}
         {nextProject ? (
           <Link
-            href={`/${locale}/projects/${nextProject.slug}`}
+            href={`/projects/${nextProject.slug}`}
             className="group flex flex-col gap-1.5 p-5 rounded-xl border border-stroke bg-bg-base-2 hover:border-brand-orange/40 transition-colors sm:items-end text-left sm:text-right"
           >
             <span className="flex items-center justify-end gap-1.5 text-body-s-regular text-text-secondary group-hover:text-brand-orange transition-colors">
@@ -109,7 +109,7 @@ export function CaseStudyNavigation({
         </div>
 
         <Link
-          href={`/${locale}/contact`}
+          href="/contact"
           className="inline-flex items-center justify-center h-10 px-5 rounded text-btn bg-brand-orange text-text-btn-primary hover:opacity-90 transition-opacity shrink-0"
         >
           {labels.ctaButton}

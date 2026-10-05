@@ -9,6 +9,9 @@ export function getSiteUrl(): string {
 export function constructUrl(locale: string, path: string = ""): string {
   const siteUrl = getSiteUrl();
   const cleanPath = path.replace(/^\/+|\/+$/g, "");
+  if (locale === "en") {
+    return cleanPath ? `${siteUrl}/${cleanPath}` : siteUrl;
+  }
   return cleanPath
     ? `${siteUrl}/${locale}/${cleanPath}`
     : `${siteUrl}/${locale}`;

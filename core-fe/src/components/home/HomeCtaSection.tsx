@@ -1,10 +1,10 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { subscribeNewsletterAction } from "@/app/actions/newsletter";
 import { NewsletterBlock } from "@/components/ui/NewsletterBlock/NewsletterBlock";
+import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 /**
@@ -59,7 +59,7 @@ export function HomeCtaSection({
       <div>
         <Link
           id="home-cta-view-projects"
-          href={`/${locale}/projects`}
+          href="/projects"
           className="inline-flex items-center justify-center h-10 px-5 rounded text-btn bg-brand-orange text-text-btn-primary hover:opacity-90 transition-colors focus-visible:outline-2 focus-visible:outline-brand-orange"
         >
           {t("ctaButtonLabel")}

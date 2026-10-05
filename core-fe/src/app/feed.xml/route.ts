@@ -6,7 +6,7 @@ export async function GET() {
   const siteUrl = env.NEXT_PUBLIC_SITE_URL;
 
   try {
-    const posts = await getBlogPosts({ locale: "vi" });
+    const posts = await getBlogPosts({ locale: "en" });
     const xml = generateRssFeed(posts, siteUrl);
 
     return new Response(xml, {

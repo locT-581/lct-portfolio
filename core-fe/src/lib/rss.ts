@@ -10,7 +10,7 @@ export function generateRssFeed(posts: BlogPost[], siteUrl: string): string {
       "Articles and thoughts on software engineering, web development, and architecture.",
     id: cleanSiteUrl,
     link: cleanSiteUrl,
-    language: "vi",
+    language: "en",
     image: `${cleanSiteUrl}/favicon.ico`,
     favicon: `${cleanSiteUrl}/favicon.ico`,
     copyright: `All rights reserved ${new Date().getFullYear()}, LocT`,
@@ -29,7 +29,7 @@ export function generateRssFeed(posts: BlogPost[], siteUrl: string): string {
   });
 
   for (const post of posts) {
-    const postUrl = `${cleanSiteUrl}/vi/blog/${post.slug}`;
+    const postUrl = `${cleanSiteUrl}/blog/${post.slug}`;
     feed.addItem({
       title: post.title,
       id: postUrl,

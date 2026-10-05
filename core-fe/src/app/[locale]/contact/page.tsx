@@ -33,7 +33,7 @@ export default async function ContactPage({
   const b = await getTranslations({ locale, namespace: "breadcrumbs" });
 
   const breadcrumbItems = [
-    { label: b("brandName"), href: `/${locale}` },
+    { label: b("brandName"), href: "/" },
     { label: b("contact") },
   ];
 

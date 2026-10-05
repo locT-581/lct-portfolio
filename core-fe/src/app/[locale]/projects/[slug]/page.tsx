@@ -91,8 +91,8 @@ export default async function CaseStudyDetailPage({
       : null;
 
   const breadcrumbsItems = [
-    { label: tBreadcrumbs("home"), href: `/${locale}` },
-    { label: tProjects("sectionLabel"), href: `/${locale}/projects` },
+    { label: tBreadcrumbs("home"), href: "/" },
+    { label: tProjects("sectionLabel"), href: "/projects" },
     { label: project.name },
   ];
 

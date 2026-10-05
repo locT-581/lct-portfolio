@@ -22,6 +22,6 @@ test("generateRssFeed generates valid RSS 2.0 XML with correct post details and 
 
   assert.ok(xml.includes('<rss version="2.0"'));
   assert.ok(xml.includes("Hello World Post"));
-  assert.ok(xml.includes("https://loct.dev/vi/blog/hello-world"));
+  assert.ok(xml.includes("https://loct.dev/blog/hello-world"));
   assert.ok(xml.includes("This is a test post excerpt."));
 });

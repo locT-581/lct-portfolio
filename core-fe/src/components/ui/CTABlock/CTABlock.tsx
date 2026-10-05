@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 import type { HTMLAttributes, ReactNode } from "react";
 import { Button, type ButtonVariant } from "@/components/ui/Button";
+import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 
 /**

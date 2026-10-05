@@ -36,7 +36,7 @@ export default async function ProjectsPage({
   const projects = await getProjects({ locale }).catch(() => []);
 
   const breadcrumbItems = [
-    { label: b("brandName"), href: `/${locale}` },
+    { label: b("brandName"), href: "/" },
     { label: t("pageHeading") },
   ];
 
